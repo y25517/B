@@ -68,7 +68,7 @@
         start.addEventListener("click",function(){
             let count = 0;
             setInterval(function () {
-                count++;
+                count = count + 1;
                 document.getElementById("timerResult").textContent = `タイマー: ${count}秒経過`;
                 if (count === 5) {
                     document.getElementById("timerResult").textContent += " - タイマー終了";
