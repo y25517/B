@@ -30,3 +30,68 @@
 img{
     width: 30px;
 }
+.sentobutton a {
+    background: #fff700;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 240px;
+    padding: 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    z-index:0;
+}
+.sentobutton a:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    display: block;
+    background: #ee6f0e;
+    transition: .3s;
+    left:0;
+}
+.sentobutton a:hover {
+    color: #ffffff;
+}
+.sentobutton a:hover:before {
+    width: 100%;
+    z-index: -1;
+}
+
+.bukiyabutton a {
+    background: #6bb3c5;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 240px;
+    padding: 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    z-index:0;
+}
+.bukiyabutton a:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    display: block;
+    background: #0754d0;
+    transition: .3s;
+    left:0;
+}
+.bukiyabutton a:hover {
+    color: #ffffff;
+}
+.bukiyabutton a:hover:before {
+    width: 100%;
+    z-index: -1;
+}
