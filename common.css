@@ -27,4 +27,7 @@
     border-radius:10px;
     filter: saturate(500%);
 }
+img{
+    width: 30px;
+}
 
