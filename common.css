@@ -30,14 +30,19 @@
 img{
     width: 30px;
 }
+/* ホーム画面戦闘ボタン */
 .sentobutton a {
+    font-size: 60px;
+    width: 400px; 
+    height: 200px;
+    left: 50px;
+    top: 750px;
     background: #fff700;
     position: relative;
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 0 auto;
-    max-width: 240px;
     padding: 10px 25px;
     color: #313131;
     transition: 0.3s ease-in-out;
@@ -62,15 +67,18 @@ img{
     width: 100%;
     z-index: -1;
 }
-
+/* ホーム画面武器屋ボタン */
 .bukiyabutton a {
+    width: 500px; 
+    height: 100px;
+    left: 1000px;
+    top: 500px;
     background: #6bb3c5;
     position: relative;
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 0 auto;
-    max-width: 240px;
     padding: 10px 25px;
     color: #313131;
     transition: 0.3s ease-in-out;
