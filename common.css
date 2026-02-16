@@ -1,19 +1,19 @@
+
 /* 戦闘画面
 ---------------------------------------------------- */
-
-.HP_bar{
+.hp_bar{
     display: flex;
 }
-.My_frame{
+.my_frame{
     display: flex;
     display: block;
     margin: auto;
 }
-.My_frame p{
+.my_frame p{
     font-size: 20px;
 }
-.My_HPbar,
-.Rival_HPbar{
+.my_hpbar,
+.rival_hpbar{
     width: 40vw;
     height: 25px;
     background-color: #4b4b4b;
@@ -27,79 +27,44 @@
     border-radius:10px;
     filter: saturate(500%);
 }
-img{
-    width: 30px;
-}
-/* ホーム画面戦闘ボタン */
-.sentobutton a {
-    font-size: 60px;
-    width: 400px; 
-    height: 200px;
-    left: 50px;
-    top: 750px;
-    background: #fff700;
-    position: relative;
+
+.img_box{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px 25px;
-    color: #313131;
-    transition: 0.3s ease-in-out;
-    font-weight: 500;
-    z-index:0;
+  justify-content: space-between; /* 左右に均等配置 */
 }
-.sentobutton a:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    display: block;
-    background: #ee6f0e;
-    transition: .3s;
-    left:0;
-}
-.sentobutton a:hover {
-    color: #ffffff;
-}
-.sentobutton a:hover:before {
-    width: 100%;
-    z-index: -1;
-}
-/* ホーム画面武器屋ボタン */
-.bukiyabutton a {
-    width: 500px; 
-    height: 100px;
-    left: 1000px;
-    top: 500px;
-    background: #6bb3c5;
-    position: relative;
+
+.atack_pos{
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px 25px;
-    color: #313131;
-    transition: 0.3s ease-in-out;
-    font-weight: 500;
-    z-index:0;
+    justify-content: center;
 }
-.bukiyabutton a:before {
-    content: "";
+.atack_bar{
+    width: 400px;
+    height: 40px;
+    background-color: #ababab;
+    border-radius:10px;
     position: absolute;
+    bottom: 20vh;
+}
+.btn-3d-shadow {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 6px 0 #c92a2a, 0 8px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s ease;
+    position: relative;
     top: 0;
-    bottom: 0;
-    width: 0;
-    display: block;
-    background: #0754d0;
-    transition: .3s;
-    left:0;
-}
-.bukiyabutton a:hover {
-    color: #ffffff;
-}
-.bukiyabutton a:hover:before {
-    width: 100%;
-    z-index: -1;
-}
+    
+    &:hover {
+      background-color: #ff5252;
+    }
+    
+    &:active {
+      top: 4px;
+      box-shadow: 0 2px 0 #c92a2a, 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+  }
