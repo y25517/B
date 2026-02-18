@@ -55,6 +55,25 @@
     position: absolute;
     bottom: 20vh;
 }
+.atack_mark{
+    width: 20px;
+    height: 100%;
+    background-color: #ff0000;
+    border-radius:10px;
+    position: absolute;
+    left: 380px;
+    filter: saturate(500%);
+}
+.stop_bar{
+    width:4px;
+    height: 100%;
+    background-color: #090909;
+    border-radius:10px;
+    position: absolute;
+    left: 1px;
+    filter: saturate(500%);
+}
+
 .btn-3d-shadow {
     background: #ff6b6b;
     color: white;
