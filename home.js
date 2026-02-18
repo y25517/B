@@ -1,6 +1,6 @@
 // home.js
-export let HP = 100; // デフォHP
-export let ATK = 0;  // デフォ攻撃力
+let HP = 100; // デフォHP
+let ATK = 0;  // デフォ攻撃力
 
 const Jsonfile = './eq.json'; // 
 
@@ -20,8 +20,8 @@ fetch(Jsonfile)
     document.getElementById("kougeki").textContent = totalATK;
 
     // りょうまのやつに反映するためのやつ
-    HP = totalHP;
-    ATK = totalATK;
+    export HP = totalHP;
+    export ATK = totalATK;
 
     console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
 })
