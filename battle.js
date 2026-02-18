@@ -37,7 +37,7 @@ StartBtn.addEventListener("click", function(){
         StopBtn.style.display = "none";
         clearInterval(timer);
 
-        
+        import {HP} from './home.js';
 
         // fetch(JsonFile)
         // .then(Response => {
