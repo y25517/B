@@ -4,7 +4,8 @@ const JsonFile = './eq.json'
 const AtackBtn = document.querySelector("#atcbar"); //アタックボタン
 const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
-import {HP,ATK} from './home.js';
+let HP =  Number(localStorage.getItem("avatarHP"));
+let ATK =  Number(localStorage.getItem("avatarATK"));
 let BossHP = 100;
 
 
