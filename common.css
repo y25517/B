@@ -1,6 +1,8 @@
 
 /* 戦闘画面
 ---------------------------------------------------- */
+
+/* header */
 .hp_bar{
     display: flex;
 }
@@ -27,12 +29,20 @@
     border-radius:10px;
     filter: saturate(500%);
 }
-
 .img_box{
     display: flex;
-  justify-content: space-between; /* 左右に均等配置 */
+  justify-content: space-between; 
 }
 
+/* スタートボタン */
+.startbtn_pos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* アタックボタン */
 .atack_pos{
     display: flex;
     justify-content: center;
@@ -54,19 +64,17 @@
     border-radius: 10px;
     cursor: pointer;
     font-weight: 700;
-    box-shadow: 0 6px 0 #c92a2a, 0 8px 10px rgba(0, 0, 0, 0.2);
+  
+    position: absolute;
+    bottom: 15vh;
+  
+    box-shadow: 0 6px 0 #c92a2a;
     transition: all 0.1s ease;
-    position: relative;
-    top: 0;
-    
-    &:hover {
-      background-color: #ff5252;
-    }
-    
-    &:active {
-      top: 4px;
-      box-shadow: 0 2px 0 #c92a2a, 0 4px 6px rgba(0, 0, 0, 0.2);
-    }
+  }
+  
+  .btn-3d-shadow:active {
+    transform: translateY(6px);
+    box-shadow: 0 0 0 #c92a2a;
   }
 
   /* ホーム画面戦闘ボタン */
