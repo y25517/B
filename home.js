@@ -19,10 +19,14 @@ fetch(Jsonfile)
     document.getElementById("hp").textContent = totalHP;
     document.getElementById("kougeki").textContent = totalATK;
 
-    // りょうまのやつに反映するためのやつ
-    HP = totalHP;
-    ATK = totalATK;
+    //ローカルストレージに保存
+    localStorage.setItem("avatarHP", totalHP);
+    localStorage.setItem("avatarATK", totalATK);
+
+    // buttle.jsにこれ追加
+    // let HP =  Number(localStorage.getItem("avatarHP"));
+    // let ATK =  Number(localStorage.getItem("avatarATK"));
 
     console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
 })
-.catch(error => console.error("データの読み込みに失敗しました:", error));
+.catch(error => console.error("データの読み込みに失敗したにょ:", error));
