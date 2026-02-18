@@ -1,6 +1,6 @@
 // home.js
-let HP = 100; // デフォHP
-let ATK = 0;  // デフォ攻撃力
+export let HP = 100; // デフォHP
+export let ATK = 0;  // デフォ攻撃力
 
 const Jsonfile = './eq.json'; // 
 
@@ -8,8 +8,8 @@ fetch(Jsonfile)
 .then(response => response.json())
 .then(data => {
     // constで新しい変数を作ってjsonファイルの武器、防具を反映させる
-    const equippedWeapon = data.weapon[0];
-    const equippedArmor = data.armor[0];
+    const equippedWeapon = data.weapon[27];
+    const equippedArmor = data.armor[15];
 
     // constで新しい変数を作ってjsonファイルの攻撃力、hpを反映させたのを、デフォに足す
     const totalATK = ATK + equippedWeapon.atk;
@@ -20,8 +20,8 @@ fetch(Jsonfile)
     document.getElementById("kougeki").textContent = totalATK;
 
     // りょうまのやつに反映するためのやつ
-    export HP = totalHP;
-    export ATK = totalATK;
+    HP = totalHP;
+    ATK = totalATK;
 
     console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
 })
