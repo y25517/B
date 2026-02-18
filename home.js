@@ -1,24 +1,28 @@
-export let HP = 100; //デフォルトHP 
-export let ATK = 1;  //デフォルト攻撃力
+// home.js
+export let HP = 100; // デフォHP
+export let ATK = 0;  // デフォ攻撃力
 
+const Jsonfile = './eq.json'; // 
 
-const Jsonfile = './wq.json';
-fetch (Jsonfile)
-.then(Response => {
-    return Response.json();
+fetch(Jsonfile)
+.then(response => response.json())
+.then(data => {
+    // constで新しい変数を作ってjsonファイルの武器、防具を反映させる
+    const equippedWeapon = data.weapon[0];
+    const equippedArmor = data.armor[0];
+
+    // constで新しい変数を作ってjsonファイルの攻撃力、hpを反映させたのを、デフォに足す
+    const totalATK = ATK + equippedWeapon.atk;
+    const totalHP = HP + equippedArmor.hp;
+
+    // HTMLに反映
+    document.getElementById("hp").textContent = totalHP;
+    document.getElementById("kougeki").textContent = totalATK;
+
+    // りょうまのやつに反映するためのやつ
+    HP = totalHP;
+    ATK = totalATK;
+
+    console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
 })
-.then(function (data){
-
-    const Weapon = data.weapon[27]; //Weaponという変数を作ってjsonの武器を反映
-    const Armor = data.armor[15];   //Armorという変数を作ってjsonの防具を反映
-
-    const TotalHP = HP + Weapon.atk;    //TotalHPという変数を作ってデフォHPに反映した武器の攻撃力をプラスする
-    const TotalATK = ATK + Armor.hp;    //TotalATKという変数を作ってデフォATKに反映した防具のhpをプラスする
-
-    document.getElementById("hp").textContent = TotalHP;    //HTMLのステータスに反映させる
-    document.getElementById("kougeki").textContent = TotalATK;
-
-    HP = TotalHP;
-    ATK = TotalATK; //りょうまの方に反映させる
-
-});
+.catch(error => console.error("データの読み込みに失敗しました:", error));
