@@ -16,14 +16,20 @@
 }
 .my_hpbar,
 .rival_hpbar{
-    width: 40vw;
+    width: 500px;
     height: 25px;
     background-color: #4b4b4b;
     border-radius:10px;
 }
-.life_mark
-{
-    width: 90%;
+.mylife_mark{
+    width: 500px;
+    height: 100%;
+    background-color: #8df369;
+    border-radius:10px;
+    filter: saturate(500%);
+}
+.rivallife_mark{
+    width: 500px;
     height: 100%;
     background-color: #8df369;
     border-radius:10px;
