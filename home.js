@@ -23,10 +23,6 @@ fetch(Jsonfile)
     localStorage.setItem("avatarHP", totalHP);
     localStorage.setItem("avatarATK", totalATK);
 
-    // buttle.jsにこれ追加
-    // let HP =  Number(localStorage.getItem("avatarHP"));
-    // let ATK =  Number(localStorage.getItem("avatarATK"));
-
     console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
 })
 .catch(error => console.error("データの読み込みに失敗したにょ:", error));
