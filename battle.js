@@ -1,12 +1,11 @@
 const JsonFile = './eq.json'
 
 
-const AtackBtn = document.querySelector("#atcbar");
-const StopBtn = document.querySelector("#stopbtn");
-const StartBtn = document.querySelector("#strbtn");
-import {HP} from './home.js';
-import {ATK} from './home.js';
-
+const AtackBtn = document.querySelector("#atcbar"); //アタックボタン
+const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
+const StartBtn = document.querySelector("#strbtn"); //スタートボタン
+import {HP,ATK} from './home.js';
+let BossHP = 500;
 
 //戦闘開始したら
 StartBtn.addEventListener("click", function(){
@@ -39,9 +38,17 @@ StartBtn.addEventListener("click", function(){
         StopBtn.style.display = "none";
         clearInterval(timer);
 
-        
         console.log(HP);
         console.log(ATK);
+
+        const RivalBar = document.querySelector("#rivalbar");
+        const RivalLifeMark = document.querySelector("#rival_lifemark");
+
+        BossHP = BossHP - ATK;
+        RivalLifeMark.style.width = BossHP + "px";
+
+        
+        
         // fetch(JsonFile)
         // .then(Response => {
         //     return Response.json();
