@@ -1,5 +1,5 @@
-let HP = 100; //デフォルトHP
-let ATK = 0;  //デフォルト攻撃力
+export let HP = 100; //デフォルトHP 
+export let ATK = 0;  //デフォルト攻撃力
 
 
 const Jsonfile = './wq.json';
