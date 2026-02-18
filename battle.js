@@ -37,13 +37,15 @@ StartBtn.addEventListener("click", function(){
         StopBtn.style.display = "none";
         clearInterval(timer);
 
-        fetch(JsonFile)
-        .then(Response => {
-            return Response.json();
-        })
-        .then(function(data){
-            console.log(data)
-        });
+        
+
+        // fetch(JsonFile)
+        // .then(Response => {
+        //     return Response.json();
+        // })
+        // .then(function(data){
+        //     console.log(data)
+        // });
     });
 
 });
