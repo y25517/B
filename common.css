@@ -102,14 +102,87 @@
     box-shadow: 0 0 0 #c92a2a;
   }
 
+  /* ホーム画面
+  --------------------------------------------------------------------------- */
+  /* タイトル */
+  header {
+    font-size: 50px;
+    background-color: #5a06139d;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+  }
+  header p {
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: rgba(138, 25, 25, 0.788);
+    text-shadow: 
+      3px 3px 0 #000,
+      6px 6px 10px rgba(0, 0, 0, 0.6);
+  }
+  
+  /* ステータス */
+  .st1 {
+    font-size: x-large;
+    margin: 50px;
+    padding-left: 7%;
+  }
+
+  .status-box {
+    font-size: large;
+    width: 400px;
+    color: rgb(0, 0, 0);
+    border: 3px solid rgb(0, 0, 0);
+    padding: 30px 30px;
+    font-family: "MS Gothic", monospace;
+    margin: 50px;
+  }
+
+  .status .row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+  
+  .status dt {
+    font-weight: normal;
+  }
+  
+  .status dd {
+    margin: 0;
+  }
+  
+  .status dt::after {
+    content: "　：";
+  }
+  
+  /* 今の装備 */
+.now-equipment {
+    position: absolute;  
+    top: 50%;
+    right: 250px;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+.now-equipment img {
+    width: 120px;
+    height: auto;
+}
+
+  
   /* ホーム画面戦闘ボタン */
 .sentobutton a {
     font-size: 60px;
     width: 400px; 
     height: 200px;
     left: 50px;
-    top: 750px;
-    background: #fff700;
+    top: 650px;
+    background: #d1ca0a;
     position: relative;
     display: flex;
     justify-content: space-around;
@@ -139,12 +212,13 @@
     width: 100%;
     z-index: -1;
 }
-/* ホーム画面武器屋ボタン */
+/* ホーム画面装備屋ボタン */
 .bukiyabutton a {
-    width: 500px; 
-    height: 100px;
-    left: 1000px;
-    top: 500px;
+    font-size: 60px;
+    width: 400px; 
+    height: 200px;
+    left: 1180px;
+    top: 650px;
     background: #6bb3c5;
     position: relative;
     display: flex;
@@ -175,3 +249,12 @@
     width: 100%;
     z-index: -1;
 }
+
+/* coin */
+  #coin {
+    position: absolute;
+    top: 120px;
+    right: 310px;
+    font-size: 30px;
+    font-weight: bolder;
+  }
