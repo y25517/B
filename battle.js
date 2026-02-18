@@ -5,7 +5,8 @@ const AtackBtn = document.querySelector("#atcbar"); //アタックボタン
 const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
 import {HP,ATK} from './home.js';
-let BossHP = 500;
+let BossHP = 100;
+
 
 //戦闘開始したら
 StartBtn.addEventListener("click", function(){
@@ -42,6 +43,8 @@ StartBtn.addEventListener("click", function(){
         console.log(ATK);
 
         const RivalBar = document.querySelector("#rivalbar");
+            RivalBar.style.width = BossHP + "px";
+
         const RivalLifeMark = document.querySelector("#rival_lifemark");
 
         BossHP = BossHP - ATK;
