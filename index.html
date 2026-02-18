@@ -12,24 +12,46 @@
     />
     <link rel="stylesheet" href="common.css" />
   </head>
+
   <body>
     <header>
-      <button class="sentobutton">
-        <a href="battle.html">戦闘</a>
-      </button>
-      <button class="bukiyabutton">
-        <a href="equipment.html">武器屋</a>
-      </button>
-      <div>
-        <h1>ステータス</h1>
-      <dl>
-        <dt>HP</dt>
-        <dd id="hp">1000</dd>
-        <dt>攻撃力</dt>
-        <dd id="kougeki">50</dd>
-      </dl>
-    </div>
+        <p>アバサバイバー</p>
     </header>
+
+    <main>
+      <h1 id="coin">COIN : <span id="coin-count">100</span></h1>
+
+      <div class="now-equipment">
+        <img src="images/sword1.png" alt="weapon">
+        <img src="images/protector.png" alt="protector">
+      </div>
+
+      <button class="sentobutton">
+        <a href="battle.html">⚔戦闘⚔</a>
+      </button>
+    
+      <button class="bukiyabutton">
+        <a href="equipment.html">装備屋</a>
+      </button>
+
+      <div>
+        <h2 class="st1">ステータス</h2>
+        <div class="status-box">
+          <dl class="status">
+            <div class="row">
+              <dt>HP</dt>
+              <dd id="hp">1000</dd>
+            </div>
+            <div class="row">
+              <dt>攻撃力</dt>
+              <dd id="kougeki">50</dd>
+            </div>
+          </dl>
+        </div>  
+    </main>
+
     <footer></footer>
+
   </body>
 </html>
+
