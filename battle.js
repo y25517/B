@@ -4,6 +4,8 @@ const JsonFile = './eq.json'
 const AtackBtn = document.querySelector("#atcbar");
 const StopBtn = document.querySelector("#stopbtn");
 const StartBtn = document.querySelector("#strbtn");
+import {HP} from './home.js';
+import {ATK} from './home.js';
 
 
 //戦闘開始したら
@@ -37,8 +39,9 @@ StartBtn.addEventListener("click", function(){
         StopBtn.style.display = "none";
         clearInterval(timer);
 
-        import {HP} from './home.js';
-
+        
+        console.log(HP);
+        console.log(ATK);
         // fetch(JsonFile)
         // .then(Response => {
         //     return Response.json();
