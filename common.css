@@ -159,6 +159,20 @@
     content: "　：";
   }
   
+  /* アバター */
+  .avatar {
+    position: absolute;  
+    top: 50%;
+    right: 45%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 20px;
+  }
+
+  .avatar img {
+    width: 200px;
+  }
+
   /* 今の装備 */
 .now-equipment {
     position: absolute;  
