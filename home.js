@@ -24,5 +24,6 @@ fetch(Jsonfile)
     localStorage.setItem("avatarATK", totalATK);
 
     console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
+    console.log(`HP: ${totalHP},攻撃力: ${totalATK}`);
 })
 .catch(error => console.error("データの読み込みに失敗したにょ:", error));
