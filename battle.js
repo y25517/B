@@ -4,11 +4,13 @@ const AtcBar = document.querySelector("#atcbar"); //アタックバー
 const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
 
+let rank = parseInt(localStorage.getItem("rank"));  //現在のランク
 let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
 let MyHP_now = MyHP;    //現在自分のHP
 let MyATK = Math.floor(Number(localStorage.getItem("avatarATK")));  //自分の攻撃
 let type = localStorage.getItem("RivalType");
 let BossCnt = Number(localStorage.getItem("bosscnt"));  //ボスカウント
+
 //ボスカウントがまだセットされていなければBossCntに0を代入
 if (isNaN(BossCnt)) {
     BossCnt = 0;
@@ -66,11 +68,16 @@ StartBtn.addEventListener("click", function(){
            
 
             //モブ敵をランダム取得
-            const MobuRondom = Math.floor(Math.random() * data.Rival.length);
+            const SameID = data.Rival.filter(rival => rival.id === rank);
+            const MobuRondom = Math.floor(Math.random() * SameID.length);
+            
+            let Mobu = SameID[MobuRondom];
+            console.log("モブ："+Mobu.name);
+
             if(type === "0"){
-                RivalAtk = data.Rival[MobuRondom].atk;   //敵の攻撃力
-                RivalHP = data.Rival[MobuRondom].HP;     //敵のHP
-                RivalName = data.Rival[MobuRondom].name;
+                RivalAtk = Mobu.atk;   //敵の攻撃力
+                RivalHP = Mobu.HP;     //敵のHP
+                RivalName = Mobu.name;
                 
                 console.log("敵の攻撃力:"+RivalAtk);
                 console.log("敵のHP:"+RivalHP);
@@ -78,6 +85,7 @@ StartBtn.addEventListener("click", function(){
                 const RivalNameFrame = document.querySelector("#rival_name");
                 RivalNameFrame.textContent = "敵の名前："+RivalName;
             }
+
             //ボスを取得           
             else if(type === "1"){
                 console.log(BossCnt);
@@ -156,8 +164,15 @@ StartBtn.addEventListener("click", function(){
                         {
                             BossCnt = 0;
                         }
-                        
                         localStorage.setItem("bosscnt", BossCnt);
+
+                        let Coin = Number(localStorage.getItem("Coin"));
+                        Coin = Coin + Number(data.Rival[MobuRondom].coin);
+                        console.log("コイン"+Coin);
+                        localStorage.setItem("Coin", Coin); 
+                        showResult("Coin" + Number(data.Rival[MobuRondom].coin) + "枚獲得！");
+                        const CoinImg = document.querySelector("#coinimg");
+                        CoinImg.src = "./images/resultmoney.png";
                     }
 
                     // リザルト表示
