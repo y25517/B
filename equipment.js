@@ -12,12 +12,6 @@ window.addEventListener("load", async () => {
     }
 });
 
-// ランクの初期設定（ランクがセットされていなかった場合）
-if (!localStorage.getItem("isDone")) {
-    localStorage.setItem("rank", 0);
-    localStorage.setItem("isDone", JSON.stringify(true));
-}
-
 // localStorageから「現在の装備」「所持している装備」「現在のランク」「現在のコイン所持数」を取得
 let equipped = JSON.parse(localStorage.getItem("equipped"));
 let owned = JSON.parse(localStorage.getItem("owned"));

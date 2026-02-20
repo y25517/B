@@ -5,6 +5,12 @@
 // eq.jsonファイルを取得
 const Jsonfile = "./eq.json";
 
+// ランクの初期設定（ランクがセットされていなかった場合）
+if (!localStorage.getItem("isDone")) {
+  localStorage.setItem("rank", 0);
+  localStorage.setItem("isDone", JSON.stringify(true));
+}
+
 //ローカルストレージのownedを配列として取り出す
 const owned = JSON.parse(localStorage.getItem("owned")) || [];
 console.log("owned:", owned);
