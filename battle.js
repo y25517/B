@@ -3,11 +3,13 @@ const JsonFile = './battle.json'
 const AtcBar = document.querySelector("#atcbar"); //アタックバー
 const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
-// let HP =  Number(localStorage.getItem("avatarHP"));
-// let ATK =  Number(localStorage.getItem("avatarATK"));
-let MyHP = 100;     //自分のHP
+
+let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
 let MyHP_now = 100;    //現在自分のHP
-let MyATK = 10;             //自分の攻撃
+let MyATK = Math.floor(Number(localStorage.getItem("avatarATK")));  //自分の攻撃
+
+console.log("HP:"+MyHP);
+console.log("ATK:"+MyATK);
 
 //戦闘開始したら
 StartBtn.addEventListener("click", function(){
@@ -37,7 +39,6 @@ StartBtn.addEventListener("click", function(){
             function isColliding(a, b) {
                 const rectA = a.getBoundingClientRect();
                 const rectB = b.getBoundingClientRect();
-
                 return !(
                     rectA.right < rectB.left ||
                     rectA.left > rectB.right
@@ -101,8 +102,6 @@ StartBtn.addEventListener("click", function(){
                     alert("あなたの勝ち");
                     window.location.href = 'index.html';
                 }
-                
-                
             });
         });
 
