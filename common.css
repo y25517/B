@@ -219,7 +219,7 @@ body{
     font-size: 60px;
     width: 400px; 
     height: 200px;
-    left: 1180px;
+    left: 700px;
     top: 650px;
     background: #6bb3c5;
     position: relative;
@@ -294,4 +294,16 @@ body{
 
 .hidden {
     display: none;
+}
+
+.equip-box {
+  display: flex;
+  flex-direction: column; /* ← 縦並び */
+  align-items: center;
+}
+
+.weaponmenu,
+#armorpuru {
+  margin-top: 10px;
+  width: 120px;
 }
