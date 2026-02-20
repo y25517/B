@@ -12,17 +12,11 @@ window.addEventListener("load", async () => {
     }
 });
 
-// ランクの初期設定（ランクがセットされていなかった場合）
-if (!localStorage.getItem("isDone")) {
-    localStorage.setItem("rank", 0);
-    localStorage.setItem("isDone", JSON.stringify(true));
-}
-
 // localStorageから「現在の装備」「所持している装備」「現在のランク」「現在のコイン所持数」を取得
-let equipped = JSON.parse(localStorage.getItem("equipped"));
-let owned = JSON.parse(localStorage.getItem("owned"));
-let rank = parseInt(localStorage.getItem("rank"));
-let coins = parseInt(localStorage.getItem("Coin"));
+let equipped = JSON.parse(localStorage.getItem("equipped")) || [];
+let owned = JSON.parse(localStorage.getItem("owned")) || [];
+let rank = parseInt(localStorage.getItem("rank")) || 0;
+let coins = parseInt(localStorage.getItem("Coin")) || 0;
 
 
 
@@ -131,16 +125,16 @@ function compareEquipment() {
     let diff;
     statusDifferenceArea.innerHTML = "<h3>ステータス比較</h3>";
     if (selectedItem.id < 28) {
-        diff = (selectedItem.atk - equipped[0].atk);
+        diff = (selectedItem.atk - equipped.weapon.atk);
         statusDifferenceArea.innerHTML += `
-            <p>装備中の武器の攻撃力: ${equipped[0].atk}</p>
+            <p>装備中の武器の攻撃力: ${equipped.weapon.atk}</p>
             <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
             <p>攻撃力差分: ${diff}</p>
         `
     } else {
-        diff = (selectedItem.hp - equipped[1].hp);
+        diff = (selectedItem.hp - equipped.armor.hp);
         statusDifferenceArea.innerHTML += `
-            <p>装備中の防具のHP: ${equipped[1].hp}</p>
+            <p>装備中の防具のHP: ${equipped.armor.hp}</p>
             <p>選択した防具のHP: ${selectedItem.hp}</p>
             <p>HP差分: ${diff}</p>
         `;
