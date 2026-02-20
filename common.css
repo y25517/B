@@ -8,7 +8,8 @@ body{
 .hp_bar{
     display: flex;
 }
-.my_frame{
+.my_frame,
+.rival_frame{
     width: 500px;
     display: flex;
     display: block;
