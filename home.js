@@ -67,3 +67,7 @@ document.addEventListener("click", () => {
     armorMenu.classList.remove("active");
 });
 
+// ローカルストレージから所持している武器、防具を取得
+const displayData = document.querySelector('.display-data');
+const data = localStorage.getItem('owned');
+displayData.innerText = data;
