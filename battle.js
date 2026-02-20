@@ -4,12 +4,13 @@ const AtcBar = document.querySelector("#atcbar"); //アタックバー
 const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
 
-let rank = parseInt(localStorage.getItem("rank"));  //現在のランク
+let rank = parseInt(localStorage.getItem("rank")); //現在のランク
 let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
 let MyHP_now = MyHP;    //現在自分のHP
 let MyATK = Math.floor(Number(localStorage.getItem("avatarATK")));  //自分の攻撃
 let type = localStorage.getItem("RivalType");
 let BossCnt = Number(localStorage.getItem("bosscnt"));  //ボスカウント
+console.log(rank);
 
 //ボスカウントがまだセットされていなければBossCntに0を代入
 if (isNaN(BossCnt)) {
@@ -68,6 +69,7 @@ StartBtn.addEventListener("click", function(){
            
 
             //モブ敵をランダム取得
+            rank = 2;
             const SameID = data.Rival.filter(rival => rival.id === rank);
             const MobuRondom = Math.floor(Math.random() * SameID.length);
             
@@ -137,9 +139,11 @@ StartBtn.addEventListener("click", function(){
                 if(MyHP_now < 1)
                 {
                     clearTimeout(timer);
+                    // document.querySelector("#coinimg").style.display = "none";
                     AtcBar.style.display = "none";
                     StopBtn.style.display = "none";
                     showResult("あなたの負け");
+                    return;
                 }
                 else  if(RivalHP_now < 1)
                 {
@@ -159,7 +163,8 @@ StartBtn.addEventListener("click", function(){
                     else if(type === "1")
                     {
                         BossCnt++;
-
+                        rank++;
+                        localStorage.setItem("rank", rank);
                         if(BossCnt >= data.Boss.length)
                         {
                             BossCnt = 0;
@@ -174,22 +179,22 @@ StartBtn.addEventListener("click", function(){
                         const CoinImg = document.querySelector("#coinimg");
                         CoinImg.src = "./images/resultmoney.png";
                     }
-
-                    // リザルト表示
-                    function showResult(text)
-                    {
-                        const modal = document.getElementById("resultModal");
-                        const resultText = document.getElementById("resultText");
-                      
-                        resultText.textContent = text;
-                        modal.style.display = "flex";
-                    }
-                    // リザルトのボタンを押されたら遷移する
-                    document.querySelector("#resultbtn").addEventListener("click", function(){
-                        window.location.href = "index.html";
-                        document.getElementById("resultModal").style.display = "none";
-                    })
                 }
+                // リザルト表示
+                function showResult(text)
+                {
+                    const modal = document.getElementById("resultModal");
+                    const resultText = document.getElementById("resultText");
+                  
+                    resultText.textContent = text;
+                    modal.style.display = "flex";
+                }
+                // リザルトのボタンを押されたら遷移する
+                document.querySelector("#resultbtn").addEventListener("click", function(){
+                    window.location.href = "index.html";
+                    document.getElementById("resultModal").style.display = "none";
+                })
+                return;
             });
         });
 
