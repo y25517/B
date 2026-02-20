@@ -14,11 +14,8 @@ if (isNaN(BossCnt)) {
     BossCnt = 0;
     localStorage.setItem("bosscnt", BossCnt);
 }
-console.log(type);
-MyATK = 1000;
-
-console.log("HP:"+MyHP);
-console.log("ATK:"+MyATK);
+console.log("自分のHP:"+MyHP);
+console.log("自分のATK:"+MyATK);
 
 //戦闘開始したら
 StartBtn.addEventListener("click", function(){
@@ -69,8 +66,8 @@ StartBtn.addEventListener("click", function(){
            
 
             //モブ敵をランダム取得
+            const MobuRondom = Math.floor(Math.random() * data.Rival.length);
             if(type === "0"){
-                const MobuRondom = Math.floor(Math.random() * data.Rival.length);    
                 RivalAtk = data.Rival[MobuRondom].atk;   //敵の攻撃力
                 RivalHP = data.Rival[MobuRondom].HP;     //敵のHP
                 RivalName = data.Rival[MobuRondom].name;
@@ -81,7 +78,7 @@ StartBtn.addEventListener("click", function(){
                 const RivalNameFrame = document.querySelector("#rival_name");
                 RivalNameFrame.textContent = "敵の名前："+RivalName;
             }
-            //モブ敵をランダム取得           
+            //ボスを取得           
             else if(type === "1"){
                 console.log(BossCnt);
                 RivalAtk = data.Boss[BossCnt].atk;   //敵の攻撃力
@@ -121,7 +118,7 @@ StartBtn.addEventListener("click", function(){
                 timer = setTimeout(() => {
                     MyHP_now = MyHP_now - RivalAtk;
                     let MyRate = Math.round(MyHP_now / MyHP * 100);
-                    console.log(MyRate);
+                    console.log("自分のHPの状態" +MyRate);
 
                     MyLifeMark.style.width = MyRate + "%";
                     StopBtn.style.display = "block";
@@ -134,11 +131,16 @@ StartBtn.addEventListener("click", function(){
                 }
                 else  if(RivalHP_now < 1)
                 {
-                    let Coin = localStorage.getItem("Coin");
-                    Coin++;
-                    localStorage.setItem("Coin", Coin); 
+                    
                     alert("あなたの勝ち");
-                    if(type === "1")
+                    if(type === "0")
+                    {
+                        let Coin = Number(localStorage.getItem("Coin"));
+                        Coin = Coin + Number(data.Rival[MobuRondom].coin);
+                        console.log("コイン"+Coin);
+                        localStorage.setItem("Coin", Coin); 
+                    }
+                    else if(type === "1")
                     {
                         BossCnt++;
 
