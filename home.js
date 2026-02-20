@@ -18,6 +18,15 @@ if (isNaN(CoinNow)) {
 const CoinCnt = document.querySelector("#coin-count");
 CoinCnt.textContent = localStorage.getItem("Coin");
 
+let RankNow = Number(localStorage.getItem("Rank"));
+//ランクをローカルストレージに入れる
+if (isNaN(RankNow)) {
+  RankNow = 0;
+  localStorage.setItem("Rank", RankNow);
+}
+const RankCnt = document.querySelector("#Rank-count");
+RankCnt.textContent = localStorage.getItem("Rank");
+
 // 戦闘かボスのaタグを押したときの判定をlocalStorageに保存
 document.getElementById("rival").addEventListener("click", function (e) {
   e.preventDefault(); //動作を止める
@@ -155,8 +164,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       localStorage.setItem("avatarATK", totalATK);
 
       localStorage.setItem("equipped", JSON.stringify({
-          weapon: weaponId,
-          armor: armorId
+          weapon: weapon,
+          armor: armor
       }));
   }
 
