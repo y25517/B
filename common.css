@@ -262,7 +262,16 @@ body{
     font-weight: bolder;
   }
 
-  /* 今の装備のところ */
+  /* ボタンの並び替え */
+.buttons{
+    display: flex;
+}
+
+  .battle-buttons{
+    display: flex;
+    flex-flow: column;
+    gap: 30px;
+  }
  
 /* 武器屋画面
 --------------------------------------------------------------------------- */
