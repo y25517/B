@@ -24,5 +24,32 @@ fetch(Jsonfile)
     localStorage.setItem("avatarATK", totalATK);
 
     console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
+    console.log(`HP: ${totalHP},攻撃力: ${totalATK}`);
 })
 .catch(error => console.error("データの読み込みに失敗したにょ:", error));
+
+
+// 今の装備のところ
+const weaponImg = document.getElementById("weaponimg");
+const weaponMenu = document.getElementById("weaponpuru");
+
+const armorImg = document.getElementById("armorimg");
+const armorMenu = document.getElementById("armorpuru");
+
+weaponImg.addEventListener("click", (e) => {
+    e.stopPropagation();
+    weaponMenu.classList.toggle("active");
+    armorMenu.classList.remove("active"); 
+});
+
+armorImg.addEventListener("click", (e) => {
+    e.stopPropagation();
+    armorMenu.classList.toggle("active");
+    weaponMenu.classList.remove("active");
+});
+
+// 外をクリックしたら閉じる
+document.addEventListener("click", () => {
+    weaponMenu.classList.remove("active");
+    armorMenu.classList.remove("active");
+});

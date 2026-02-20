@@ -1,18 +1,18 @@
-const JsonFile = './eq.json'
+const JsonFile = './battle.json'
 
-
-const AtackBtn = document.querySelector("#atcbar"); //アタックボタン
+const AtcBar = document.querySelector("#atcbar"); //アタックバー
 const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
-let HP =  Number(localStorage.getItem("avatarHP"));
-let ATK =  Number(localStorage.getItem("avatarATK"));
-let BossHP = 100;
-
+// let HP =  Number(localStorage.getItem("avatarHP"));
+// let ATK =  Number(localStorage.getItem("avatarATK"));
+let MyHP = 100;     //自分のHP
+let MyHP_now = 100;    //現在自分のHP
+let MyATK = 10;             //自分の攻撃
 
 //戦闘開始したら
 StartBtn.addEventListener("click", function(){
     StartBtn.style.display = "none";
-    AtackBtn.style.display = "block";
+    AtcBar.style.display = "block";
     StopBtn.style.display = "block";
 
     const AtcMark = document.querySelector("#atcmark");
@@ -20,54 +20,98 @@ StartBtn.addEventListener("click", function(){
     let i = 0;
     let timer;
 
-    let random = Math.floor(Math.random() * 380); //1~10のランダムな数字
-    AtcMark.style.left = random + "px";
+            function StopBar_move(){
+                let random = Math.floor(Math.random() * 380); //1~10のランダムな数字
+                AtcMark.style.left = random + "px";
+                timer = setInterval(() => {
+                    i++;
+                    StopBar.style.left = i + "px";
 
-    function StopBar_move(){
-        timer = setInterval(() => {
-            i++;
-            StopBar.style.left = i + "px";
-
-            if(i == 396)
-            {
-                i = 0;     
+                    if(i == 396)
+                        i = 0;     
+                }, 0);
             }
-        }, 0);
-    }
-    StopBar_move();
+            StopBar_move();
 
-    StopBtn.addEventListener("click", function(){
-        StopBtn.style.display = "none";
-        clearInterval(timer);
+            //ストップした場所の判定
+            function isColliding(a, b) {
+                const rectA = a.getBoundingClientRect();
+                const rectB = b.getBoundingClientRect();
 
-        console.log(HP);
-        console.log(ATK);
+                return !(
+                    rectA.right < rectB.left ||
+                    rectA.left > rectB.right
+                );
+            }
+            
+        // 敵の情報を取得           
+        fetch(JsonFile)
+        .then(Response => {
+            return Response.json();
+        })
+        .then(function(data){
+            console.log(data);
+            //敵をランダム取得
+            
+            let RivalRondom = Math.floor(Math.random() * data.Rival.length);    
+            const RivalAtk = data.Rival[RivalRondom].atk;   //敵の攻撃力
+            const RivalHP = data.Rival[RivalRondom].HP;     //敵のHP
+            let RivalHP_now = RivalHP;  //現在の敵のHp
+            console.log("敵の攻撃力:"+RivalAtk);
+            console.log("敵のHP:"+RivalHP);
+    
+            //ストップボタンを押されたら
+            StopBtn.addEventListener("click", function(){
+                const RivalLifeMark = document.querySelector("#rival_lifemark"); //ボスの体力状態
+                const MyLifeMark = document.querySelector("#my_lifemark");       //自分の体力
+                let ATKTimes = Math.round((1 + Math.random() * 0.4) * 10) / 10;     //攻撃上乗せをどのくらい倍にするか
 
-        const RivalBar = document.querySelector("#rivalbar");
-            RivalBar.style.width = BossHP + "px";
+                //　ストップした位置がどこかで判定を変える
+                if(isColliding(StopBar, AtcMark)) {
+                    ATKTimes = 1.5   
+                }
+                console.log(ATKTimes);
+                StopBtn.style.display = "none";
+                clearInterval(timer);
 
-        const RivalLifeMark = document.querySelector("#rival_lifemark");
+                // 敵の体力状態変化
+                RivalHP_now = RivalHP_now - MyATK * ATKTimes;
+                let RivalRate= Math.round(RivalHP_now / RivalHP * 100);
+                console.log("敵のHP状態:"+ RivalRate);
 
-        BossHP = BossHP - ATK;
-        RivalLifeMark.style.width = BossHP + "px";
+                RivalLifeMark.style.width = RivalRate + "%";
 
-        
-        
-        // fetch(JsonFile)
-        // .then(Response => {
-        //     return Response.json();
-        // })
-        // .then(function(data){
-        //     console.log(data)
-        // });
-    });
+                //　敵からの反撃（自分の体力が減る）
+                timer = setTimeout(() => {
+                    MyHP_now = MyHP_now - RivalAtk;
+                    let MyRate = Math.round(MyHP_now / MyHP * 100);
+                    console.log(MyRate);
+
+                    MyLifeMark.style.width = MyRate + "%";
+                    StopBtn.style.display = "block";
+                    StopBar_move();
+                }, 1000);
+                if(MyHP_now < 1)
+                {
+                    alert("あなたの負け");  
+                    window.location.href = 'index.html';
+                }
+                else  if(RivalHP_now < 1)
+                {
+                    alert("あなたの勝ち");
+                    window.location.href = 'index.html';
+                }
+                
+                
+            });
+        });
 
 });
 
 //戦闘を開始する前
 function main()
 {
-    AtackBtn.style.display = "none";
+    AtcBar.style.display = "none";
     StopBtn.style.display = "none";
 }
 
