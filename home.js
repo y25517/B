@@ -4,6 +4,19 @@ export let ATK = 0;  // デフォ攻撃力
 
 const Jsonfile = './eq.json'; // 
 
+// 戦闘かボスのaタグを押したときの判定をlocalStorageに保存
+document.getElementById("rival").addEventListener("click", function(e){
+    e.preventDefault();     //動作を止める
+    localStorage.setItem("RivalType", 0);
+    window.location.href = "battle.html"; 
+});
+document.getElementById("boss").addEventListener("click", function(e){
+    e.preventDefault();
+    localStorage.setItem("RivalType", 1);
+    window.location.href = "battle.html"; 
+});
+
+
 fetch(Jsonfile)
 .then(response => response.json())
 .then(data => {
