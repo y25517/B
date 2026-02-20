@@ -124,22 +124,30 @@ StartBtn.addEventListener("click", function(){
                     StopBtn.style.display = "block";
                     StopBar_move();
                 }, 1000);
+
+            // 勝ち負けの判定
                 if(MyHP_now < 1)
                 {
-                    alert("あなたの負け");  
-                    window.location.href = 'index.html';
+                    clearTimeout(timer);
+                    AtcBar.style.display = "none";
+                    StopBtn.style.display = "none";
+                    showResult("あなたの負け");
                 }
                 else  if(RivalHP_now < 1)
                 {
-                    
-                    alert("あなたの勝ち");
+                    clearTimeout(timer);
+                    AtcBar.style.display = "none";
+                    StopBtn.style.display = "none";
                     if(type === "0")
                     {
                         let Coin = Number(localStorage.getItem("Coin"));
                         Coin = Coin + Number(data.Rival[MobuRondom].coin);
                         console.log("コイン"+Coin);
                         localStorage.setItem("Coin", Coin); 
-                    }
+                        showResult("Coin" + Number(data.Rival[MobuRondom].coin) + "枚獲得！");
+                        const CoinImg = document.querySelector("#coinimg");
+                        CoinImg.src = "./images/resultmoney.png";
+                    }   
                     else if(type === "1")
                     {
                         BossCnt++;
@@ -151,8 +159,21 @@ StartBtn.addEventListener("click", function(){
                         
                         localStorage.setItem("bosscnt", BossCnt);
                     }
-                    
-                    window.location.href = 'index.html';
+
+                    // リザルト表示
+                    function showResult(text)
+                    {
+                        const modal = document.getElementById("resultModal");
+                        const resultText = document.getElementById("resultText");
+                      
+                        resultText.textContent = text;
+                        modal.style.display = "flex";
+                    }
+                    // リザルトのボタンを押されたら遷移する
+                    document.querySelector("#resultbtn").addEventListener("click", function(){
+                        window.location.href = "index.html";
+                        document.getElementById("resultModal").style.display = "none";
+                    })
                 }
             });
         });
@@ -167,3 +188,4 @@ function main()
 }
 
 main();
+
