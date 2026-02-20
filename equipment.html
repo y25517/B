@@ -9,15 +9,15 @@
     <title>アバサバイバー - 装備画面</title>
 </head>
 <body>
-    <a href="index.html" class="button-style">戻る</a>
+    <a href="index.html" class="button-style" onclick="alert(randomPick(message.leave, 1))">戻る</a>
     <header>
         <div class="coinArea"></div>
         <div class="messageArea" id="messageArea"></div>
     </header>
     <div class="center">
-        <div class="itemDetailsArea hidden" id="itemDetailsArea"></div>
+        <div class="itemDetailsArea" id="itemDetailsArea"></div>
         <img src="./images/shopkeeper.JPG" alt="店主" class="shopkeeper">
-        <div class="statusDifferenceArea hidden" id="statusDifferenceArea"></div>
+        <div class="statusDifferenceArea" id="statusDifferenceArea"></div>
     </div>
     <div class="itemsArea" id="itemsArea"></div>
     <script src="equipment.js"></script>
