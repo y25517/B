@@ -68,6 +68,27 @@ document.addEventListener("click", () => {
 });
 
 // ローカルストレージから所持している武器、防具を取得
-const displayData = document.querySelector('.display-data');
-const data = localStorage.getItem('owned');
-displayData.innerText = data;
+let owned = JSON.parse(localStorage.getItem("owned")) || [];
+
+const weaponSelect = document.getElementById("weaponpuru");
+const armorSelect = document.getElementById("armorpuru");
+
+weaponSelect.innerHTML = "";
+armorSelect.innerHTML = "";
+
+owned.forEach(item => {
+
+    const option = document.createElement("option");
+    option.value = item.id;
+    option.textContent = item.name;
+
+    if (item.id <= 27) {
+        // 武器
+        weaponSelect.appendChild(option);
+
+    } else if (item.id >= 28 && item.id <= 43) {
+        // 防具
+        armorSelect.appendChild(option);
+    }
+
+});
