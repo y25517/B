@@ -12,13 +12,21 @@ window.addEventListener("load", async () => {
     }
 });
 
-// コインとランク（今は仮状態です）
-let coin=0;
-let rank=1;
+// コインとランクと現在の装備（今は仮状態です）
+localStorage.setItem("rank", 0);
+localStorage.setItem("coins", 10000);
 let soubi = {"weapon":{"id":0,"name": "檜の棒","rank":0,"atk":10.0, "desc":"何の変哲もない、ただの木の棒。とはいえ檜製なので高級感がある。", "price":1}, "armor":{"id":28,"name": "布の服","rank":0,"hp":5, "desc":"ただの布切れを縫い合わせた服。<ruby>全裸<rp>(</rp><rt>フル・フロンタル</rt><rp>)</rp></ruby>よりかはマシ。", "price":1}}
 localStorage.setItem("equipped", JSON.stringify(soubi));
+let moti = [{"id":0,"name": "檜の棒","rank":0,"atk":10.0, "desc":"何の変哲もない、ただの木の棒。とはいえ檜製なので高級感がある。", "price":1}, {"id":28,"name": "布の服","rank":0,"hp":5, "desc":"ただの布切れを縫い合わせた服。<ruby>全裸<rp>(</rp><rt>フル・フロンタル</rt><rp>)</rp></ruby>よりかはマシ。", "price":1}];
+localStorage.setItem("owned", JSON.stringify(moti));
 
+let owned = JSON.parse(localStorage.getItem("owned"));
+let rank = parseInt(localStorage.getItem("rank"));
+let coins = parseInt(localStorage.getItem("coins"));
 let selectedItem = null;
+
+updateCoins();
+
 
 // 店主のメッセージ一覧
 let message = 
@@ -35,6 +43,10 @@ let message =
         "返品は受け付けないぞ。……やられちまったら使い道もないだろうしな。",
         "契約成立だ。持って行け。",
         "ほう、それを選ぶとはな。存外に見る目はあるようだな。"
+    ],
+    "sold_out": [
+        "悪いがそいつは売り切れだ。お前さんが買っちまったからな。",
+        "お前さんは同じものを何度も買おうとするのか? ……本当に?"
     ],
     "no_money": [
         "金が足りないな。出直してきな。",
@@ -60,8 +72,9 @@ let statusDifferenceArea = document.querySelector("#statusDifferenceArea");
 let itemsArea = document.querySelector("#itemsArea");
 function renderItems(e) {
     let itemRank = rank;
-    let weapons = randomPick(e.weapon.filter(item => item.rank == itemRank), 2);
-    let armors = randomPick(e.armor.filter(item => item.rank == itemRank), 2);
+    
+    let weapons = randomPick(e.weapon.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
+    let armors = randomPick(e.armor.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
     let displayItem = weapons.concat(armors);
     itemsArea.innerHTML = "";
 
@@ -70,7 +83,7 @@ function renderItems(e) {
         div.className = "itemCard";
         div.innerHTML = `
             <h4>${i.name}</h4>
-            <p>金額: ${i.price}</p>
+            <p>金額: ${i.price} コイン</p>
             <button type="button" onclick="showDetails(${i.id})">詳細を見る</button>
         `;
         itemsArea.appendChild(div);
@@ -83,50 +96,75 @@ function showDetails(itemId) {
     
     selectedItem = allEqs.find(i=>i.id==itemId);
 
-    itemDetailsArea.classList.remove("hidden");
-
     // 攻撃力（ATK）が存在するかどうかで武器か防具かを判断
     if (selectedItem.atk) {
         itemDetailsArea.innerHTML=`
             <h3>${selectedItem.name}</h3>
             <p>${selectedItem.desc}</p>
             <p>攻撃力: ${selectedItem.atk}</p>
-            <button type="button">購入する</button>
+            <button type="button" onClick="buyItem()">購入する</button>
         `;
     } else {
         itemDetailsArea.innerHTML=`
             <h3>${selectedItem.name}</h3>
             <p>${selectedItem.desc}</p>
             <p>HP: ${selectedItem.hp}</p>
-            <button type="button">購入する</button>
+            <button type="button" onClick="buyItem()">購入する</button>
         `;
     }
     compareEquipment();
 }
 
+// ステータス比較
 function compareEquipment() {
     let equipped = JSON.parse(localStorage.getItem("equipped"));
-    let eId;
     let diff;
     statusDifferenceArea.innerHTML = "<h3>ステータス比較</h3>";
     if (selectedItem.id < 28) {
-        eId = equipped.weapon.id;
         diff = (selectedItem.atk - equipped.weapon.atk);
         statusDifferenceArea.innerHTML += `
-            <p>現在: ${equipped.weapon.atk}</p>
-            <p>選択: ${selectedItem.atk}</p>
-            <p>差分: ${diff}</p>
+            <p>装備中の武器の攻撃力: ${equipped.weapon.atk}</p>
+            <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
+            <p>攻撃力差分: ${diff}</p>
         `
     } else {
-        eId = equipped.armor.id;
         diff = (selectedItem.hp - equipped.armor.hp);
         statusDifferenceArea.innerHTML += `
-            <p>現在: ${equipped.armor.hp}</p>
-            <p>選択: ${selectedItem.hp}</p>
-            <p>差分: ${diff}</p>
+            <p>装備中の防具のHP: ${equipped.armor.hp}</p>
+            <p>選択した防具のHP: ${selectedItem.hp}</p>
+            <p>HP差分: ${diff}</p>
         `;
     }
-    statusDifferenceArea.classList.remove("hidden");
+}
+
+function buyItem() {
+    owned = JSON.parse(localStorage.getItem("owned"));
+
+    for (let i = 0; i < owned.length; i++) {
+        
+        if (owned[i].id == selectedItem.id) {
+            messageArea.innerHTML = randomPick(message.sold_out, 1);
+            return;
+        }
+    }
+    if (coins<selectedItem.price) {
+        messageArea.innerHTML = randomPick(message.no_money, 1);
+        return;
+    }
+    coins-=selectedItem.price;
+    owned.push(selectedItem);
+    localStorage.setItem("coins", coins);
+    localStorage.setItem("owned", JSON.stringify(owned));
+    
+    messageArea.innerHTML = randomPick(message.purchase, 1);
+    updateCoins();
+}
+
+function updateCoins() {
+    let coinArea = document.querySelector(".coinArea");
+    coinArea.innerHTML = `
+        <p>所持コイン: ${coins}<p>
+    `;
 }
 
 // 配列からのランダム取得用の関数(配列と取り出したい要素の数を引数に)
