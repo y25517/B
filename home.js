@@ -2,7 +2,10 @@
 export let HP = 100; // デフォHP
 export let ATK = 0;  // デフォ攻撃力
 
-const Jsonfile = './eq.json'; // 
+// eq.jsonファイルを取得
+const Jsonfile = './eq.json'; 
+
+//ローカルストレージのownedを取得
 const owned = JSON.parse(localStorage.getItem("owned")) || [];
 console.log("owned:", owned);
 
@@ -110,3 +113,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   
   });
+  
+//プルダウンで設定した武器、防具をステータスに反映
+  document.addEventListener("DOMContentLoaded", async () => {
+
+    //ベースの攻撃力、hp
+    const HP_BASE = 100;
+    const ATK_BASE = 0;
+
+    //プルダウンの武器、防具を取得
+    const weaponSelect = document.getElementById("weaponpuru");
+    const armorSelect = document.getElementById("armorpuru");
+
+    //eq.jsonを取得
+    const response = await fetch("./eq.json");
+    const data = await response.json();
+
+    function updateStatus() {
+
+        const weaponId = Number(weaponSelect.value);
+        const armorId = Number(armorSelect.value);
+
+        const weapon = data.weapon.find(w => w.id === weaponId);
+        const armor = data.armor.find(a => a.id === armorId);
+
+        const totalATK = ATK_BASE + (weapon ? weapon.atk : 0);
+        const totalHP = HP_BASE + (armor ? armor.hp : 0);
+
+        document.getElementById("hp").textContent = totalHP;
+        document.getElementById("kougeki").textContent = totalATK;
+
+        localStorage.setItem("avatarHP", totalHP);
+        localStorage.setItem("avatarATK", totalATK);
+    }
+
+    // 初期反映
+    updateStatus();
+
+    // プルダウン変更時に更新
+    weaponSelect.addEventListener("change", updateStatus);
+    armorSelect.addEventListener("change", updateStatus);
+
+});
