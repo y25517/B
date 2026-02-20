@@ -182,7 +182,7 @@ body{
 .sentobutton a {
     font-size: 60px;
     width: 400px; 
-    height: 200px;
+    height: 100px;
     left: 50px;
     top: 650px;
     background: #d1ca0a;
@@ -220,7 +220,7 @@ body{
     font-size: 60px;
     width: 400px; 
     height: 200px;
-    left: 700px;
+    left: 1100px;
     top: 650px;
     background: #6bb3c5;
     position: relative;
@@ -299,7 +299,7 @@ body{
 
 .equip-box {
   display: flex;
-  flex-direction: column; /* ← 縦並び */
+  flex-direction: column; 
   align-items: center;
 }
 
@@ -307,4 +307,13 @@ body{
 #armorpuru {
   margin-top: 10px;
   width: 120px;
+}
+
+.buttons{
+  display: flex;
+}
+.battle-buttons{
+  flex-direction:column ;
+  gap: 40px;
+  display:flex;
 }
