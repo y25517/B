@@ -214,6 +214,10 @@ body{
     width: 120px;
     height: auto;
 }
+.equip-box{
+    display: flex;
+    flex-flow: column;
+}
   
   /* ホーム画面戦闘ボタン */
 .sentobutton a {
