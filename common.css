@@ -1,4 +1,6 @@
-
+body{
+  height: 100vh;
+}
 /* 戦闘画面
 ---------------------------------------------------- */
 
@@ -6,7 +8,8 @@
 .hp_bar{
     display: flex;
 }
-.my_frame{
+.my_frame,
+.rival_frame{
     width: 500px;
     display: flex;
     display: block;
@@ -179,7 +182,7 @@
 .sentobutton a {
     font-size: 60px;
     width: 400px; 
-    height: 200px;
+    height: 100px;
     left: 50px;
     top: 650px;
     background: #d1ca0a;
@@ -217,7 +220,7 @@
     font-size: 60px;
     width: 400px; 
     height: 200px;
-    left: 1180px;
+    left: 1100px;
     top: 650px;
     background: #6bb3c5;
     position: relative;
@@ -259,6 +262,8 @@
     font-weight: bolder;
   }
 
+  /* 今の装備のところ */
+ 
 /* 武器屋画面
 --------------------------------------------------------------------------- */
 .shopkeeper {
