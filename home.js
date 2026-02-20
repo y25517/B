@@ -22,7 +22,7 @@ fetch(Jsonfile)
 .then(data => {
     // constで新しい変数を作ってjsonファイルの武器、防具を反映させる
     const equippedWeapon = data.weapon[0];
-    const equippedArmor = data.armor[3];
+    const equippedArmor = data.armor[28];
 
     // constで新しい変数を作ってjsonファイルの攻撃力、hpを反映させたのを、デフォに足す
     const totalATK = ATK + equippedWeapon.atk;
