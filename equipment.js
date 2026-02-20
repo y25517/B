@@ -13,13 +13,13 @@ window.addEventListener("load", async () => {
 });
 
 // コインとランクと現在の装備（今は仮状態です）
-localStorage.setItem("rank", 0);
-localStorage.setItem("coins", 10000);
-let soubi = {"weapon":{"id":0,"name": "檜の棒","rank":0,"atk":10.0, "desc":"何の変哲もない、ただの木の棒。とはいえ檜製なので高級感がある。", "price":1}, "armor":{"id":28,"name": "布の服","rank":0,"hp":5, "desc":"ただの布切れを縫い合わせた服。<ruby>全裸<rp>(</rp><rt>フル・フロンタル</rt><rp>)</rp></ruby>よりかはマシ。", "price":1}}
-localStorage.setItem("equipped", JSON.stringify(soubi));
-let moti = [{"id":0,"name": "檜の棒","rank":0,"atk":10.0, "desc":"何の変哲もない、ただの木の棒。とはいえ檜製なので高級感がある。", "price":1}, {"id":28,"name": "布の服","rank":0,"hp":5, "desc":"ただの布切れを縫い合わせた服。<ruby>全裸<rp>(</rp><rt>フル・フロンタル</rt><rp>)</rp></ruby>よりかはマシ。", "price":1}];
-localStorage.setItem("owned", JSON.stringify(moti));
+// localStorage.setItem("rank", 0);
+// localStorage.setItem("coins", 10000);
+// let soubi = {"weapon":{"id":0,"name": "檜の棒","rank":0,"atk":10.0, "desc":"何の変哲もない、ただの木の棒。とはいえ檜製なので高級感がある。", "price":1}, "armor":{"id":28,"name": "布の服","rank":0,"hp":5, "desc":"ただの布切れを縫い合わせた服。<ruby>全裸<rp>(</rp><rt>フル・フロンタル</rt><rp>)</rp></ruby>よりかはマシ。", "price":1}}
+// localStorage.setItem("equipped", JSON.stringify(soubi));
 
+// localStorageから「現在の装備」「所持している装備」「現在のランク」「現在のコイン所持数」を取得
+let equipped = JSON.parse(localStorage.getItem("equipped"));
 let owned = JSON.parse(localStorage.getItem("owned"));
 let rank = parseInt(localStorage.getItem("rank"));
 let coins = parseInt(localStorage.getItem("coins"));
@@ -96,8 +96,8 @@ function showDetails(itemId) {
     
     selectedItem = allEqs.find(i=>i.id==itemId);
 
-    // 攻撃力（ATK）が存在するかどうかで武器か防具かを判断
-    if (selectedItem.atk) {
+    // idの値で武器か防具かを判断
+    if (selectedItem < 28) {
         itemDetailsArea.innerHTML=`
             <h3>${selectedItem.name}</h3>
             <p>${selectedItem.desc}</p>
@@ -117,7 +117,6 @@ function showDetails(itemId) {
 
 // ステータス比較
 function compareEquipment() {
-    let equipped = JSON.parse(localStorage.getItem("equipped"));
     let diff;
     statusDifferenceArea.innerHTML = "<h3>ステータス比較</h3>";
     if (selectedItem.id < 28) {
