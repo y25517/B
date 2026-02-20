@@ -8,7 +8,14 @@ let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
 let MyHP_now = MyHP;    //現在自分のHP
 let MyATK = Math.floor(Number(localStorage.getItem("avatarATK")));  //自分の攻撃
 let type = localStorage.getItem("RivalType");
+let BossCnt = Number(localStorage.getItem("bosscnt"));  //ボスカウント
+//ボスカウントがまだセットされていなければBossCntに0を代入
+if (isNaN(BossCnt)) {
+    BossCnt = 0;
+    localStorage.setItem("bosscnt", BossCnt);
+}
 console.log(type);
+MyATK = 1000;
 
 console.log("HP:"+MyHP);
 console.log("ATK:"+MyATK);
@@ -59,22 +66,33 @@ StartBtn.addEventListener("click", function(){
             let RivalAtk;
             let RivalHP;
             let RivalName;
+           
 
-            if(type === "0"){
             //モブ敵をランダム取得
-            const MobuRondom = Math.floor(Math.random() * data.Rival.length);    
-            RivalAtk = data.Rival[MobuRondom].atk;   //敵の攻撃力
-            RivalHP = data.Rival[MobuRondom].HP;     //敵のHP
-            RivalName = data.Rival[MobuRondom].name;
-            
-            console.log("敵の攻撃力:"+RivalAtk);
-            console.log("敵のHP:"+RivalHP);
-            // 敵の名前を出力
-            const RivalNameFrame = document.querySelector("#rival_name");
-            RivalNameFrame.textContent = "敵の名前："+RivalName;
+            if(type === "0"){
+                const MobuRondom = Math.floor(Math.random() * data.Rival.length);    
+                RivalAtk = data.Rival[MobuRondom].atk;   //敵の攻撃力
+                RivalHP = data.Rival[MobuRondom].HP;     //敵のHP
+                RivalName = data.Rival[MobuRondom].name;
+                
+                console.log("敵の攻撃力:"+RivalAtk);
+                console.log("敵のHP:"+RivalHP);
+                // 敵の名前を出力
+                const RivalNameFrame = document.querySelector("#rival_name");
+                RivalNameFrame.textContent = "敵の名前："+RivalName;
             }
+            //モブ敵をランダム取得           
             else if(type === "1"){
-
+                console.log(BossCnt);
+                RivalAtk = data.Boss[BossCnt].atk;   //敵の攻撃力
+                RivalHP = data.Boss[BossCnt].HP;     //敵のHP
+                RivalName = data.Boss[BossCnt].name;
+                
+                console.log("ボスの攻撃力:"+RivalAtk);
+                console.log("ボスのHP:"+RivalHP);
+                // ボスの名前を出力
+                const RivalNameFrame = document.querySelector("#rival_name");
+                RivalNameFrame.textContent = "敵の名前："+RivalName;
             }
             let RivalHP_now = RivalHP;  //現在の敵のHp
             
@@ -116,7 +134,22 @@ StartBtn.addEventListener("click", function(){
                 }
                 else  if(RivalHP_now < 1)
                 {
+                    let Coin = localStorage.getItem("Coin");
+                    Coin++;
+                    localStorage.setItem("Coin", Coin); 
                     alert("あなたの勝ち");
+                    if(type === "1")
+                    {
+                        BossCnt++;
+
+                        if(BossCnt >= data.Boss.length)
+                        {
+                            BossCnt = 0;
+                        }
+                        
+                        localStorage.setItem("bosscnt", BossCnt);
+                    }
+                    
                     window.location.href = 'index.html';
                 }
             });

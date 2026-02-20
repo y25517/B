@@ -4,6 +4,12 @@ export let ATK = 0;  // デフォ攻撃力
 
 const Jsonfile = './eq.json'; // 
 
+let CoinNow = 100;
+// コインをローカルストレージに入れる
+    localStorage.setItem("Coin", CoinNow);
+    const CoinCnt = document.querySelector("#coin-count");
+    CoinCnt.textContent = localStorage.getItem("Coin");
+
 // 戦闘かボスのaタグを押したときの判定をlocalStorageに保存
 document.getElementById("rival").addEventListener("click", function(e){
     e.preventDefault();     //動作を止める
