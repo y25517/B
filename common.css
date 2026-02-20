@@ -302,6 +302,15 @@ body{
     font-size: 30px;
     font-weight: bolder;
   }
+  /* ランク */
+  #rank{
+    position: absolute;
+    top: 120px;
+    right: 150px;
+    font-size: 30px;
+    font-weight: bolder;
+  }
+
 
   /* ボタンの並び替え */
 .buttons{
