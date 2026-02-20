@@ -4,12 +4,25 @@ export let ATK = 0;  // デフォ攻撃力
 
 const Jsonfile = './eq.json'; // 
 
+// 戦闘かボスのaタグを押したときの判定をlocalStorageに保存
+document.getElementById("rival").addEventListener("click", function(e){
+    e.preventDefault();     //動作を止める
+    localStorage.setItem("RivalType", 0);
+    window.location.href = "battle.html"; 
+});
+document.getElementById("boss").addEventListener("click", function(e){
+    e.preventDefault();
+    localStorage.setItem("RivalType", 1);
+    window.location.href = "battle.html"; 
+});
+
+
 fetch(Jsonfile)
 .then(response => response.json())
 .then(data => {
     // constで新しい変数を作ってjsonファイルの武器、防具を反映させる
-    const equippedWeapon = data.weapon[27];
-    const equippedArmor = data.armor[15];
+    const equippedWeapon = data.weapon[0];
+    const equippedArmor = data.armor[3];
 
     // constで新しい変数を作ってjsonファイルの攻撃力、hpを反映させたのを、デフォに足す
     const totalATK = ATK + equippedWeapon.atk;
@@ -53,3 +66,4 @@ document.addEventListener("click", () => {
     weaponMenu.classList.remove("active");
     armorMenu.classList.remove("active");
 });
+
