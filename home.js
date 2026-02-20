@@ -4,9 +4,12 @@ export let ATK = 0;  // デフォ攻撃力
 
 const Jsonfile = './eq.json'; // 
 
-let CoinNow = 100;
+let CoinNow = Number(localStorage.getItem("Coin"));
 // コインをローカルストレージに入れる
+if (isNaN(CoinNow)) {
+    CoinNow = 100;
     localStorage.setItem("Coin", CoinNow);
+}
     const CoinCnt = document.querySelector("#coin-count");
     CoinCnt.textContent = localStorage.getItem("Coin");
 
