@@ -5,8 +5,10 @@ const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
 
 let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
-let MyHP_now = 100;    //現在自分のHP
+let MyHP_now = MyHP;    //現在自分のHP
 let MyATK = Math.floor(Number(localStorage.getItem("avatarATK")));  //自分の攻撃
+let type = localStorage.getItem("RivalType");
+console.log(type);
 
 console.log("HP:"+MyHP);
 console.log("ATK:"+MyATK);
@@ -52,15 +54,30 @@ StartBtn.addEventListener("click", function(){
         })
         .then(function(data){
             console.log(data);
-            //敵をランダム取得
+
             
-            let RivalRondom = Math.floor(Math.random() * data.Rival.length);    
-            const RivalAtk = data.Rival[RivalRondom].atk;   //敵の攻撃力
-            const RivalHP = data.Rival[RivalRondom].HP;     //敵のHP
-            let RivalHP_now = RivalHP;  //現在の敵のHp
+            let RivalAtk;
+            let RivalHP;
+            let RivalName;
+
+            if(type === "0"){
+            //モブ敵をランダム取得
+            const MobuRondom = Math.floor(Math.random() * data.Rival.length);    
+            RivalAtk = data.Rival[MobuRondom].atk;   //敵の攻撃力
+            RivalHP = data.Rival[MobuRondom].HP;     //敵のHP
+            RivalName = data.Rival[MobuRondom].name;
+            
             console.log("敵の攻撃力:"+RivalAtk);
             console.log("敵のHP:"+RivalHP);
-    
+            // 敵の名前を出力
+            const RivalNameFrame = document.querySelector("#rival_name");
+            RivalNameFrame.textContent = "敵の名前："+RivalName;
+            }
+            else if(type === "1"){
+
+            }
+            let RivalHP_now = RivalHP;  //現在の敵のHp
+            
             //ストップボタンを押されたら
             StopBtn.addEventListener("click", function(){
                 const RivalLifeMark = document.querySelector("#rival_lifemark"); //ボスの体力状態
