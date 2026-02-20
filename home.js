@@ -2,7 +2,12 @@
 export let HP = 100; // デフォHP
 export let ATK = 0;  // デフォ攻撃力
 
-const Jsonfile = './eq.json'; // 
+// eq.jsonファイルを取得
+const Jsonfile = './eq.json'; 
+
+//ローカルストレージのownedを取得
+const owned = JSON.parse(localStorage.getItem("owned")) || [];
+console.log("owned:", owned);
 
 let CoinNow = Number(localStorage.getItem("Coin"));
 // コインをローカルストレージに入れる
@@ -30,8 +35,8 @@ fetch(Jsonfile)
 .then(response => response.json())
 .then(data => {
     // constで新しい変数を作ってjsonファイルの武器、防具を反映させる
-    const equippedWeapon = data.weapon[0];
-    const equippedArmor = data.armor[28];
+    const equippedWeapon = data.weapon[3];
+    const equippedArmor = data.armor[29];
 
     // constで新しい変数を作ってjsonファイルの攻撃力、hpを反映させたのを、デフォに足す
     const totalATK = ATK + equippedWeapon.atk;
@@ -76,29 +81,77 @@ document.addEventListener("click", () => {
     armorMenu.classList.remove("active");
 });
 
-// ローカルストレージから所持している武器、防具を取得
-window.addEventListener("DOMContentLoaded", () => {
+// optionにある武器、防具とownedにある武器、防具と一致したら表示させる
 
-    let owned = JSON.parse(localStorage.getItem("owned")) || [];
+document.addEventListener("DOMContentLoaded", () => {
 
+    const owned = JSON.parse(localStorage.getItem("owned")) || [];
+  
+    const weaponSelect = document.getElementById("weaponpuru");
+    const armorSelect = document.getElementById("armorpuru");
+  
+    // 武器のoption整理
+    Array.from(weaponSelect.options).forEach(option => {
+  
+      const hasItem = owned.some(o => o.id == option.value);
+  
+      if (!hasItem) {
+        option.remove();
+      }
+  
+    });
+  
+    // 防具のoption整理
+    Array.from(armorSelect.options).forEach(option => {
+  
+      const hasItem = owned.some(o => o.id == option.value);
+  
+      if (!hasItem) {
+        option.remove();
+      }
+  
+    });
+  
+  });
+  
+//プルダウンで設定した武器、防具をステータスに反映
+  document.addEventListener("DOMContentLoaded", async () => {
+
+    //ベースの攻撃力、hp
+    const HP_BASE = 100;
+    const ATK_BASE = 0;
+
+    //プルダウンの武器、防具を取得
     const weaponSelect = document.getElementById("weaponpuru");
     const armorSelect = document.getElementById("armorpuru");
 
-    weaponSelect.innerHTML = "";
-    armorSelect.innerHTML = "";
+    //eq.jsonを取得
+    const response = await fetch("./eq.json");
+    const data = await response.json();
 
-    owned.forEach(item => {
+    function updateStatus() {
 
-        const option = document.createElement("option");
-        option.value = item.id;
-        option.textContent = item.name;
+        const weaponId = Number(weaponSelect.value);
+        const armorId = Number(armorSelect.value);
 
-        if (item.id <= 27) {
-            weaponSelect.appendChild(option);
-        } else if (item.id >= 28) {
-            armorSelect.appendChild(option);
-        }
+        const weapon = data.weapon.find(w => w.id === weaponId);
+        const armor = data.armor.find(a => a.id === armorId);
 
-    });
+        const totalATK = ATK_BASE + (weapon ? weapon.atk : 0);
+        const totalHP = HP_BASE + (armor ? armor.hp : 0);
+
+        document.getElementById("hp").textContent = totalHP;
+        document.getElementById("kougeki").textContent = totalATK;
+
+        localStorage.setItem("avatarHP", totalHP);
+        localStorage.setItem("avatarATK", totalATK);
+    }
+
+    // 初期反映
+    updateStatus();
+
+    // プルダウン変更時に更新
+    weaponSelect.addEventListener("change", updateStatus);
+    armorSelect.addEventListener("change", updateStatus);
 
 });

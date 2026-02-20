@@ -22,7 +22,7 @@ window.addEventListener("load", async () => {
 let equipped = JSON.parse(localStorage.getItem("equipped"));
 let owned = JSON.parse(localStorage.getItem("owned"));
 let rank = parseInt(localStorage.getItem("rank"));
-let coins = parseInt(localStorage.getItem("coins"));
+let coins = parseInt(localStorage.getItem("Coin"));
 let selectedItem = null;
 
 updateCoins();
@@ -83,6 +83,7 @@ function renderItems(e) {
         div.className = "itemCard";
         div.innerHTML = `
             <h4>${i.name}</h4>
+            <img src="./images/equipments_img/e${i.id}.JPG" alt="${i.name}">
             <p>金額: ${i.price} コイン</p>
             <button type="button" onclick="showDetails(${i.id})">詳細を見る</button>
         `;
@@ -152,7 +153,7 @@ function buyItem() {
     }
     coins-=selectedItem.price;
     owned.push(selectedItem);
-    localStorage.setItem("coins", coins);
+    localStorage.setItem("Coin", coins);
     localStorage.setItem("owned", JSON.stringify(owned));
     
     messageArea.innerHTML = randomPick(message.purchase, 1);
