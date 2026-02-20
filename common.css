@@ -7,6 +7,7 @@
     display: flex;
 }
 .my_frame{
+    width: 500px;
     display: flex;
     display: block;
     margin: auto;
@@ -16,20 +17,20 @@
 }
 .my_hpbar,
 .rival_hpbar{
-    width: 500px;
+    width: 100%;
     height: 25px;
     background-color: #4b4b4b;
     border-radius:10px;
 }
 .mylife_mark{
-    width: 500px;
+    width: 100%;
     height: 100%;
     background-color: #8df369;
     border-radius:10px;
     filter: saturate(500%);
 }
 .rivallife_mark{
-    width: 500px;
+    width: 100%;
     height: 100%;
     background-color: #8df369;
     border-radius:10px;
