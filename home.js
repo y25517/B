@@ -53,3 +53,4 @@ document.addEventListener("click", () => {
     weaponMenu.classList.remove("active");
     armorMenu.classList.remove("active");
 });
+
