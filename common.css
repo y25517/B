@@ -44,6 +44,43 @@ body{
   justify-content: space-between; 
 }
 
+/* リザルト表示 */
+.modal {
+  display: none; /* 最初は隠す */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.1);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: rgb(252, 241, 213);
+  padding: 70px;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 30px;
+  position: relative;
+}
+.resulttext{
+  font-size: 28px;
+  position: absolute;
+  top: 30px;
+  text-align: center;
+}
+.modal-content img{
+  width: 15vw;
+  height: 100%;
+}
+.resultbutton{
+  font-size: 16px;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+
 /* スタートボタン */
 .startbtn_pos{
     display: flex;
@@ -118,7 +155,7 @@ body{
     align-items: center;
     height: 120px;
   }
-  header p {
+  .index p {
     margin: 0;
     font-weight: bold;
     letter-spacing: 5px;
