@@ -3,6 +3,8 @@ export let HP = 100; // デフォHP
 export let ATK = 0;  // デフォ攻撃力
 
 const Jsonfile = './eq.json'; // 
+const owned = JSON.parse(localStorage.getItem("owned")) || [];
+console.log("owned:", owned);
 
 let CoinNow = 100;
 // コインをローカルストレージに入れる
@@ -27,8 +29,8 @@ fetch(Jsonfile)
 .then(response => response.json())
 .then(data => {
     // constで新しい変数を作ってjsonファイルの武器、防具を反映させる
-    const equippedWeapon = data.weapon[0];
-    const equippedArmor = data.armor[28];
+    const equippedWeapon = data.weapon[3];
+    const equippedArmor = data.armor[29];
 
     // constで新しい変数を作ってjsonファイルの攻撃力、hpを反映させたのを、デフォに足す
     const totalATK = ATK + equippedWeapon.atk;
@@ -73,29 +75,35 @@ document.addEventListener("click", () => {
     armorMenu.classList.remove("active");
 });
 
-// ローカルストレージから所持している武器、防具を取得
-window.addEventListener("DOMContentLoaded", () => {
+// optionにある武器、防具とownedにある武器、防具と一致したら表示させる
 
-    let owned = JSON.parse(localStorage.getItem("owned")) || [];
+document.addEventListener("DOMContentLoaded", () => {
 
+    const owned = JSON.parse(localStorage.getItem("owned")) || [];
+  
     const weaponSelect = document.getElementById("weaponpuru");
     const armorSelect = document.getElementById("armorpuru");
-
-    weaponSelect.innerHTML = "";
-    armorSelect.innerHTML = "";
-
-    owned.forEach(item => {
-
-        const option = document.createElement("option");
-        option.value = item.id;
-        option.textContent = item.name;
-
-        if (item.id <= 27) {
-            weaponSelect.appendChild(option);
-        } else if (item.id >= 28) {
-            armorSelect.appendChild(option);
-        }
-
+  
+    // 武器のoption整理
+    Array.from(weaponSelect.options).forEach(option => {
+  
+      const hasItem = owned.some(o => o.id == option.value);
+  
+      if (!hasItem) {
+        option.remove();
+      }
+  
     });
-
-});
+  
+    // 防具のoption整理
+    Array.from(armorSelect.options).forEach(option => {
+  
+      const hasItem = owned.some(o => o.id == option.value);
+  
+      if (!hasItem) {
+        option.remove();
+      }
+  
+    });
+  
+  });
