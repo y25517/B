@@ -146,7 +146,33 @@ body{
   /* ホーム画面
   --------------------------------------------------------------------------- */
   
-  /* タイトル */
+  body {
+  height: 100vh;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* 背景 */
+.home_body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.home_body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('images/home_back.jpg') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+/* タイトル */
 .home_header {
   height: 120px;
   display: flex;
@@ -162,37 +188,19 @@ body{
   margin: 0;
   font-size: 64px;
   background: linear-gradient(90deg, #00c3ff, #ffff1c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   text-shadow:
     2px 2px 0 #000,
-    4px 4px 0 rgba(0,0,0,0.3),
-    6px 6px 0 rgba(0,0,0,0.2);
+    4px 4px 0 rgba(0, 0, 0, 0.3),
+    6px 6px 0 rgba(0, 0, 0, 0.2);
   letter-spacing: 8px;
   font-weight: bold;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-
-  /* 背景 */
-  .home_body {
-      margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: white;
-  font-family: "Poppins", sans-serif;
-  position: relative;
-  overflow: hidden;
-  }
-
-.home_body::before {
-  content: "";
-  position: absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: url('images/home_back.jpg') no-repeat center center;
-  background-size: cover;
-  opacity: 0.2;
-  z-index: 0;
+@keyframes glow {
+  0% { text-shadow: 2px 2px 0 #000, 4px 4px 0 rgba(0,0,0,0.3), 6px 6px 0 rgba(0,0,0,0.2); }
+  100% { text-shadow: 2px 2px 2px #fff, 4px 4px 4px rgba(255,255,255,0.4), 6px 6px 6px rgba(255,255,255,0.2); }
 }
 
   /* アバター */
@@ -218,89 +226,56 @@ body{
       6px 6px 10px rgba(0, 0, 0, 0.6);
       }
     }
-
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
-  }
-
-  /* ステータス */
-  .st1 {
-  font-size: 32px;
-  margin-bottom: 40px;
-  padding-left: 0;
-  text-align: center;
+/* アバター */
+.home_avatar {
+    position: fixed;
+    top: 20%;
+    right: 43%;
+    width: 12%;
 }
 
-  .status-box {
+/* ステータス */
+.sute-tasu {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.st1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.status-box {
+    position: fixed;
+    top: 30%;
+    left: 170px; 
     width: 500px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
     border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 50px;
-    margin: 150px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-  }
-  .status .row {
-    font-size: 30px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-  }
-  .status dt {
-    font-weight: normal;
-  }
-  .status dd {
-    margin: 0;
-  }
-  .status dt::after {
-    content: "　：";
-  }
-  
-
-  /* 今の装備 */
-  .home_equipment {
-    position: absolute;
-    top: 23%;
-    right: 14%;
-    transform: translateY(-50%);
-    font-size: 32px;
-    color:white;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 10px 20px;
-    border-radius: 10px;
-    letter-spacing: 4px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  }
-
-.now-equipment {
-    position: absolute;  
-    background-color: #75757515;
-    top: 45%;
-    right: 8%;
-    transform: translateY(-50%);
-    display: flex;
-    gap: 90px;
-    width: 470px;
-    padding: 90px 10px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
     padding: 40px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
-.now-equipment img {
-    width: 120px;
-    height: auto;
+
+.status .row {
+  font-size: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
-.equip-box{
-    display: flex;
-    flex-flow: column;
+
+.status dt {
+  font-weight: normal;
 }
-  
+
+.status dd {
+  margin: 0;
+}
+
+.status dt::after {
+  content: " :";
+}
+
 /* ボタン */
 .btn_battle,
 .btn_shop,
@@ -317,10 +292,17 @@ body{
 .btn_battle {
   background: #98930a;
   color: black;
+  padding: 80px 70px;
   left: 100px;
   padding: 80px 75px;
 }
 
+.btn_battle_boss {
+  background: #d10a0a;
+  color: black;
+  padding: 80px 50px;
+  left: 550px;
+}
 .btn_shop {
   background: #1488a5;
   color: black;
@@ -396,36 +378,57 @@ body{
 .itemsArea {
     display: flex;
     justify-content: space-around;
+  box-shadow: 0 0 20px #d10a0a;
+  color: white;
 }
 
-.itemCard {
-    border: 1px solid #000;
-    padding: 5rem;
+.btn_shop:hover {
+  box-shadow: 0 0 20px #6bb3c5;
+  color: white;
 }
 
-.itemDetailsArea, 
-.statusDifferenceArea {
-    width: 15rem;
-    overflow-wrap: break-word;
-    text-align: center;
+/* コイン、ランク */
+#coin {
+  position: absolute;
+  top: 120px;
+  right: 570px;
+  font-size: 30px;
+  font-weight: bolder;
 }
 
-.button-style {
-    display: block;
-    width: 150px;
-    padding: 10px 25px;
-    background: rgba(160, 227, 15, 0.495);
-    color: #313131;
-    text-decoration: none;
-    font-weight: 500;
+#rank {
+  position: absolute;
+  top: 120px;
+  right: 300px;
+  font-size: 30px;
+  font-weight: bolder;
 }
 
-.button-style:hover {
-    background: rgba(100, 150, 5, 1);
-    transition: 0.3s;
-    color: #fff;
+/* 装備ボックス */
+.now-equipment {
+  position: absolute;
+  background-color: #75757515;
+  top: 45%;
+  right: 8%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 50px;
+  width: 470px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-.messageArea {
-    text-align: center;
+.now-equipment img {
+  width: 120px;
+  height: auto;
+}
+
+/* 装備セレクト */
+.equip-box {
+  display: flex;
+  flex-flow: column;
 }
