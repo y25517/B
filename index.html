@@ -14,30 +14,27 @@
     <script type="module" src="home.js"></script>
   </head>
 
-  <body>
-    <header>
+  <body class="home_body">
+    <header class="home_header">
         <p>アバサバイバー</p>
     </header>
 
     <main>
       <h1 id="coin">COIN : <span id="coin-count">100</span></h1>
 
-      <div class="now-equipment">
-        <img src="images/sword1.png" alt="weapon">
-        <img src="images/protector.png" alt="protector">
+      <div class="avatar">
+        <img src="" alt="アバター" id="">
       </div>
 
-      <button class="sentobutton">
-        <a href="battle.html">⚔戦闘⚔</a>
-      </button>
-    
-      <button class="bukiyabutton">
-        <a href="equipment.html">装備屋</a>
-      </button>
+      <h2 class="home_equipment">装備中</h2>
+      <div class="now-equipment">
+        <img src="" alt="武器" id="">
+        <img src="" alt="防具" id="">
+      </div>
 
       <div>
-        <h2 class="st1">ステータス</h2>
         <div class="status-box">
+          <h2 class="st1">ステータス</h2>
           <dl class="status">
             <div class="row">
               <dt>HP</dt>
@@ -48,11 +45,16 @@
               <dd id="kougeki">50</dd>
             </div>
           </dl>
-        </div>  
+        </div>
+
+      <div class="btn">
+        <a href="battle.html" class="btn_battle">⚔ 戦闘</a>
+        <a href="equipment.html" class="btn_shop">装備屋</a>
+      </div>
+      
     </main>
 
     <footer></footer>
-
   </body>
 </html>
 
