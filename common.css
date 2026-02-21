@@ -162,18 +162,6 @@ header p {
   margin: 0;
   font-size: 64px;
   background: linear-gradient(90deg, #00c3ff, #ffff1c);
-  text-shadow:
-    2px 2px 0 #000,
-    4px 4px 0 rgba(0,0,0,0.3),
-    6px 6px 0 rgba(0,0,0,0.2);
-  letter-spacing: 8px;
-  font-weight: bold;
-}
-
-header p {
-  margin: 0;
-  font-size: 64px;
-  background: linear-gradient(90deg, #00c3ff, #ffff1c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow:
@@ -228,7 +216,8 @@ header p {
     text-shadow: 
       3px 3px 0 #000,
       6px 6px 10px rgba(0, 0, 0, 0.6);
-  }
+      }
+    }
 
   @keyframes float {
     0% { transform: translateY(0px); }
@@ -314,11 +303,11 @@ header p {
   
 /* ボタン */
 .btn_battle,
-.btn_shop {
+.btn_shop,
+.btn_battle_boss {
   position: fixed;
   bottom: 50px;
-  font-size: 90px;
-  padding: 80px 150px;
+  font-size: 70px;
   border-radius: 20px;
   text-decoration: none;
   font-weight: bold;
@@ -326,18 +315,33 @@ header p {
 }
 
 .btn_battle {
-  background: #d1ca0a;
+  background: #98930a;
   color: black;
   left: 100px;
+  padding: 80px 75px;
 }
 
 .btn_shop {
-  background: #6bb3c5;
+  background: #1488a5;
   color: black;
-  right: 100px;
+  right: 150px;
+  padding: 80px 150px;
 }
+
+.btn_battle_boss {
+  background: #970e0e;
+  color: black;
+  left: 500px;
+  padding: 80px 70px;
+}
+
 .btn_battle:hover {
   box-shadow: 0 0 20px #ffe600;
+  color: white;
+}
+
+.btn_battle_boss:hover {
+  box-shadow: 0 0 50px #d10a0a;
   color: white;
 }
 
@@ -349,8 +353,8 @@ header p {
 /* coin */
   #coin {
     position: absolute;
-    top: 130px;
-    right: 370px;
+    top: 120px;
+    right: 570px;
     font-size: 30px;
     font-weight: bolder;
   }
@@ -358,7 +362,7 @@ header p {
   #rank{
     position: absolute;
     top: 120px;
-    right: 150px;
+    right: 250px;
     font-size: 30px;
     font-weight: bolder;
   }
