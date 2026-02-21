@@ -203,6 +203,29 @@ body{
   100% { text-shadow: 2px 2px 2px #fff, 4px 4px 4px rgba(255,255,255,0.4), 6px 6px 6px rgba(255,255,255,0.2); }
 }
 
+  /* アバター */
+  .avatar {
+    position: absolute;  
+    top: 50%;
+    right: 45%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 20px;
+  }
+
+  .avatar img {
+  width: 250px;
+  animation: float 3s ease-in-out infinite;
+  .index p {
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 5px;
+    color: rgba(138, 25, 25, 0.788);
+    text-shadow: 
+      3px 3px 0 #000,
+      6px 6px 10px rgba(0, 0, 0, 0.6);
+      }
+    }
 /* アバター */
 .home_avatar {
     position: fixed;
@@ -267,10 +290,11 @@ body{
 }
 
 .btn_battle {
-  background: #d1ca0a;
+  background: #98930a;
   color: black;
   padding: 80px 70px;
   left: 100px;
+  padding: 80px 75px;
 }
 
 .btn_battle_boss {
@@ -280,10 +304,17 @@ body{
   left: 550px;
 }
 .btn_shop {
-  background: #6bb3c5;
+  background: #1488a5;
   color: black;
-  padding: 80px 150px;
   right: 150px;
+  padding: 80px 150px;
+}
+
+.btn_battle_boss {
+  background: #970e0e;
+  color: black;
+  left: 500px;
+  padding: 80px 70px;
 }
 
 .btn_battle:hover {
@@ -292,6 +323,61 @@ body{
 }
 
 .btn_battle_boss:hover {
+  box-shadow: 0 0 50px #d10a0a;
+  color: white;
+}
+
+.btn_shop:hover {
+  box-shadow: 0 0 20px #6bb3c5;
+  color: white;
+}
+
+/* coin */
+  #coin {
+    position: absolute;
+    top: 120px;
+    right: 570px;
+    font-size: 30px;
+    font-weight: bolder;
+  }
+  /* ランク */
+  #rank{
+    position: absolute;
+    top: 120px;
+    right: 250px;
+    font-size: 30px;
+    font-weight: bolder;
+  }
+
+
+  /* ボタンの並び替え */
+.buttons{
+    display: flex;
+}
+
+  .battle-buttons{
+    display: flex;
+    flex-flow: column;
+    gap: 30px;
+  }
+ 
+/* 武器屋画面
+--------------------------------------------------------------------------- */
+.shopkeeper {
+    width: 50vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5rem;
+}
+
+.center {
+    display: flex;
+}
+
+.itemsArea {
+    display: flex;
+    justify-content: space-around;
   box-shadow: 0 0 20px #d10a0a;
   color: white;
 }
