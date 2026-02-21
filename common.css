@@ -145,16 +145,81 @@ body{
 
   /* ホーム画面
   --------------------------------------------------------------------------- */
-  /* タイトル */
-  .index {
-    font-size: 50px;
-    background-color: #5a06139d;
   
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 120px;
+  /* タイトル */
+.home_header {
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #001f3f, #0074D9);
+  font-size: 48px;
+  letter-spacing: 8px;
+  border-bottom: 4px solid #00c3ff;
+}
+
+header p {
+  margin: 0;
+  font-size: 64px;
+  background: linear-gradient(90deg, #00c3ff, #ffff1c);
+  text-shadow:
+    2px 2px 0 #000,
+    4px 4px 0 rgba(0,0,0,0.3),
+    6px 6px 0 rgba(0,0,0,0.2);
+  letter-spacing: 8px;
+  font-weight: bold;
+}
+
+header p {
+  margin: 0;
+  font-size: 64px;
+  background: linear-gradient(90deg, #00c3ff, #ffff1c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow:
+    2px 2px 0 #000,
+    4px 4px 0 rgba(0,0,0,0.3),
+    6px 6px 0 rgba(0,0,0,0.2);
+  letter-spacing: 8px;
+  font-weight: bold;
+}
+
+
+  /* 背景 */
+  .home_body {
+      margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  overflow: hidden;
   }
+
+.home_body::before {
+  content: "";
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: url('images/home_back.jpg') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+  /* アバター */
+  .avatar {
+    position: absolute;  
+    top: 50%;
+    right: 45%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 20px;
+  }
+
+  .avatar img {
+  width: 250px;
+  animation: float 3s ease-in-out infinite;
   .index p {
     margin: 0;
     font-weight: bold;
@@ -164,52 +229,80 @@ body{
       3px 3px 0 #000,
       6px 6px 10px rgba(0, 0, 0, 0.6);
   }
-  
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+
   /* ステータス */
   .st1 {
-    font-size: x-large;
-    margin: 50px;
-    padding-left: 7%;
-  }
+  font-size: 32px;
+  margin-bottom: 40px;
+  padding-left: 0;
+  text-align: center;
+}
 
   .status-box {
-    font-size: large;
-    width: 400px;
-    color: rgb(0, 0, 0);
-    border: 3px solid rgb(0, 0, 0);
-    padding: 30px 30px;
-    font-family: "MS Gothic", monospace;
-    margin: 50px;
+    width: 500px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 50px;
+    margin: 150px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   }
-
   .status .row {
+    font-size: 30px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
   }
-  
   .status dt {
     font-weight: normal;
   }
-  
   .status dd {
     margin: 0;
   }
-  
   .status dt::after {
     content: "　：";
   }
   
+
   /* 今の装備 */
+  .home_equipment {
+    position: absolute;
+    top: 23%;
+    right: 14%;
+    transform: translateY(-50%);
+    font-size: 32px;
+    color:white;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px 20px;
+    border-radius: 10px;
+    letter-spacing: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
 .now-equipment {
     position: absolute;  
-    top: 50%;
-    right: 250px;
+    background-color: #75757515;
+    top: 45%;
+    right: 8%;
     transform: translateY(-50%);
     display: flex;
-    gap: 20px;
+    gap: 90px;
+    width: 470px;
+    padding: 90px 10px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
 }
-
 .now-equipment img {
     width: 120px;
     height: auto;
@@ -219,86 +312,45 @@ body{
     flex-flow: column;
 }
   
-  /* ホーム画面戦闘ボタン */
-.sentobutton a {
-    font-size: 60px;
-    width: 400px; 
-    height: 100px;
-    left: 50px;
-    top: 650px;
-    background: #d1ca0a;
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px 25px;
-    color: #313131;
-    transition: 0.3s ease-in-out;
-    font-weight: 500;
-    z-index:0;
+/* ボタン */
+.btn_battle,
+.btn_shop {
+  position: fixed;
+  bottom: 50px;
+  font-size: 90px;
+  padding: 80px 150px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
 }
-.sentobutton a:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    display: block;
-    background: #ee6f0e;
-    transition: .3s;
-    left:0;
+
+.btn_battle {
+  background: #d1ca0a;
+  color: black;
+  left: 100px;
 }
-.sentobutton a:hover {
-    color: #ffffff;
+
+.btn_shop {
+  background: #6bb3c5;
+  color: black;
+  right: 100px;
 }
-.sentobutton a:hover:before {
-    width: 100%;
-    z-index: -1;
+.btn_battle:hover {
+  box-shadow: 0 0 20px #ffe600;
+  color: white;
 }
-/* ホーム画面装備屋ボタン */
-.bukiyabutton a {
-    font-size: 60px;
-    width: 400px; 
-    height: 200px;
-    left: 1100px;
-    top: 650px;
-    background: #6bb3c5;
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px 25px;
-    color: #313131;
-    transition: 0.3s ease-in-out;
-    font-weight: 500;
-    z-index:0;
-}
-.bukiyabutton a:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    display: block;
-    background: #0754d0;
-    transition: .3s;
-    left:0;
-}
-.bukiyabutton a:hover {
-    color: #ffffff;
-}
-.bukiyabutton a:hover:before {
-    width: 100%;
-    z-index: -1;
+
+.btn_shop:hover {
+  box-shadow: 0 0 20px #6bb3c5;
+  color: white;
 }
 
 /* coin */
   #coin {
     position: absolute;
-    top: 120px;
-    right: 310px;
+    top: 130px;
+    right: 370px;
     font-size: 30px;
     font-weight: bolder;
   }
