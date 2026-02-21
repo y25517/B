@@ -3,10 +3,24 @@ body{
 }
 /* 戦闘画面
 ---------------------------------------------------- */
+/* 背景 */
+.battle_body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url("images/battle_back.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
 
 /* header */
 .hp_bar{
-    display: flex;
+    display: flex;  
+    justify-content: space-between;
+    margin-top: 130px;
 }
 .my_frame,
 .rival_frame{
@@ -15,8 +29,10 @@ body{
     display: block;
     margin: auto;
 }
-.my_frame p{
-    font-size: 20px;
+.my_frame p,
+.rival_frame p{
+    font-size: 30px;
+    color: #ffffff;
 }
 .my_hpbar,
 .rival_hpbar{
@@ -42,6 +58,16 @@ body{
 .img_box{
     display: flex;
   justify-content: space-between; 
+}
+
+.vs_text {
+  font-size: 70px;
+  font-weight: bold;
+  color: #ff3b3b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 0 10px rgba(255,0,0,0.8);
 }
 
 /* リザルト表示 */
@@ -87,6 +113,23 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.startbtn {
+  font-size: 24px;
+  padding: 20px 60px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(45deg, #ff6b6b, #ff9f43);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 0 #c44536;
+  transition: 0.1s;
+}
+
+.startbtn:active {
+  transform: translateY(8px);
+  box-shadow: none;
 }
 
 /* アタックボタン */
@@ -276,6 +319,29 @@ body{
   content: " :";
 }
 
+/* 装備ボックス */
+.now-equipment {
+  position: absolute;
+  background-color: #75757515;
+  top: 45%;
+  right: 8%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 50px;
+  width: 470px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.now-equipment img {
+  width: 120px;
+  height: auto;
+}
+
 /* ボタン */
 .btn_battle,
 .btn_shop,
@@ -433,16 +499,56 @@ body{
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
+/* 店主タイトル */
+.shopTitle {
+  position: fixed;
+  top: 250px;   /* messageAreaより少し上 */
+  left: 63%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  font-weight: bold;
+  color: #bbb488;
+}
+
+/* 装備詳細 */
+.itemDetailsArea {
+    position: fixed;
+    top: 40%;
+    right: 12%;
+    width: 25%;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    color: #fffbfb;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 商品棚  */
 .itemsArea {
     display: flex;
     justify-content: space-around;
-  box-shadow: 0 0 20px #d10a0a;
-  color: white;
+    box-shadow: 0 0 20px #d10a0a;
+    color: white;
+    background-color: #8139239b;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
-.btn_shop:hover {
-  box-shadow: 0 0 20px #6bb3c5;
-  color: white;
+/* 購入ボタン */
+.itemDetailsArea button {
+  margin-top: 20px;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ffd700, #ff9f43);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 /* コイン、ランク */
@@ -462,29 +568,6 @@ body{
   font-weight: bolder;
 }
 
-/* 装備ボックス */
-.now-equipment {
-  position: absolute;
-  background-color: #75757515;
-  top: 45%;
-  right: 8%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 50px;
-  width: 470px;
-  padding: 40px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-}
-
-.now-equipment img {
-  width: 120px;
-  height: auto;
-}
-
 /* 装備セレクト */
 .equip-box {
   display: flex;
@@ -494,10 +577,10 @@ body{
 /* ステータス比較 */
 .statusDifferenceArea {
     position: fixed;
-    top: 15%;
+    top: 20%;
     left: 12%;
-    width: 420px;
-    padding: 300px;
+    width: 20%;
+    padding: 200px;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-size: 20px;
@@ -508,6 +591,9 @@ body{
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+.st-st {
+  
 }
 
 /* コイン */
