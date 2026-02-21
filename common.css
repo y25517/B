@@ -361,8 +361,49 @@ body{
     gap: 30px;
   }
  
-/* 武器屋画面
+/* 装備屋画面
 --------------------------------------------------------------------------- */
+/* 背景 */
+.shop_body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: rgb(0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+
+.shop_body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url(images/shop_back.jpg) no-repeat center center;
+  background-size: cover;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* 戻るボタン */
+.button-style {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  font-size: 40px;
+  padding: 40px 70px;
+  background: rgba(160, 227, 15, 0.402);
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.button-style:hover {
+  background: rgba(100, 150, 5, 1);
+  color: #fff;
+}
+
+/* 店員 */
 .shopkeeper {
     width: 50vh;
     display: block;
@@ -373,6 +414,23 @@ body{
 
 .center {
     display: flex;
+}
+
+/* メッセージ */
+#messageArea {
+    position: fixed;
+    top: 300px;
+    left: 60%;
+    width: 700px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .itemsArea {
@@ -431,4 +489,37 @@ body{
 .equip-box {
   display: flex;
   flex-flow: column;
+}
+
+/* ステータス比較 */
+.statusDifferenceArea {
+    position: fixed;
+    top: 15%;
+    left: 12%;
+    width: 420px;
+    padding: 300px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.879);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* コイン */
+.coinArea {
+  position: fixed;
+  top: 5%;
+  right: 15%;
+  padding: 15px 30px;
+  font-size: 30px;
+  color: #ffd700;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  border: 2px solid #ffd700;
+
 }
