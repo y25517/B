@@ -18,7 +18,9 @@ let owned = JSON.parse(localStorage.getItem("owned")) || [];
 let rank = parseInt(localStorage.getItem("rank")) || 0;
 let coins = parseInt(localStorage.getItem("Coin")) || 0;
 
-
+// 指定した時間待機する（メッセージ更新用の補助）
+let sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
+let messageTxt = "";
 
 // 店主のメッセージ一覧
 let message = 
@@ -49,7 +51,7 @@ let message =
     // コイン不足時
     "no_money": [
         "金が足りないな。出直してきな。",
-        "冷や出しか？ 金のない奴に売る武器はないよ。",
+        "冷やかしか？ 金のない奴に売る武器はないよ。",
         "おいおい、値切ろうなんて思うなよ。命の値段だぞ。",
         "ツケは効かない。ここはそういう店じゃないんだ。"
     ],
@@ -64,9 +66,17 @@ let message =
 
 // 入店時のメッセージ表示、コイン表示
 let messageArea = document.querySelector("#messageArea");
-messageArea.innerHTML = randomPick(message.welcome, 1);
+messageTxt = randomPick(message.welcome, 1);
+updateMessage(messageTxt[0]);
 updateCoins();
 
+let button = document.querySelector(".button-style");
+button.addEventListener("click", async () => {
+    messageTxt = randomPick(message.leave, 1);
+    updateMessage(messageTxt[0]);
+    await sleep(1000);
+    window.location.href = "index.html";
+})
 
 let itemDetailsArea = document.querySelector("#itemDetailsArea");
 let statusDifferenceArea = document.querySelector("#statusDifferenceArea");
@@ -124,20 +134,36 @@ function showDetails(itemId) {
 function compareEquipment() {
     let diff;
     statusDifferenceArea.innerHTML = "<h3>ステータス比較</h3>";
-    if (selectedItem.id < 28) {
-        diff = (selectedItem.atk - equipped.weapon.atk);
-        statusDifferenceArea.innerHTML += `
-            <p>装備中の武器の攻撃力: ${equipped.weapon.atk}</p>
-            <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
-            <p>攻撃力差分: ${diff}</p>
-        `
+    console.log(equipped);
+    
+    if (equipped == "") {
+        if (selectedItem.id < 28) {
+            statusDifferenceArea.innerHTML += `
+                <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
+                <p>攻撃力差分: ${selectedItem.atk}</p>
+            `;
+        } else {
+            statusDifferenceArea.innerHTML += `
+                <p>選択した防具のHP: ${selectedItem.hp}</p>
+                <p>HP差分: ${selectedItem.hp}</p>
+            `;
+        }
     } else {
-        diff = (selectedItem.hp - equipped.armor.hp);
-        statusDifferenceArea.innerHTML += `
-            <p>装備中の防具のHP: ${equipped.armor.hp}</p>
-            <p>選択した防具のHP: ${selectedItem.hp}</p>
-            <p>HP差分: ${diff}</p>
-        `;
+        if (selectedItem.id < 28) {
+            diff = (selectedItem.atk - equipped.weapon.atk);
+            statusDifferenceArea.innerHTML += `
+                <p>装備中の武器の攻撃力: ${equipped.weapon.atk}</p>
+                <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
+                <p>攻撃力差分: ${diff}</p>
+            `
+        } else {
+            diff = (selectedItem.hp - equipped.armor.hp);
+            statusDifferenceArea.innerHTML += `
+                <p>装備中の防具のHP: ${equipped.armor.hp}</p>
+                <p>選択した防具のHP: ${selectedItem.hp}</p>
+                <p>HP差分: ${diff}</p>
+            `;
+        }
     }
 }
 
@@ -146,14 +172,16 @@ function buyItem() {
     // すでに所持しているものを購入しようとすると、売り切れ用のメッセージを表示して戻る
     for (let i = 0; i < owned.length; i++) {
         if (owned[i].id == selectedItem.id) {
-            messageArea.innerHTML = randomPick(message.sold_out, 1);
+            messageTxt = randomPick(message.sold_out, 1);
+            updateMessage(messageTxt[0]);
             return;
         }
     }
 
     // コインが足らなかったら専用のメッセージを表示して戻る
     if (coins<selectedItem.price) {
-        messageArea.innerHTML = randomPick(message.no_money, 1);
+        messageTxt = randomPick(message.no_money, 1);
+        updateMessage(messageTxt[0]);
         return;
     }
     
@@ -164,7 +192,8 @@ function buyItem() {
     owned.push(selectedItem);
     localStorage.setItem("owned", JSON.stringify(owned));
     
-    messageArea.innerHTML = randomPick(message.purchase, 1);
+    messageTxt = randomPick(message.purchase, 1);
+    updateMessage(messageTxt[0]);
     updateCoins();
 }
 
@@ -174,6 +203,18 @@ function updateCoins() {
     coinArea.innerHTML = `
         <p>所持コイン: ${coins}<p>
     `;
+}
+
+// 店主のメッセージ更新
+async function updateMessage(mes) {
+    let speed = 15;
+    
+    messageArea.textContent = "";
+
+    for (let char of mes) {
+        messageArea.textContent += char;
+        await sleep(speed);
+    }
 }
 
 // 配列からのランダム取得用の関数(配列と取り出したい要素の数を引数に)
