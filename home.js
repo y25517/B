@@ -20,10 +20,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let CoinNow = Number(localStorage.getItem("Coin"));
   // コインをローカルストレージに入れる
-  if (isNaN(CoinNow)) {
+  if (isNaN(CoinNow) || CoinNow <= 0) {
     CoinNow = 100;
     localStorage.setItem("Coin", CoinNow);
   }
+  console.log(CoinNow);
   const CoinCnt = document.querySelector("#coin-count");
   CoinCnt.textContent = localStorage.getItem("Coin");
 
