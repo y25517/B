@@ -10,7 +10,8 @@ let MyHP_now = MyHP;    //現在自分のHP
 let MyATK = Math.floor(Number(localStorage.getItem("avatarATK")));  //自分の攻撃
 let type = localStorage.getItem("RivalType");
 let BossCnt = Number(localStorage.getItem("bosscnt"));  //ボスカウント
-console.log(rank);
+console.log("ランク：" +rank);
+console.log("タイプ：" +type)
 
 //ボスカウントがまだセットされていなければBossCntに0を代入
 if (isNaN(BossCnt)) {
@@ -69,7 +70,6 @@ StartBtn.addEventListener("click", function(){
            
 
             //モブ敵をランダム取得
-            rank = 2;
             const SameID = data.Rival.filter(rival => rival.id === rank);
             const MobuRondom = Math.floor(Math.random() * SameID.length);
             
@@ -172,7 +172,7 @@ StartBtn.addEventListener("click", function(){
                         localStorage.setItem("bosscnt", BossCnt);
 
                         let Coin = Number(localStorage.getItem("Coin"));
-                        Coin = Coin + Number(data.Rival[MobuRondom].coin);
+                        Coin = Coin + Number(data.Boss[BossCnt-1].coin);
                         console.log("コイン"+Coin);
                         localStorage.setItem("Coin", Coin); 
                         showResult("Coin" + Number(data.Rival[MobuRondom].coin) + "枚獲得！");

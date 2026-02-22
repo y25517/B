@@ -5,89 +5,85 @@
 // eq.jsonファイルを取得
 const Jsonfile = "./eq.json";
 
-// ランクの初期設定（ランクがセットされていなかった場合）
-if (!localStorage.getItem("isDone")) {
-  localStorage.setItem("rank", 0);
-  localStorage.setItem("isDone", JSON.stringify(true));
-}
+document.addEventListener("DOMContentLoaded", async () => {
+  // ランクの初期設定（ランクがセットされていなかった場合）
+  if (!localStorage.getItem("isDone")) {
+    localStorage.setItem("rank", 0);
+    localStorage.setItem("isDone", JSON.stringify(true));
+  }
+  const RankCnt = document.querySelector("#rank-count");  //笹森（変更）
+  RankCnt.textContent = localStorage.getItem("rank");     //笹森
 
-//ローカルストレージのownedを配列として取り出す
-const owned = JSON.parse(localStorage.getItem("owned")) || [];
-console.log("owned:", owned);
+  //ローカルストレージのownedを配列として取り出す
+  const owned = JSON.parse(localStorage.getItem("owned")) || [];
+  console.log("owned:", owned);
 
-let CoinNow = Number(localStorage.getItem("Coin"));
-// コインをローカルストレージに入れる
-if (isNaN(CoinNow)) {
-  CoinNow = 100;
-  localStorage.setItem("Coin", CoinNow);
-}
-const CoinCnt = document.querySelector("#coin-count");
-CoinCnt.textContent = localStorage.getItem("Coin");
+  let CoinNow = Number(localStorage.getItem("Coin"));
+  // コインをローカルストレージに入れる
+  if (isNaN(CoinNow)) {
+    CoinNow = 100;
+    localStorage.setItem("Coin", CoinNow);
+  }
+  const CoinCnt = document.querySelector("#coin-count");
+  CoinCnt.textContent = localStorage.getItem("Coin");
 
-let RankNow = Number(localStorage.getItem("Rank"));
-//ランクをローカルストレージに入れる
-if (isNaN(RankNow)) {
-  RankNow = 0;
-  localStorage.setItem("Rank", RankNow);
-}
-const RankCnt = document.querySelector("#Rank-count");
-RankCnt.textContent = localStorage.getItem("Rank");
+  // 戦闘かボスのaタグを押したときの判定をlocalStorageに保存
+  document.getElementById("rival").addEventListener("click", function (e) {
+    e.preventDefault(); //動作を止める
+    localStorage.setItem("RivalType", 0);
+    window.location.href = "battle.html";
+  });
+  document.getElementById("boss").addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.setItem("RivalType", 1);
+    window.location.href = "battle.html";
+  });
 
-// 戦闘かボスのaタグを押したときの判定をlocalStorageに保存
-document.getElementById("rival").addEventListener("click", function (e) {
-  e.preventDefault(); //動作を止める
-  localStorage.setItem("RivalType", 0);
-  window.location.href = "battle.html";
-});
-document.getElementById("boss").addEventListener("click", function (e) {
-  e.preventDefault();
-  localStorage.setItem("RivalType", 1);
-  window.location.href = "battle.html";
-});
+  // fetch(Jsonfile)
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     // constで新しい変数を作ってjsonファイルの攻撃力、hpを反映させたのを、デフォに足す
+  //     // const totalATK = ATK + equippedWeapon.atk;
+  //     // const totalHP = HP + equippedArmor.hp;
 
-fetch(Jsonfile)
-  .then((response) => response.json())
-  .then((data) => {
-    // constで新しい変数を作ってjsonファイルの攻撃力、hpを反映させたのを、デフォに足す
-    // const totalATK = ATK + equippedWeapon.atk;
-    // const totalHP = HP + equippedArmor.hp;
+  //     // HTMLに反映
+  //     document.getElementById("hp").textContent = totalHP;
+  //     document.getElementById("kougeki").textContent = totalATK;
 
-    // HTMLに反映
-    document.getElementById("hp").textContent = totalHP;
-    document.getElementById("kougeki").textContent = totalATK;
+  //     //ローカルストレージに保存
+  //     localStorage.setItem("avatarHP", totalHP);
+  //     localStorage.setItem("avatarATK", totalATK);
 
-    //ローカルストレージに保存
-    localStorage.setItem("avatarHP", totalHP);
-    localStorage.setItem("avatarATK", totalATK);
+  //     console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
+  //     console.log(`HP: ${totalHP},攻撃力: ${totalATK}`);
+  //   })
+  //   .catch((error) => console.error("データの読み込みに失敗したにょ:", error));
 
-    console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
-    console.log(`HP: ${totalHP},攻撃力: ${totalATK}`);
-  })
-  .catch((error) => console.error("データの読み込みに失敗したにょ:", error));
+  // 今の装備のところ
+  const weaponImg = document.getElementById("weaponimg");
+  const weaponMenu = document.getElementById("weaponpuru");
 
-// 今の装備のところ
-const weaponImg = document.getElementById("weaponimg");
-const weaponMenu = document.getElementById("weaponpuru");
+  const armorImg = document.getElementById("armorimg");
+  const armorMenu = document.getElementById("armorpuru");
 
-const armorImg = document.getElementById("armorimg");
-const armorMenu = document.getElementById("armorpuru");
+  weaponImg.addEventListener("click", (e) => {
+    e.stopPropagation();
+    weaponMenu.classList.toggle("active");
+    armorMenu.classList.remove("active");
+  });
 
-weaponImg.addEventListener("click", (e) => {
-  e.stopPropagation();
-  weaponMenu.classList.toggle("active");
-  armorMenu.classList.remove("active");
-});
+  armorImg.addEventListener("click", (e) => {
+    e.stopPropagation();
+    armorMenu.classList.toggle("active");
+    weaponMenu.classList.remove("active");
+  });
 
-armorImg.addEventListener("click", (e) => {
-  e.stopPropagation();
-  armorMenu.classList.toggle("active");
-  weaponMenu.classList.remove("active");
-});
+  // 外をクリックしたら閉じる
+  document.addEventListener("click", () => {
+    weaponMenu.classList.remove("active");
+    armorMenu.classList.remove("active");
+  });
 
-// 外をクリックしたら閉じる
-document.addEventListener("click", () => {
-  weaponMenu.classList.remove("active");
-  armorMenu.classList.remove("active");
 });
 
 // optionにある武器、防具とownedにある武器、防具と一致したら表示させる
