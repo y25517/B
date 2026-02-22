@@ -3,10 +3,24 @@ body{
 }
 /* 戦闘画面
 ---------------------------------------------------- */
+/* 背景 */
+.battle_body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+  linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url("images/battle_back.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
 
 /* header */
 .hp_bar{
-    display: flex;
+    display: flex;  
+    justify-content: space-between;
+    margin-top: 130px;
 }
 .my_frame,
 .rival_frame{
@@ -15,8 +29,10 @@ body{
     display: block;
     margin: auto;
 }
-.my_frame p{
-    font-size: 20px;
+.my_frame p,
+.rival_frame p{
+    font-size: 30px;
+    color: #ffffff;
 }
 .my_hpbar,
 .rival_hpbar{
@@ -42,6 +58,16 @@ body{
 .img_box{
     display: flex;
   justify-content: space-between; 
+}
+
+.vs_text {
+  font-size: 70px;
+  font-weight: bold;
+  color: #ff3b3b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 0 10px rgba(255,0,0,0.8);
 }
 
 /* リザルト表示 */
@@ -87,6 +113,23 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+}
+
+.startbtn {
+  font-size: 24px;
+  padding: 20px 60px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(45deg, #ff6b6b, #ff9f43);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 0 #c44536;
+  transition: 0.1s;
+}
+
+.startbtn:active {
+  transform: translateY(8px);
+  box-shadow: none;
 }
 
 /* アタックボタン */
@@ -145,16 +188,77 @@ body{
 
   /* ホーム画面
   --------------------------------------------------------------------------- */
-  /* タイトル */
-  .index {
-    font-size: 50px;
-    background-color: #5a06139d;
   
+  body {
+  height: 100vh;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* 背景 */
+.home_body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.home_body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('images/home_back.jpg') no-repeat center center;
+  background-size: cover;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+/* タイトル */
+.home_header {
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, #001f3f, #0074D9);
+  font-size: 48px;
+  letter-spacing: 8px;
+  border-bottom: 4px solid #00c3ff;
+}
+
+.home_header p {
+  margin: 0;
+  font-size: 64px;
+  background: linear-gradient(90deg, #00c3ff, #ffff1c);
+  text-shadow:
+    2px 2px 0 #000,
+    4px 4px 0 rgba(0, 0, 0, 0.3),
+    6px 6px 0 rgba(0, 0, 0, 0.2);
+  letter-spacing: 8px;
+  font-weight: bold;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes glow {
+  0% { text-shadow: 2px 2px 0 #000, 4px 4px 0 rgba(0,0,0,0.3), 6px 6px 0 rgba(0,0,0,0.2); }
+  100% { text-shadow: 2px 2px 2px #fff, 4px 4px 4px rgba(255,255,255,0.4), 6px 6px 6px rgba(255,255,255,0.2); }
+}
+
+  /* アバター */
+  .avatar {
+    position: absolute;  
+    top: 50%;
+    right: 45%;
+    transform: translateY(-50%);
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 120px;
+    gap: 20px;
   }
+
+  .avatar img {
+  width: 250px;
+  animation: float 3s ease-in-out infinite;
   .index p {
     margin: 0;
     font-weight: bold;
@@ -163,142 +267,142 @@ body{
     text-shadow: 
       3px 3px 0 #000,
       6px 6px 10px rgba(0, 0, 0, 0.6);
-  }
-  
-  /* ステータス */
-  .st1 {
-    font-size: x-large;
-    margin: 50px;
-    padding-left: 7%;
-  }
+      }
+    }
+/* アバター */
+.home_avatar {
+    position: fixed;
+    top: 20%;
+    right: 43%;
+    width: 12%;
+}
 
-  .status-box {
-    font-size: large;
-    width: 400px;
-    color: rgb(0, 0, 0);
-    border: 3px solid rgb(0, 0, 0);
-    padding: 30px 30px;
-    font-family: "MS Gothic", monospace;
-    margin: 50px;
-  }
+/* ステータス */
+.sute-tasu {
+  text-align: center;
+  margin-top: 40px;
+}
 
-  .status .row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-  }
-  
-  .status dt {
-    font-weight: normal;
-  }
-  
-  .status dd {
-    margin: 0;
-  }
-  
-  .status dt::after {
-    content: "　：";
-  }
-  
-  /* 今の装備 */
+.st1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.status-box {
+    position: fixed;
+    top: 30%;
+    left: 170px; 
+    width: 500px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.status .row {
+  font-size: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.status dt {
+  font-weight: normal;
+}
+
+.status dd {
+  margin: 0;
+}
+
+.status dt::after {
+  content: " :";
+}
+
+/* 装備ボックス */
 .now-equipment {
-    position: absolute;  
-    top: 50%;
-    right: 250px;
-    transform: translateY(-50%);
-    display: flex;
-    gap: 20px;
+  position: absolute;
+  background-color: #75757515;
+  top: 45%;
+  right: 8%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 50px;
+  width: 470px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .now-equipment img {
-    width: 120px;
-    height: auto;
+  width: 120px;
+  height: auto;
 }
-.equip-box{
-    display: flex;
-    flex-flow: column;
+
+/* ボタン */
+.btn_battle,
+.btn_shop,
+.btn_battle_boss {
+  position: fixed;
+  bottom: 50px;
+  font-size: 70px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
 }
-  
-  /* ホーム画面戦闘ボタン */
-.sentobutton a {
-    font-size: 60px;
-    width: 400px; 
-    height: 100px;
-    left: 50px;
-    top: 650px;
-    background: #d1ca0a;
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px 25px;
-    color: #313131;
-    transition: 0.3s ease-in-out;
-    font-weight: 500;
-    z-index:0;
+
+.btn_battle {
+  background: #98930a;
+  color: black;
+  padding: 80px 70px;
+  left: 100px;
+  padding: 80px 75px;
 }
-.sentobutton a:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    display: block;
-    background: #ee6f0e;
-    transition: .3s;
-    left:0;
+
+.btn_battle_boss {
+  background: #d10a0a;
+  color: black;
+  padding: 80px 50px;
+  left: 550px;
 }
-.sentobutton a:hover {
-    color: #ffffff;
+.btn_shop {
+  background: #1488a5;
+  color: black;
+  right: 150px;
+  padding: 80px 150px;
 }
-.sentobutton a:hover:before {
-    width: 100%;
-    z-index: -1;
+
+.btn_battle_boss {
+  background: #970e0e;
+  color: black;
+  left: 500px;
+  padding: 80px 70px;
 }
-/* ホーム画面装備屋ボタン */
-.bukiyabutton a {
-    font-size: 60px;
-    width: 400px; 
-    height: 200px;
-    left: 1100px;
-    top: 650px;
-    background: #6bb3c5;
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0 auto;
-    padding: 10px 25px;
-    color: #313131;
-    transition: 0.3s ease-in-out;
-    font-weight: 500;
-    z-index:0;
+
+.btn_battle:hover {
+  box-shadow: 0 0 20px #ffe600;
+  color: white;
 }
-.bukiyabutton a:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    display: block;
-    background: #0754d0;
-    transition: .3s;
-    left:0;
+
+.btn_battle_boss:hover {
+  box-shadow: 0 0 50px #d10a0a;
+  color: white;
 }
-.bukiyabutton a:hover {
-    color: #ffffff;
-}
-.bukiyabutton a:hover:before {
-    width: 100%;
-    z-index: -1;
+
+.btn_shop:hover {
+  box-shadow: 0 0 20px #6bb3c5;
+  color: white;
 }
 
 /* coin */
   #coin {
     position: absolute;
     top: 120px;
-    right: 310px;
+    right: 570px;
     font-size: 30px;
     font-weight: bolder;
   }
@@ -306,7 +410,7 @@ body{
   #rank{
     position: absolute;
     top: 120px;
-    right: 150px;
+    right: 250px;
     font-size: 30px;
     font-weight: bolder;
   }
@@ -323,8 +427,49 @@ body{
     gap: 30px;
   }
  
-/* 武器屋画面
+/* 装備屋画面
 --------------------------------------------------------------------------- */
+/* 背景 */
+.shop_body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: rgb(0, 0, 0);
+  position: relative;
+  overflow: hidden;
+}
+
+.shop_body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url(images/shop_back.jpg) no-repeat center center;
+  background-size: cover;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* 戻るボタン */
+.button-style {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  font-size: 40px;
+  padding: 40px 70px;
+  background: rgba(160, 227, 15, 0.402);
+  color: #000;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.button-style:hover {
+  background: rgba(100, 150, 5, 1);
+  color: #fff;
+}
+
+/* 店員 */
 .shopkeeper {
     width: 50vh;
     display: block;
@@ -337,39 +482,130 @@ body{
     display: flex;
 }
 
+/* メッセージ */
+#messageArea {
+    position: fixed;
+    top: 300px;
+    left: 60%;
+    width: 700px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* 店主タイトル */
+.shopTitle {
+  position: fixed;
+  top: 250px;   /* messageAreaより少し上 */
+  left: 63%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  font-weight: bold;
+  color: #bbb488;
+}
+
+/* 装備詳細 */
+.itemDetailsArea {
+    position: fixed;
+    top: 40%;
+    right: 12%;
+    width: 25%;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    color: #fffbfb;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 商品棚  */
 .itemsArea {
     display: flex;
     justify-content: space-around;
+    box-shadow: 0 0 20px #d10a0a;
+    color: white;
+    background-color: #8139239b;
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
-.itemCard {
-    border: 1px solid #000;
-    padding: 5rem;
+/* 購入ボタン */
+.itemDetailsArea button {
+  margin-top: 20px;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(45deg, #ffd700, #ff9f43);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.itemDetailsArea, 
+/* コイン、ランク */
+#coin {
+  position: absolute;
+  top: 120px;
+  right: 570px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+#rank {
+  position: absolute;
+  top: 120px;
+  right: 300px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+/* 装備セレクト */
+.equip-box {
+  display: flex;
+  flex-flow: column;
+}
+
+/* ステータス比較 */
 .statusDifferenceArea {
-    width: 15rem;
-    overflow-wrap: break-word;
-    text-align: center;
-}
-
-.button-style {
-    display: block;
-    width: 150px;
-    padding: 10px 25px;
-    background: rgba(160, 227, 15, 0.495);
-    color: #313131;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.button-style:hover {
-    background: rgba(100, 150, 5, 1);
-    transition: 0.3s;
+    position: fixed;
+    top: 20%;
+    left: 12%;
+    width: 20%;
+    padding: 200px;
+    background: rgba(0, 0, 0, 0.5);
     color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.879);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.st-st {
+  
 }
 
-.messageArea {
-    text-align: center;
+/* コイン */
+.coinArea {
+  position: fixed;
+  top: 5%;
+  right: 15%;
+  padding: 15px 30px;
+  font-size: 30px;
+  color: #ffd700;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 15px;
+  border: 2px solid #ffd700;
+
 }
