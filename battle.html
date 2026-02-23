@@ -8,26 +8,24 @@
     <link rel="stylesheet" href="common.css">
 </head>
 <body class="battle_body">
-    <header>
-        <div class="hp_bar">
-            <div class="my_frame">
-                <p>HP:</p>
-                <div class="my_hpbar" id="mybar">
-                    <div class="mylife_mark" id="my_lifemark"></div>
-                    <img src="" alt="自分">
-                </div>
+    <div class="hp_bar">
+        <div class="my_frame">
+            <p>HP:</p>
+            <div class="my_hpbar" id="mybar">
+            <div class="mylife_mark" id="my_lifemark"></div>
             </div>
-            <div class="vs_text">VS</div>
-            <div class="rival_frame">
-                <p>HP:</p>
-                <div class="rival_hpbar" id="rivalbar">
-                    <div class="rivallife_mark" id="rival_lifemark"></div>
-                    <p id="rival_name"></p>
-                    <img src="" alt="敵">
-                </div>
-            </div>
+            <img src="" alt="自分" class="myimg">
         </div>
-    </header>
+        <div class="vs_text">VS</div>
+        <div class="rival_frame">
+            <p>HP:</p>
+            <div class="rival_hpbar" id="rivalbar">
+                <div class="rivallife_mark" id="rival_lifemark"></div>
+                <p id="rival_name"></p>
+            </div>
+            <img src="" alt="敵"class="rivalimg" id="rival_img">
+        </div>
+    </div>
     <div id="resultModal" class="modal">
         <div class="modal-content">
           <p id="resultText" class="resulttext"></p>
