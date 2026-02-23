@@ -3,6 +3,7 @@ const JsonFile = './battle.json'
 const AtcBar = document.querySelector("#atcbar"); //アタックバー
 const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
+const RivalImg = document.querySelector("#rival_img")   //敵の写真
 
 let rank = parseInt(localStorage.getItem("rank")); //現在のランク
 let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
@@ -23,6 +24,7 @@ console.log("自分のATK:"+MyATK);
 
 //戦闘開始したら
 StartBtn.addEventListener("click", function(){
+    RivalImg.style.opacity = "1";
     StartBtn.style.display = "none";
     AtcBar.style.display = "block";
     StopBtn.style.display = "block";
@@ -77,10 +79,12 @@ StartBtn.addEventListener("click", function(){
             console.log("モブ："+Mobu.name);
 
             if(type === "0"){
-                RivalAtk = Mobu.atk;   //敵の攻撃力
-                RivalHP = Mobu.HP;     //敵のHP
-                RivalName = Mobu.name;
-                
+                RivalAtk = Mobu.atk;    //敵の攻撃力
+                RivalHP = Mobu.HP;      //敵のHP
+                RivalName = Mobu.name;  //敵の名前
+
+                RivalImg.src = Mobu.image;
+                console.log("モブのimgタグ" + Mobu.image)
                 console.log("敵の攻撃力:"+RivalAtk);
                 console.log("敵のHP:"+RivalHP);
                 // 敵の名前を出力
@@ -113,7 +117,6 @@ StartBtn.addEventListener("click", function(){
                 if(isColliding(StopBar, AtcMark)) {
                     ATKTimes = 1.5   
                 }
-                console.log(ATKTimes);
                 StopBtn.style.display = "none";
                 clearInterval(timer);
 
@@ -121,14 +124,27 @@ StartBtn.addEventListener("click", function(){
                 RivalHP_now = RivalHP_now - MyATK * ATKTimes;
                 let RivalRate= Math.round(RivalHP_now / RivalHP * 100);
                 console.log("敵のHP状態:"+ RivalRate);
-
                 RivalLifeMark.style.width = RivalRate + "%";
 
-                //　敵からの反撃（自分の体力が減る）
+                if(RivalRate >= 70) // 体力状態の色の変化
+                    RivalLifeMark.style.backgroundColor = "limegreen";
+                else if(RivalRate > 20)
+                    RivalLifeMark.style.backgroundColor = "yellow";    
+                else
+                    RivalLifeMark.style.backgroundColor = "red";
+
+                //　敵からの反撃（少し時間がたってから自分の体力が減る）
                 timer = setTimeout(() => {
                     MyHP_now = MyHP_now - RivalAtk;
                     let MyRate = Math.round(MyHP_now / MyHP * 100);
                     console.log("自分のHPの状態" +MyRate);
+
+                    if(MyRate >= 70) // 体力状態の色の変化
+                        MyLifeMark.style.backgroundColor = "limegreen";
+                    else if(MyRate > 20)
+                        MyLifeMark.style.backgroundColor = "yellow";    
+                    else
+                        MyLifeMark.style.backgroundColor = "red";
 
                     MyLifeMark.style.width = MyRate + "%";
                     StopBtn.style.display = "block";
@@ -138,15 +154,24 @@ StartBtn.addEventListener("click", function(){
             // 勝ち負けの判定
                 if(MyHP_now < 1)
                 {
+                    MyLifeMark.style.opacity = "0";
                     clearTimeout(timer);
-                    // document.querySelector("#coinimg").style.display = "none";
+                    document.querySelector("#coinimg").style.opacity = '0';
                     AtcBar.style.display = "none";
                     StopBtn.style.display = "none";
-                    showResult("あなたの負け");
+                    if(type === "0")
+                    {
+                    showResult("あなたは力尽きた…");
+                    }
+                    if(type === "1")
+                    {
+                    showResult("深淵があなたを呑み込む。")
+                    }
                     return;
                 }
                 else  if(RivalHP_now < 1)
                 {
+                    RivalLifeMark.style.opacity = "0";
                     clearTimeout(timer);
                     AtcBar.style.display = "none";
                     StopBtn.style.display = "none";
@@ -154,7 +179,6 @@ StartBtn.addEventListener("click", function(){
                     {
                         let Coin = Number(localStorage.getItem("Coin"));
                         Coin = Coin + Number(data.Rival[MobuRondom].coin);
-                        console.log("コイン"+Coin);
                         localStorage.setItem("Coin", Coin); 
                         showResult("Coin" + Number(data.Rival[MobuRondom].coin) + "枚獲得！");
                         const CoinImg = document.querySelector("#coinimg");
@@ -173,7 +197,6 @@ StartBtn.addEventListener("click", function(){
 
                         let Coin = Number(localStorage.getItem("Coin"));
                         Coin = Coin + Number(data.Boss[BossCnt-1].coin);
-                        console.log("コイン"+Coin);
                         localStorage.setItem("Coin", Coin); 
                         showResult("Coin" + Number(data.Rival[MobuRondom].coin) + "枚獲得！");
                         const CoinImg = document.querySelector("#coinimg");
@@ -203,6 +226,7 @@ StartBtn.addEventListener("click", function(){
 //戦闘を開始する前
 function main()
 {
+    RivalImg.style.opacity = "0";
     AtcBar.style.display = "none";
     StopBtn.style.display = "none";
 }
