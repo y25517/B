@@ -4,6 +4,8 @@ const AtcBar = document.querySelector("#atcbar"); //アタックバー
 const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
 const RivalImg = document.querySelector("#rival_img")   //敵の写真
+// 指定した時間待機する（メッセージ更新用の補助）
+let sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
 
 let rank = parseInt(localStorage.getItem("rank")); //現在のランク
 let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
@@ -90,6 +92,8 @@ StartBtn.addEventListener("click", function(){
                 // 敵の名前を出力
                 const RivalNameFrame = document.querySelector("#rival_name");
                 RivalNameFrame.textContent = "敵の名前："+RivalName;
+
+                BossMessage(Mobu.txt);
             }
 
             //ボスを取得           
@@ -223,6 +227,19 @@ StartBtn.addEventListener("click", function(){
 
 });
 
+//　ボスのメッセージ
+async function BossMessage(mes) {
+    let speed = 15;
+    
+    const BossText = document.querySelector("#bosstext");
+    BossText.textContent = "";
+
+    for (let char of mes) {
+        BossText.textContent += char;
+        await sleep(speed);
+    }
+}
+
 //戦闘を開始する前
 function main()
 {
@@ -232,4 +249,5 @@ function main()
 }
 
 main();
+
 
