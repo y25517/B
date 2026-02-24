@@ -375,7 +375,7 @@ body{
 .btn_battle,
 .btn_shop,
 .btn_battle_boss {
-  position: fixed;
+  /* position: fixed; */
   bottom: 50px;
   font-size: 70px;
   border-radius: 20px;
@@ -387,15 +387,14 @@ body{
 .btn_battle {
   background: #98930a;
   color: black;
-  padding: 80px 70px;
   /* left: 100px; */
-  padding: 80px 75px;
+  padding: 30px 75px;
 }
 
 .btn_battle_boss {
   background: #d10a0a;
   color: black;
-  padding: 80px 50px;
+  padding: 30px 75px;
   /* left: 550px; */
 }
 .btn_shop {
@@ -403,6 +402,9 @@ body{
   color: black;
   right: 150px;
   padding: 80px 150px;
+  position: fixed;
+  bottom: 50px;
+  right: 120px;
 }
 
 .btn_battle_boss {
@@ -418,7 +420,7 @@ body{
 }
 
 .btn_battle_boss:hover {
-  box-shadow: 0 0 50px #d10a0a;
+  box-shadow: 0 0 50px #000000;
   color: white;
 }
 
@@ -447,15 +449,18 @@ body{
 
   /* ボタンの並び替え */
 .buttons{
-    display: flex;
+    display: block;
     bottom: 50px;
     left: 80px;
 }
 
   .battle-buttons{
-    display: flex;
-    flex-flow: column;
-    gap: 30px;
+    position: fixed;
+  bottom: 50px;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   }
  
 /* 装備屋画面
