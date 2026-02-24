@@ -4,15 +4,20 @@ const AtcBar = document.querySelector("#atcbar"); //アタックバー
 const StopBtn = document.querySelector("#stopbtn"); //ストップボタン
 const StartBtn = document.querySelector("#strbtn"); //スタートボタン
 const RivalImg = document.querySelector("#rival_img")   //敵の写真
+const overlay = document.getElementById("overlay");
+const textElement = document.getElementById("text");
 // 指定した時間待機する（メッセージ更新用の補助）
-let sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
-
+let sleep = (ms) => new Promise((resolve) => {
+    setTimeout(resolve, ms);
+});
 let rank = parseInt(localStorage.getItem("rank")); //現在のランク
 let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
 let MyHP_now = MyHP;    //現在自分のHP
+
 let MyATK = Math.floor(Number(localStorage.getItem("avatarATK")));  //自分の攻撃
 let type = localStorage.getItem("RivalType");
 let BossCnt = Number(localStorage.getItem("bosscnt"));  //ボスカウント
+
 console.log("ランク：" +rank);
 console.log("タイプ：" +type)
 
@@ -25,11 +30,8 @@ console.log("自分のHP:"+MyHP);
 console.log("自分のATK:"+MyATK);
 
 //戦闘開始したら
-StartBtn.addEventListener("click", function(){
-    RivalImg.style.opacity = "1";
+StartBtn.addEventListener("click", async function(){
     StartBtn.style.display = "none";
-    AtcBar.style.display = "block";
-    StopBtn.style.display = "block";
 
     const AtcMark = document.querySelector("#atcmark");
     const StopBar = document.querySelector("#stopbar");
@@ -64,7 +66,7 @@ StartBtn.addEventListener("click", function(){
         .then(Response => {
             return Response.json();
         })
-        .then(function(data){
+        .then(async function(data){
             console.log(data);
 
             
@@ -85,6 +87,10 @@ StartBtn.addEventListener("click", function(){
                 RivalHP = Mobu.HP;      //敵のHP
                 RivalName = Mobu.name;  //敵の名前
 
+                AtcBar.style.display = "block";
+                StopBtn.style.display = "block";
+                RivalImg.style.opacity = "1";
+
                 RivalImg.src = Mobu.image;
                 console.log("モブのimgタグ" + Mobu.image)
                 console.log("敵の攻撃力:"+RivalAtk);
@@ -93,12 +99,13 @@ StartBtn.addEventListener("click", function(){
                 const RivalNameFrame = document.querySelector("#rival_name");
                 RivalNameFrame.textContent = "敵の名前："+RivalName;
 
-                BossMessage(Mobu.txt);
             }
 
             //ボスを取得           
-            else if(type === "1"){
-                console.log(BossCnt);
+            else if(type === "1")
+            {
+                await showMessageEffect(data.Boss[BossCnt].txt);
+                console.log("ボスカウント：" + BossCnt);
                 RivalAtk = data.Boss[BossCnt].atk;   //敵の攻撃力
                 RivalHP = data.Boss[BossCnt].HP;     //敵のHP
                 RivalName = data.Boss[BossCnt].name;
@@ -108,6 +115,7 @@ StartBtn.addEventListener("click", function(){
                 // ボスの名前を出力
                 const RivalNameFrame = document.querySelector("#rival_name");
                 RivalNameFrame.textContent = "敵の名前："+RivalName;
+                
             }
             let RivalHP_now = RivalHP;  //現在の敵のHp
             
@@ -137,12 +145,11 @@ StartBtn.addEventListener("click", function(){
                 else
                     RivalLifeMark.style.backgroundColor = "red";
 
+                MyHP_now = MyHP_now - RivalAtk;
+                let MyRate = Math.round(MyHP_now / MyHP * 100);
+                console.log("自分のHPの状態" +MyRate);
                 //　敵からの反撃（少し時間がたってから自分の体力が減る）
                 timer = setTimeout(() => {
-                    MyHP_now = MyHP_now - RivalAtk;
-                    let MyRate = Math.round(MyHP_now / MyHP * 100);
-                    console.log("自分のHPの状態" +MyRate);
-
                     if(MyRate >= 70) // 体力状態の色の変化
                         MyLifeMark.style.backgroundColor = "limegreen";
                     else if(MyRate > 20)
@@ -154,9 +161,8 @@ StartBtn.addEventListener("click", function(){
                     StopBtn.style.display = "block";
                     StopBar_move();
                 }, 1000);
-
             // 勝ち負けの判定
-                if(MyHP_now < 1)
+                if(MyRate < 1)
                 {
                     MyLifeMark.style.opacity = "0";
                     clearTimeout(timer);
@@ -228,14 +234,52 @@ StartBtn.addEventListener("click", function(){
 });
 
 //　ボスのメッセージ
-async function BossMessage(mes) {
-    let speed = 15;
-    
-    const BossText = document.querySelector("#bosstext");
-    BossText.textContent = "";
+const speed = 15;
+const afterDelay = 1500;
+const fadeDuration = 2000;
 
-    for (let char of mes) {
-        BossText.textContent += char;
+
+async function showMessageEffect(message) {
+    StartBtn.disabled = true;
+
+    try {
+        await fadeIn();
+        await updateMessage(message);
+        await sleep(afterDelay);
+        await fadeOut();
+    } catch (err) {
+        console.error(err);
+    } finally {
+        StartBtn.disabled = false;
+    }
+}
+
+function fadeIn() {
+    return new Promise(resolve => {
+        overlay.style.opacity = "1";
+        setTimeout(resolve, fadeDuration);
+    });
+}
+
+function fadeOut() {
+    return new Promise(resolve => {
+        overlay.style.opacity = "0";
+
+        setTimeout(() => {
+            AtcBar.style.display = "block";
+            StopBtn.style.display = "block";
+            RivalImg.style.opacity = "1";
+            textElement.textContent = "";
+            resolve();
+        }, fadeDuration);
+    });
+}
+
+async function updateMessage(messageText) {
+    textElement.textContent = "";
+
+    for (let char of messageText) {
+        textElement.textContent += char;
         await sleep(speed);
     }
 }
