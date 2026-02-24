@@ -320,8 +320,8 @@ body{
 .status-box {
     position: fixed;
     top: 30%;
-    left: 170px; 
-    width: 500px;
+    left: 80px; 
+    width: 420px;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
     border-radius: 15px;
@@ -357,7 +357,8 @@ body{
   transform: translateY(-50%);
   display: flex;
   gap: 50px;
-  width: 470px;
+  width: 500px;
+  left: 1420px;
   padding: 40px;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
@@ -395,7 +396,7 @@ body{
   background: #d10a0a;
   color: black;
   padding: 30px 75px;
-  /* left: 550px; */
+    /* left: 550px; */
 }
 .btn_shop {
   background: #1488a5;
