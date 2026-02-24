@@ -366,7 +366,7 @@ body{
   background: #98930a;
   color: black;
   padding: 80px 70px;
-  left: 100px;
+  /* left: 100px; */
   padding: 80px 75px;
 }
 
@@ -374,7 +374,7 @@ body{
   background: #d10a0a;
   color: black;
   padding: 80px 50px;
-  left: 550px;
+  /* left: 550px; */
 }
 .btn_shop {
   background: #1488a5;
@@ -426,6 +426,8 @@ body{
   /* ボタンの並び替え */
 .buttons{
     display: flex;
+    bottom: 50px;
+    left: 80px;
 }
 
   .battle-buttons{
