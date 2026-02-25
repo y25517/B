@@ -1,16 +1,16 @@
 {
     "Rival": [
-        {"id":0, "name":"ゴーレム・サメク", "atk":5, "HP":100, "coin":5, "image": "images/Rival_img/goremusareku.png", "ME": "ME/mobuBGM.mp3"},
-        {"id":0, "name":"射干", "atk":6, "HP":110, "coin":8},
-        {"id":0, "name":"ジェヴォーダンの獣", "atk":6, "HP":120, "coin":10},
-        {"id":0, "name":"ドラウグ", "atk":7, "HP":130, "coin":12},
-        {"id":0, "name":"トーテンタンツァー", "atk":8, "HP":150, "coin":15},
+        {"id":0, "name":"ゴーレム・サメク", "atk":5, "HP":100, "coin":5, "image": "images/Rival_img/goremusa_0.png"},
+        {"id":0, "name":"射干", "atk":6, "HP":110, "coin":8, "image": "images/Rival_img/sha_0.png"},
+        {"id":0, "name":"ジェヴォーダンの獣", "atk":6, "HP":120, "coin":10, "image": "images/Rival_img/jevo_0.png"},
+        {"id":0, "name":"ドラウグ", "atk":7, "HP":130, "coin":12, "image": "images/Rival_img/dora_0.png"},
+        {"id":0, "name":"トーテンタンツァー", "atk":8, "HP":150, "coin":15, "image": "images/Rival_img/to-te_0.png"},
 
-        {"id":1, "name":"ゴーレム・ヴァーヴ", "atk":9, "HP":190, "coin":25},
-        {"id":1, "name":"リリン", "atk":8, "HP":160, "coin":18},
-        {"id":1, "name":"ドルグワント", "atk":9, "HP":180, "coin":22},
-        {"id":1, "name":"ツェンタウァ", "atk":9, "HP":190, "coin":25},
-        {"id":1, "name":"スルーア・シー", "atk":9, "HP":190, "coin":25},
+        {"id":1, "name":"ゴーレム・ヴァーヴ", "atk":9, "HP":190, "coin":25, "image": "images/Rival_img/goremuva_1.png"},
+        {"id":1, "name":"リリン", "atk":8, "HP":160, "coin":18, "image": "images/Rival_img/ririn_1.png"},
+        {"id":1, "name":"ドルグワント", "atk":9, "HP":180, "coin":22, "image": "images/Rival_img/doru_1.png"},
+        {"id":1, "name":"ツェンタウァ", "atk":9, "HP":190, "coin":25, "image": "images/Rival_img/tuwen_1.png"},
+        {"id":1, "name":"スルーア・シー", "atk":9, "HP":190, "coin":25, "image": "images/Rival_img/surua_1.png"},
         
         {"id":2, "name":"ゴーレム・レーシュ", "atk":10, "HP":210, "coin":30},
         {"id":2, "name":"バルトアンデルス", "atk":11, "HP":230, "coin":35},
