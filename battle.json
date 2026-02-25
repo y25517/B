@@ -1,6 +1,6 @@
 {
     "Rival": [
-        {"id":0, "name":"ゴーレム・サメク", "atk":5, "HP":100, "coin":5, "image": "images/Rival_img/goremusareku.png"},
+        {"id":0, "name":"ゴーレム・サメク", "atk":5, "HP":100, "coin":5, "image": "images/Rival_img/goremusareku.png", "ME": "ME/mobuBGM.mp3"},
         {"id":0, "name":"射干", "atk":6, "HP":110, "coin":8},
         {"id":0, "name":"ジェヴォーダンの獣", "atk":6, "HP":120, "coin":10},
         {"id":0, "name":"ドラウグ", "atk":7, "HP":130, "coin":12},
