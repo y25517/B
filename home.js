@@ -142,6 +142,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("hp").textContent = totalHP;
       document.getElementById("kougeki").textContent = totalATK;
 
+      // 武器防具変更の写真変更
+      weaponImg.src = `./images/equipments_img/e${weaponId}.JPG`;
+      armorImg.src  = `./images/equipments_img/e${armorId}.JPG`;
+
       localStorage.setItem("avatarHP", totalHP);
       localStorage.setItem("avatarATK", totalATK);
 
@@ -158,3 +162,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 
+// imageを取得
+
+const weaponImg = document.getElementById("weaponimg");
+const armorImg  = document.getElementById("armorimg");
