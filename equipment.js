@@ -64,9 +64,14 @@ let message =
     ]
 }
 
+// SEとME一覧
 let sounds = {
-    
+    me:{},
+    se:{
+        texts: Array.from({length:5}, () => new Audio("./SE/text.mp3"))
+    }
 }
+let currentIndex = 0;
 
 // 入店時のメッセージ表示、コイン表示
 let messageArea = document.querySelector("#messageArea");
@@ -139,36 +144,36 @@ function compareEquipment() {
     let diff;
     statusDifferenceArea.innerHTML = "<h3>ステータス比較</h3>";
     console.log(equipped);
-    
-    if (equipped == "") {
+
         if (selectedItem.id < 28) {
-            statusDifferenceArea.innerHTML += `
-                <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
-                <p>攻撃力差分: ${selectedItem.atk}</p>
-            `;
+            if (equipped.weapon = "") {
+                statusDifferenceArea.innerHTML += `
+                    <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
+                    <p>攻撃力差分: ${selectedItem.atk}</p>
+                `;
+            } else {
+                diff = (selectedItem.atk - equipped.weapon.atk);
+                statusDifferenceArea.innerHTML += `
+                    <p>装備中の武器の攻撃力: ${equipped.weapon.atk}</p>
+                    <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
+                    <p>攻撃力差分: ${diff}</p>
+                `;
+            }
         } else {
-            statusDifferenceArea.innerHTML += `
-                <p>選択した防具のHP: ${selectedItem.hp}</p>
-                <p>HP差分: ${selectedItem.hp}</p>
+            if (equipped.armor == "") {
+                statusDifferenceArea.innerHTML += `
+                    <p>選択した防具のHP: ${selectedItem.hp}</p>
+                    <p>HP差分: ${selectedItem.hp}</p>
+                `;
+            } else {
+                diff = (selectedItem.hp - equipped.armor.hp);
+                statusDifferenceArea.innerHTML += `
+                    <p>装備中の防具のHP: ${equipped.armor.hp}</p>
+                    <p>選択した防具のHP: ${selectedItem.hp}</p>
+                    <p>HP差分: ${diff}</p>
             `;
+            }
         }
-    } else {
-        if (selectedItem.id < 28) {
-            diff = (selectedItem.atk - equipped.weapon.atk);
-            statusDifferenceArea.innerHTML += `
-                <p>装備中の武器の攻撃力: ${equipped.weapon.atk}</p>
-                <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
-                <p>攻撃力差分: ${diff}</p>
-            `
-        } else {
-            diff = (selectedItem.hp - equipped.armor.hp);
-            statusDifferenceArea.innerHTML += `
-                <p>装備中の防具のHP: ${equipped.armor.hp}</p>
-                <p>選択した防具のHP: ${selectedItem.hp}</p>
-                <p>HP差分: ${diff}</p>
-            `;
-        }
-    }
 }
 
 // 購入時の挙動
@@ -217,7 +222,7 @@ async function updateMessage(mes) {
 
     for (let char of mes) {
         messageArea.textContent += char;
-        soundEffect("./SE/text.mp3");
+        soundEffect("texts");
         await sleep(speed);
     }
 }
@@ -234,7 +239,20 @@ function randomPick(array, n) {
 }
 
 // 効果音を鳴らす
-function soundEffect() {
-    let se 
-    se.play();
+function soundEffect(key) {
+    // 指定されたキーの効果音を取得
+    let pool = sounds.se[key];
+
+    // currentindexに対応するAudioオブジェクトを取得
+    let se = pool[currentIndex];
+    if (se) {
+        // 再生位置を0.0秒にする
+        se.currentTime = 0.0;
+        se.play().catch(e => console.log(e));
+    } else {
+        console.log("見つかりませんでした");
+    }
+
+    // indexを更新
+    currentIndex = (currentIndex+1)%pool.length;
 }
