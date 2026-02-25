@@ -1,9 +1,8 @@
 // home.js
-// export let HP = 100; // デフォHP
-// export let ATK = 0; // デフォ攻撃力
 
 // eq.jsonファイルを取得
 const Jsonfile = "./eq.json";
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   // ランクの初期設定（ランクがセットされていなかった場合）
@@ -39,26 +38,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     localStorage.setItem("RivalType", 1);
     window.location.href = "battle.html";
   });
-
-  // fetch(Jsonfile)
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     // constで新しい変数を作ってjsonファイルの攻撃力、hpを反映させたのを、デフォに足す
-  //     // const totalATK = ATK + equippedWeapon.atk;
-  //     // const totalHP = HP + equippedArmor.hp;
-
-  //     // HTMLに反映
-  //     document.getElementById("hp").textContent = totalHP;
-  //     document.getElementById("kougeki").textContent = totalATK;
-
-  //     //ローカルストレージに保存
-  //     localStorage.setItem("avatarHP", totalHP);
-  //     localStorage.setItem("avatarATK", totalATK);
-
-  //     console.log(`装備中: ${equippedWeapon.name}, ${equippedArmor.name}`);
-  //     console.log(`HP: ${totalHP},攻撃力: ${totalATK}`);
-  //   })
-  //   .catch((error) => console.error("データの読み込みに失敗したにょ:", error));
 
   // 今の装備のところ
   const weaponImg = document.getElementById("weaponimg");
@@ -178,5 +157,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   armorSelect.addEventListener("change", updateStatus);
 
 });
-// const weaponId = weaponSelect.value;
-// const armorId = armorSelect.value;
+
