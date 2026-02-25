@@ -10,7 +10,7 @@ const textElement = document.getElementById("text");
 let sleep = (ms) => new Promise((resolve) => {
     setTimeout(resolve, ms);
 });
-localStorage.setItem("bosscnt", 0);
+localStorage.setItem("rank", 1);
 let rank = parseInt(localStorage.getItem("rank")); //現在のランク
 let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
 let MyHP_now = MyHP;    //現在自分のHP
@@ -108,7 +108,7 @@ StartBtn.addEventListener("click", async function(){
                 const RivalNameFrame = document.querySelector("#rival_name");
                 RivalNameFrame.textContent = "敵の名前："+RivalName;
 
-                mobBGM.currentTime = 0;
+                mobBGM.currentTime = 0.5;
                 mobBGM.play();
 
             }
