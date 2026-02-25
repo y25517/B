@@ -104,10 +104,11 @@ function renderItems(e) {
         let div = document.createElement("div");
         div.className = "itemCard";
         div.innerHTML = `
+            <label onclick="showDetails(${i.id})">
             <h4>${i.name}</h4>
             <img src="./images/equipments_img/e${i.id}.JPG" alt="${i.name}" width="75rem" height="75rem">
             <p>金額: ${i.price} コイン</p>
-            <button type="button" onclick="showDetails(${i.id})" class="showDetails">詳細を見る</button>
+            </label>
         `;
         itemsArea.appendChild(div);
     });
@@ -143,10 +144,11 @@ function showDetails(itemId) {
 function compareEquipment() {
     let diff;
     statusDifferenceArea.innerHTML = "<h3>ステータス比較</h3>";
-    console.log(equipped);
 
         if (selectedItem.id < 28) {
-            if (equipped.weapon = "") {
+            console.log(equipped.weapon);
+            
+            if (equipped.weapon == "") {
                 statusDifferenceArea.innerHTML += `
                     <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
                     <p>攻撃力差分: ${selectedItem.atk}</p>
@@ -160,6 +162,9 @@ function compareEquipment() {
                 `;
             }
         } else {
+
+            console.log(equipped.armor);
+            
             if (equipped.armor == "") {
                 statusDifferenceArea.innerHTML += `
                     <p>選択した防具のHP: ${selectedItem.hp}</p>
