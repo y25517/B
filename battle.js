@@ -10,6 +10,7 @@ const textElement = document.getElementById("text");
 let sleep = (ms) => new Promise((resolve) => {
     setTimeout(resolve, ms);
 });
+localStorage.setItem("bosscnt", 0);
 let rank = parseInt(localStorage.getItem("rank")); //現在のランク
 let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));   //自分のHP
 let MyHP_now = MyHP;    //現在自分のHP
@@ -17,6 +18,15 @@ let MyHP_now = MyHP;    //現在自分のHP
 let MyATK = Math.floor(Number(localStorage.getItem("avatarATK")));  //自分の攻撃
 let type = localStorage.getItem("RivalType");
 let BossCnt = Number(localStorage.getItem("bosscnt"));  //ボスカウント
+
+// モブ戦BGM
+const mobBGM = new Audio("ME/mobuBGM.mp3");
+mobBGM.loop = true;
+mobBGM.volume = 0.5;
+// ボス戦BGM
+const bossBGM = new Audio(`ME/bossBGM${BossCnt}.mp3`);
+bossBGM.loop = true;
+bossBGM.volume = 0.6;
 
 console.log("ランク：" +rank);
 console.log("タイプ：" +type)
@@ -28,7 +38,6 @@ if (isNaN(BossCnt)) {
 }
 console.log("自分のHP:"+MyHP);
 console.log("自分のATK:"+MyATK);
-
 //戦闘開始したら
 StartBtn.addEventListener("click", async function(){
     StartBtn.style.display = "none";
@@ -99,12 +108,33 @@ StartBtn.addEventListener("click", async function(){
                 const RivalNameFrame = document.querySelector("#rival_name");
                 RivalNameFrame.textContent = "敵の名前："+RivalName;
 
+                mobBGM.currentTime = 0;
+                mobBGM.play();
+
             }
 
             //ボスを取得           
             else if(type === "1")
             {
                 await showMessageEffect(data.Boss[BossCnt].txt);
+                switch(rank)
+                {
+                    case 0:
+                        bossBGM.currentTime = 0.6;
+                        break;
+                    case 1:
+                        bossBGM.currentTime = 0;
+                        break;
+                    case 2:
+                        bossBGM.currentTime = 0;
+                        break;
+                    case 3:
+                        bossBGM.currentTime = 0;
+                        break;        
+
+                }
+
+                bossBGM.play();
                 console.log("ボスカウント：" + BossCnt);
                 RivalAtk = data.Boss[BossCnt].atk;   //敵の攻撃力
                 RivalHP = data.Boss[BossCnt].HP;     //敵のHP
@@ -116,6 +146,7 @@ StartBtn.addEventListener("click", async function(){
                 const RivalNameFrame = document.querySelector("#rival_name");
                 RivalNameFrame.textContent = "敵の名前："+RivalName;
                 
+
             }
             let RivalHP_now = RivalHP;  //現在の敵のHp
             
