@@ -64,6 +64,10 @@ let message =
     ]
 }
 
+let sounds = {
+    
+}
+
 // 入店時のメッセージ表示、コイン表示
 let messageArea = document.querySelector("#messageArea");
 messageTxt = randomPick(message.welcome, 1);
@@ -213,6 +217,7 @@ async function updateMessage(mes) {
 
     for (let char of mes) {
         messageArea.textContent += char;
+        soundEffect("./SE/text.mp3");
         await sleep(speed);
     }
 }
@@ -226,4 +231,10 @@ function randomPick(array, n) {
         result.push(copy.splice(index,1)[0]);
     }
     return result;
+}
+
+// 効果音を鳴らす
+function soundEffect() {
+    let se 
+    se.play();
 }
