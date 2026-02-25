@@ -146,8 +146,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       localStorage.setItem("avatarATK", totalATK);
 
       localStorage.setItem("equipped", JSON.stringify({
-          weapon: weapon,
-          armor: armor
+          weapon: weaponId,
+          armor: armorId
       }));
   }
 
