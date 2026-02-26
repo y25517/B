@@ -20,7 +20,7 @@ let type = localStorage.getItem("RivalType");   //モブ戦かボス戦か
 /*BGM
 -----------------------------------------*/
 // モブ戦BGM
-const mobBGM = new Audio("ME/mobuBGM.m4a");
+const mobBGM = new Audio(`ME/mobuBGM${rank}.m4a`);
 mobBGM.loop = true;
 mobBGM.volume = 0.5;
 // ボス戦BGM
