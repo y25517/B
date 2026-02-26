@@ -29,15 +29,6 @@ const bossBGM = new Audio(`ME/bossBGM${rank}.m4a`);
 bossBGM.loop = true;
 bossBGM.volume = 0.6;
 
-// モブ戦BGM
-const mobBGM = new Audio("ME/mobuBGM.mp3");
-mobBGM.loop = true;
-mobBGM.volume = 0.5;
-// ボス戦BGM
-const bossBGM = new Audio(`ME/bossBGM${BossCnt}.mp3`);
-bossBGM.loop = true;
-bossBGM.volume = 0.6;
-
 console.log("ランク：" +rank);
 console.log("タイプ：" +type)
 console.log("自分のHP:"+MyHP);
