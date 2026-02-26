@@ -11,7 +11,6 @@ let sleep = (ms) => new Promise((resolve) => {
 });
 /*  現在のステータス (ランク、自分のHPと攻撃力)
 ----------------------------------------*/
-localStorage.setItem("rank", 1);
 let rank = parseInt(localStorage.getItem("rank"));                  //現在のランク
 let MyHP = Math.floor(Number(localStorage.getItem("avatarHP")));    //自分のHP
 let MyATK = Math.floor(Number(localStorage.getItem("avatarATK")));  //自分の攻撃力
