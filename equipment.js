@@ -253,7 +253,7 @@ function soundEffect(key) {
     if (se) {
         // 再生位置を0.0秒にする
         se.currentTime = 0.0;
-        se.volume = 0.3;
+        se.volume = 0.1;
         se.play().catch(e => console.log(e));
     } else {
         console.log("見つかりませんでした");
