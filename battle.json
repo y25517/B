@@ -1,34 +1,45 @@
 {
     "Rival": [
-        {"id":0, "name":"ゴーレム・サメク", "atk":5, "HP":100, "coin":5, "image": "images/Rival_img/goremusa_0.png"},
-        {"id":0, "name":"射干", "atk":6, "HP":110, "coin":8, "image": "images/Rival_img/sha_0.png"},
-        {"id":0, "name":"ジェヴォーダンの獣", "atk":6, "HP":120, "coin":10, "image": "images/Rival_img/jevo_0.png"},
-        {"id":0, "name":"ドラウグ", "atk":7, "HP":130, "coin":12, "image": "images/Rival_img/dora_0.png"},
-        {"id":0, "name":"トーテンタンツァー", "atk":8, "HP":150, "coin":15, "image": "images/Rival_img/to-te_0.png"},
+        {"id":0, "name":"ゴーレム・サメク", "atk":9, "HP":100, "coin":10, "image": "images/Rival_img/goremusa_0.png"},
+        {"id":0, "name":"射干", "atk":10, "HP":110, "coin":15, "image": "images/Rival_img/sha_0.png"},
+        {"id":0, "name":"ジェヴォーダンの獣", "atk":11, "HP":120, "coin":20, "image": "images/Rival_img/jevo_0.png"},
+        {"id":0, "name":"ドラウグ", "atk":12, "HP":130, "coin":25, "image": "images/Rival_img/dora_0.png"},
+        {"id":0, "name":"トーテンタンツァー", "atk":14, "HP":150, "coin":35, "image": "images/Rival_img/to-te_0.png"},
 
-        {"id":1, "name":"ゴーレム・ヴァーヴ", "atk":9, "HP":190, "coin":25, "image": "images/Rival_img/goremuva_1.png"},
-        {"id":1, "name":"リリン", "atk":8, "HP":160, "coin":18, "image": "images/Rival_img/ririn_1.png"},
-        {"id":1, "name":"ドルグワント", "atk":9, "HP":180, "coin":22, "image": "images/Rival_img/doru_1.png"},
-        {"id":1, "name":"ツェンタウァ", "atk":9, "HP":190, "coin":25, "image": "images/Rival_img/tuwen_1.png"},
-        {"id":1, "name":"スルーア・シー", "atk":9, "HP":190, "coin":25, "image": "images/Rival_img/surua_1.png"},
+        {"id":1, "name":"ゴーレム・ヴァーヴ", "atk":38, "HP":650, "coin":90, "image": "images/Rival_img/goremuva_1.png"},
+        {"id":1, "name":"リリン", "atk":36, "HP":600, "coin":80, "image": "images/Rival_img/ririn_1.png"},
+        {"id":1, "name":"ドルグワント", "atk":42, "HP":700, "coin":110, "image": "images/Rival_img/doru_1.png"},
+        {"id":1, "name":"ツェンタウァ", "atk":45, "HP":750, "coin":130, "image": "images/Rival_img/tuwen_1.png"},
+        {"id":1, "name":"スルーア・シー", "atk":48, "HP":800, "coin":150, "image": "images/Rival_img/surua_1.png"},
         
-        {"id":2, "name":"ゴーレム・レーシュ", "atk":10, "HP":210, "coin":30},
-        {"id":2, "name":"バルトアンデルス", "atk":11, "HP":230, "coin":35},
-        {"id":2, "name":"ア・ズライグ・ゴーッホ", "atk":11, "HP":230, "coin":35},
-        {"id":2, "name":"ナハツェーラー", "atk":11, "HP":230, "coin":35},
-        {"id":2, "name":"ネロン・カイサル", "atk":11, "HP":230, "coin":35},
+        {"id":2, "name":"ゴーレム・レーシュ", "atk":65, "HP":1100, "coin":250},
+        {"id":2, "name":"バルトアンデルス", "atk":72, "HP":1200, "coin":300},
+        {"id":2, "name":"ア・ズライグ・ゴーッホ", "atk":78, "HP":1300, "coin":350},
+        {"id":2, "name":"ナハツェーラー", "atk":85, "HP":1400, "coin":400},
+        {"id":2, "name":"ネロン・カイサル", "atk":92, "HP":1500, "coin":450},
 
-        {"id":3, "name":"ゴーレム・タヴ", "atk":11, "HP":230, "coin":35},
-        {"id":3, "name":"「支配」「戦争」「飢餓」「万死」", "atk":11, "HP":230, "coin":35},
-        {"id":3, "name":"アエーシュマ", "atk":11, "HP":230, "coin":35},
-        {"id":3, "name":"阿良波々岐荒御魂", "atk":11, "HP":230, "coin":35},
-        {"id":3, "name":"ムカッタアート=イコシエンネアグラマトン", "atk":29, "HP":290, "coin":29}
+        {"id":3, "name":"ゴーレム・タヴ", "atk":110, "HP":2000, "coin":600},
+        {"id":3, "name":"「支配」「戦争」「飢餓」「万死」", "atk":125, "HP":2300, "coin":750},
+        {"id":3, "name":"アエーシュマ", "atk":140, "HP":2600, "coin":900},
+        {"id":3, "name":"阿良波々岐荒御魂", "atk":160, "HP":3000, "coin":1100},
+        {"id":3, "name":"ムカッタアート=イコシエンネアグラマトン", "atk":200, "HP":3800, "coin":1500}
     ],
     
     "Boss": [
-        {"id":0, "name":"「大海を結ぶ者、嫉妬の蛇、地上の神」リヴヤタン", "atk":18, "HP":400, "coin":100, "txt":"\"Non est super terram potestas quae comparetur ei, qui factus est ut nullum timeret. Omne sublime videt: ipse est rex super universos filios superbiae.\"\n Iob 41, 24-25"},
-        {"id":1, "name":"「大覚を殺す者、魔羅波旬、第六天魔王」マーラ・パーピーヤス", "atk":25, "HP":600, "coin":200, "txt":"三障四魔、如是波俾掾発退轉心……"},
-        {"id":2, "name":"「万象を殱くす者、エスカトス・ロゴス、冥王」タルタロス・クトニオス", "atk":35, "HP":900, "coin":500, "txt":"ネクロマンティオンのデストルドーが形而下に顕れていく……"},
-        {"id":3, "name":"「黄衣を纏う者、叛逆の使徒、ケリヨトのイェフーダー」ジューダス・クライスト", "atk":66, "HP":1200, "coin":30, "txt":"\"Surgite, eamus : ecce appropinquavit qui me tradet.\"\n Matthæus 26, 46"}
+        {"id":0, "name":"「大海を結ぶ者、嫉妬の蛇、地上の神」リヴヤタン",
+        "atk":18, "HP":400, "coin":150,
+        "txt":"\"Non est super terram potestas quae comparetur ei...\""},
+
+        {"id":1, "name":"「大覚を殺す者、魔羅波旬、第六天魔王」マーラ・パーピーヤス",
+        "atk":150, "HP":4000, "coin":1500,
+        "txt":"三障四魔、如是波俾掾発退轉心……"},
+
+        {"id":2, "name":"「万象を殱くす者、エスカトス・ロゴス、冥王」タルタロス・クトニオス",
+        "atk":300, "HP":8000, "coin":4000,
+        "txt":"ネクロマンティオンのデストルドーが形而下に顕れていく……"},
+
+        {"id":3, "name":"「黄衣を纏う者、叛逆の使徒、ケリヨトのイェフーダー」ジューダス・クライスト",
+        "atk":500, "HP":15000, "coin":10000,
+        "txt":"\"Surgite, eamus : ecce appropinquavit qui me tradet.\""}
     ]
 }
