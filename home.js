@@ -10,8 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     localStorage.setItem("rank", 0);
     localStorage.setItem("isDone", JSON.stringify(true));
   }
-  const RankCnt = document.querySelector("#rank-count");  //笹森（変更）
-  RankCnt.textContent = localStorage.getItem("rank");     //笹森
+  const RankCnt = document.querySelector("#rank-count");
+  RankCnt.textContent = localStorage.getItem("rank");
 
   //ローカルストレージのownedを配列として取り出す
   const owned = JSON.parse(localStorage.getItem("owned")) || [];
