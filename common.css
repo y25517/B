@@ -62,13 +62,11 @@ body{
 .myimg,
 .rivalimg{
   width: auto;
-  max-width: 20vw;
+  max-width: 25vw;
   height: 40vh;
   min-height: 500px;
   position: absolute;
-  left: 100px;
   top: 130px;
-
 }
 .vs_text {
   font-size: 70px;
