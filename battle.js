@@ -37,25 +37,26 @@ console.log("自分のATK:"+MyATK);
 --------------------------------------------------------*/
 StartBtn.addEventListener("click", async function(){
     StartBtn.style.display = "none";
-
     const AtcMark = document.querySelector("#atcmark");
     const StopBar = document.querySelector("#stopbar");
     let i = 0;
     let timer;
+    let RivalAtk;
+    let RivalHP;
+    let RivalName; 
 
+    /* ストップバー
+    -------------------------------------------------*/
     function StopBar_move(){
         let random = Math.floor(Math.random() * 380); //1~10のランダムな数字
         AtcMark.style.left = random + "px";
         timer = setInterval(() => {
             i++;
             StopBar.style.left = i + "px";
-
             if(i == 396)
                 i = 0;     
         }, 0);
     }
-    StopBar_move();
-
     //ストップした場所の判定
     function isColliding(a, b) {
         const rectA = a.getBoundingClientRect();
@@ -65,6 +66,7 @@ StartBtn.addEventListener("click", async function(){
             rectA.left > rectB.right
         );
     }
+    StopBar_move();
             
     // 敵の情報を取得           
     fetch(JsonFile)
@@ -72,13 +74,6 @@ StartBtn.addEventListener("click", async function(){
         return Response.json();
     })
     .then(async function(data){
-        console.log(data);
-
-        
-        let RivalAtk;
-        let RivalHP;
-        let RivalName;
-        
 
         //モブ敵をランダム取得
         const SameID = data.Rival.filter(rival => rival.id === rank);
@@ -179,7 +174,7 @@ StartBtn.addEventListener("click", async function(){
                 StopBtn.style.display = "none";
                 if(type === "0")
                     showResult("あなたは力尽きた…");
-                if(type === "1")
+                else if(type === "1")
                     showResult("深淵があなたを呑み込む。")
                 return;
             }
@@ -200,19 +195,29 @@ StartBtn.addEventListener("click", async function(){
                 }   
                 else if(type === "1") //ボス
                 {
-                    rank++;
-                    localStorage.setItem("rank", rank);
-                    if(rank > data.Boss.length - 1)
-                    {
-                        rank = 3;
-                        localStorage.setItem("rank", rank);
-                    }
                     let Coin = Number(localStorage.getItem("Coin"));
-                    Coin = Coin + Number(data.Boss[rank-1].coin);
-                    localStorage.setItem("Coin", Coin); 
-                    showResult("Coin" + Number(data.Boss[rank - 1].coin) + "枚獲得！");
-                    const CoinImg = document.querySelector("#coinimg");
-                    CoinImg.src = "./images/resultmoney.png";
+                    Coin = Coin + Number(data.Boss[rank].coin);
+                    localStorage.setItem("Coin", Coin);
+
+                    switch(rank){
+                        case 0:
+                            showResult("「ボスを撃破した！」<br>しかし、この地を支配する者はまだ他にもいる……。。<br> Coin" + data.Boss[rank].coin+ "枚獲得！")
+                            break;
+                        case 1:
+                            showResult("「強敵を打ち倒した！」<br>だがさらに危険な存在が、<br>この先に待ち受けているようだ... 。<br> Coin" + data.Boss[rank].coin+ "枚獲得！");
+                            break;
+                        case 2:
+                            showResult("「激戦の末、勝利をつかんだ！」<br>残るボスは、あと一体――。。<br> Coin" + data.Boss[rank].coin+ "枚獲得！");
+                            break;
+                        case 3:
+                            showResult("「最後のボスを撃破！」<br>すべての脅威は消え去った。<br>世界に、静かな光が戻る。<br> Coin" + data.Boss[rank].coin+ "枚獲得！");
+                            break;
+                    }
+                    document.querySelector("#coinimg").style.opacity = '0';
+                    rank++;
+                    if(rank > data.Boss.length - 1) //ランクを3で固定にする
+                        rank = 3;
+                    localStorage.setItem("rank", rank);
                 }
             }
 
@@ -223,7 +228,7 @@ StartBtn.addEventListener("click", async function(){
                 const modal = document.getElementById("resultModal");
                 const resultText = document.getElementById("resultText");
                 
-                resultText.textContent = text;
+                resultText.innerHTML = text;
                 modal.style.display = "flex";
             }
             // リザルトのボタンを押されたら遷移する
