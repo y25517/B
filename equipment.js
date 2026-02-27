@@ -94,9 +94,17 @@ let statusDifferenceArea = document.querySelector("#statusDifferenceArea");
 let itemsArea = document.querySelector("#itemsArea");
 function renderItems(e) {
     let itemRank = rank;
-    
-    let weapons = randomPick(e.weapon.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
-    let armors = randomPick(e.armor.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
+    let weapons;
+    let armors;
+    if (JSON.parse(localStorage.getItem("isFought")) == false) {
+        weapons = JSON.parse(localStorage.getItem("shop_weapon"));
+        armors = JSON.parse(localStorage.getItem("shop_armor"));    
+    } else {
+        weapons = randomPick(e.weapon.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
+        armors = randomPick(e.armor.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
+    }
+    localStorage.setItem("shop_weapon", JSON.stringify(weapons));
+    localStorage.setItem("shop_armor", JSON.stringify(armors));
     let displayItem = weapons.concat(armors);
     itemsArea.innerHTML = "";
 
