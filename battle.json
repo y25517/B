@@ -28,7 +28,7 @@
     "Boss": [
         {"id":0, "name":"「大海を結ぶ者、嫉妬の蛇、地上の神」リヴヤタン",
         "atk":18, "HP":400, "coin":150,
-        "txt":"\"Non est super terram potestas quae comparetur ei...\"",
+        "txt":"\"Non est super terram potestas quae comparetur ei, qui factus est ut nullum timeret. Omne sublime videt: ipse est rex super universos filios superbiae.\"\n Iob 41, 24-25",
         "image": "images/Rival_img/ri_b.png"},
 
         {"id":1, "name":"「大覚を殺す者、魔羅波旬、第六天魔王」マーラ・パーピーヤス",
@@ -43,7 +43,7 @@
 
         {"id":3, "name":"「黄衣を纏う者、叛逆の使徒、ケリヨトのイェフーダー」ジューダス・クライスト",
         "atk":500, "HP":15000, "coin":10000,
-        "txt":"\"Surgite, eamus : ecce appropinquavit qui me tradet.\"",
+        "txt":"\"Surgite, eamus : ecce appropinquavit qui me tradet.\"\n Matthæus 26, 46",
         "image": "images/Rival_img/ju_b.png"}
     ]
 }

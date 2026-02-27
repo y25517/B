@@ -13,6 +13,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     localStorage.setItem("isDone", JSON.stringify(true));
   }
 
+  if (!localStorage.getItem("isFought")) {
+    localStorage.setItem("isFought", "true");  // 変更by伊藤　戦闘終了検知のキーがセットされてなかった場合の初期設定(true)
+  }
+  const RankCnt = document.querySelector("#rank-count");
+  RankCnt.textContent = localStorage.getItem("rank");
+
   document.querySelector("#rank-count").textContent =
     localStorage.getItem("rank");
 

@@ -96,12 +96,17 @@ function renderItems(e) {
     let itemRank = rank;
     let weapons;
     let armors;
-    if (JSON.parse(localStorage.getItem("isFought")) == false) {
-        weapons = JSON.parse(localStorage.getItem("shop_weapon"));
-        armors = JSON.parse(localStorage.getItem("shop_armor"));    
-    } else {
+    // 戦闘が終了しているかどうかを判断する
+    let isFought = localStorage.getItem("isFought");
+    console.log(isFought);
+    
+    if (isFought === "true") {
         weapons = randomPick(e.weapon.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
         armors = randomPick(e.armor.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
+        localStorage.setItem("isFought", "false");
+    } else {
+        weapons = JSON.parse(localStorage.getItem("shop_weapon"));
+        armors = JSON.parse(localStorage.getItem("shop_armor"));  
     }
     localStorage.setItem("shop_weapon", JSON.stringify(weapons));
     localStorage.setItem("shop_armor", JSON.stringify(armors));
@@ -155,16 +160,16 @@ function compareEquipment() {
 
         if (selectedItem.id < 28) {
             console.log(equipped.weapon);
-            
-            if (equipped.weapon == "") {
+            let ew = eqs.weapon.find(w => w.id == equipped.weapon);
+            if (ew == "undefined") {
                 statusDifferenceArea.innerHTML += `
                     <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
                     <p>攻撃力差分: ${selectedItem.atk}</p>
                 `;
             } else {
-                diff = (selectedItem.atk - equipped.weapon.atk);
+                diff = (selectedItem.atk - ew.atk);
                 statusDifferenceArea.innerHTML += `
-                    <p>装備中の武器の攻撃力: ${equipped.weapon.atk}</p>
+                    <p>装備中の武器の攻撃力: ${ew.atk}</p>
                     <p>選択した武器の攻撃力: ${selectedItem.atk}</p>
                     <p>攻撃力差分: ${diff}</p>
                 `;
@@ -172,16 +177,16 @@ function compareEquipment() {
         } else {
 
             console.log(equipped.armor);
-            
-            if (equipped.armor == "") {
+            let ea = eqs.armor.find(a => a.id == equipped.armor);
+            if (ea == "undefined") {
                 statusDifferenceArea.innerHTML += `
                     <p>選択した防具のHP: ${selectedItem.hp}</p>
                     <p>HP差分: ${selectedItem.hp}</p>
                 `;
             } else {
-                diff = (selectedItem.hp - equipped.armor.hp);
+                diff = (selectedItem.hp - ea.hp);
                 statusDifferenceArea.innerHTML += `
-                    <p>装備中の防具のHP: ${equipped.armor.hp}</p>
+                    <p>装備中の防具のHP: ${ea.hp}</p>
                     <p>選択した防具のHP: ${selectedItem.hp}</p>
                     <p>HP差分: ${diff}</p>
             `;
