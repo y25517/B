@@ -96,12 +96,17 @@ function renderItems(e) {
     let itemRank = rank;
     let weapons;
     let armors;
-    if (JSON.parse(localStorage.getItem("isFought")) == false) {
-        weapons = JSON.parse(localStorage.getItem("shop_weapon"));
-        armors = JSON.parse(localStorage.getItem("shop_armor"));    
-    } else {
+    // 戦闘が終了しているかどうかを判断する
+    let isFought = localStorage.getItem("isFought");
+    console.log(isFought);
+    
+    if (isFought == true || isFought == "true") {
         weapons = randomPick(e.weapon.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
         armors = randomPick(e.armor.filter(item => item.rank <= itemRank && !owned.some(o => o.id == item.id)), 2);
+        localStorage.setItem("isFought", "false");
+    } else {
+        weapons = JSON.parse(localStorage.getItem("shop_weapon"));
+        armors = JSON.parse(localStorage.getItem("shop_armor"));  
     }
     localStorage.setItem("shop_weapon", JSON.stringify(weapons));
     localStorage.setItem("shop_armor", JSON.stringify(armors));
