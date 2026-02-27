@@ -38,6 +38,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     localStorage.setItem("RivalType", 1);
     window.location.href = "battle.html";
   });
+  document.getElementById("soubi").addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.setItem("RivalType", 1);
+    window.location.href = "battle.html";
+  });
 
   // 今の装備のところ
   const weaponImg = document.getElementById("weaponimg");
