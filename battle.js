@@ -202,12 +202,13 @@ StartBtn.addEventListener("click", async function(){
 
                     let message = "";
 
+                    // 変更by伊藤　メッセージを変更しています（現段階では一部）
                     switch(rank){
                         case 0:
-                            message = "「ボスを撃破した！」<br>しかし、この地を支配する者はまだ他にもいる……。。<br>";
+                            message = "\"<ruby>This is the Generation of that great Leviathan, or rather (to speake more <br>reverently) of that Mortall God, to which wee owe under the Immortall God, <br>our peace and defence. <rp>(</rp><rt>これこそが、かの偉大なりしレヴィアタンの――より畏敬の念を込めて語るならば――、可死の神の誕生である。我らが平和と防衛を、不死の神に次いで依存するところのものである。</rt><rp>)</rp></ruby>\" <br>Thomas Hobbes, LEVIATHAN, OR The Matter, Forme, & Power OF A COMMON-WEALTH ECCLESIASTICALL AND CIVILL. Chap. 17, Page. 87<br>";
                             break;
                         case 1:
-                            message = "「強敵を打ち倒した！」<br>だがさらに危険な存在が、<br>この先に待ち受けているようだ... 。<br>";
+                            message = "\"<ruby>तस्स सोकपरेतस्स वीणा कच्छा अभस्सथ, ततो सो दुम्मनो यक्खो तत्थेव अन्तरधायथा ति।<rp>(</rp><rt>悲しみに打ちひしがれた彼の脇から、琵琶が落ちた。その意気消沈した夜叉は、その場から姿を消した。</rt><rp>)</rp></ruby>\"<br>Sutta Nipāta 449";
                             break;
                         case 2:
                             message = "「激戦の末、勝利をつかんだ！」<br>残るボスは、あと一体――。。<br>";
