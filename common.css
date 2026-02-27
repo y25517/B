@@ -312,6 +312,23 @@ body{
     right: 43%;
     width: 12%;
 }
+.avatar_armor,
+.avatar_weapon {
+  position: absolute;
+}
+.avatar_armor {
+  z-index: 1; /* 防具は武器の下 */
+  left: 965px;
+  top: 340px;
+  width: 8%;
+}
+.avatar_weapon {
+  z-index: 2; /* 武器は防具の上 */
+  left: 800px;
+  top: 600px;
+  width: 8%;
+}
+
 
 /* ステータス */
 .sute-tasu {
@@ -454,23 +471,23 @@ body{
     font-weight: bolder;
     /* リセットボタン */
   }
-  .reset{
-    bottom: 50px;
-    font-size: 70px;
-    border-radius: 20px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-    background: #98930a;
-  color: black;
-  /* left: 100px; */
-  padding: 30px 75px;
-  }
-
-  .reset:hover {
-    box-shadow: 0 0 20px #ffe600;
-    color: white;
-  }
+  .reset {
+  display: inline-block;
+  width: 250px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 60px;
+  outline: none;
+  color: #FFFFFF;
+  background-color: #1B85FB;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+}
+.reset:hover {
+  color: #FFFFFF;
+  background-color: #1B85FB;
+  opacity: 0.7;
+}
 
 
   /* ボタンの並び替え */

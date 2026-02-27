@@ -1,161 +1,156 @@
 // home.js
 
-// eq.jsonファイルを取得
 const Jsonfile = "./eq.json";
 
-
 document.addEventListener("DOMContentLoaded", async () => {
-  // ランクの初期設定（ランクがセットされていなかった場合）
+
+  /* =============================
+     初期設定（ランク・コイン）
+  ============================== */
+
   if (!localStorage.getItem("isDone")) {
     localStorage.setItem("rank", 0);
     localStorage.setItem("isDone", JSON.stringify(true));
   }
-  const RankCnt = document.querySelector("#rank-count");
-  RankCnt.textContent = localStorage.getItem("rank");
 
-  //ローカルストレージのownedを配列として取り出す
+  document.querySelector("#rank-count").textContent =
+    localStorage.getItem("rank");
+
   const owned = JSON.parse(localStorage.getItem("owned")) || [];
   console.log("owned:", owned);
 
   let CoinNow = Number(localStorage.getItem("Coin"));
-  // コインをローカルストレージに入れる
   if (isNaN(CoinNow) || CoinNow <= 0) {
     CoinNow = 100;
     localStorage.setItem("Coin", CoinNow);
   }
-  console.log(CoinNow);
-  const CoinCnt = document.querySelector("#coin-count");
-  CoinCnt.textContent = localStorage.getItem("Coin");
 
-  // 戦闘かボスのaタグを押したときの判定をlocalStorageに保存
-  document.getElementById("rival").addEventListener("click", function (e) {
-    e.preventDefault(); //動作を止める
+  document.querySelector("#coin-count").textContent =
+    localStorage.getItem("Coin");
+
+
+  /* =============================
+     ページ遷移系
+  ============================== */
+
+  document.getElementById("rival").addEventListener("click", (e) => {
+    e.preventDefault();
     localStorage.setItem("RivalType", 0);
     window.location.href = "battle.html";
   });
-  document.getElementById("boss").addEventListener("click", function (e) {
+
+  document.getElementById("boss").addEventListener("click", (e) => {
     e.preventDefault();
     localStorage.setItem("RivalType", 1);
     window.location.href = "battle.html";
   });
-  document.getElementById("soubi").addEventListener("click", function (e) {
+
+  document.getElementById("soubi").addEventListener("click", () => {
     window.location.href = "equipment.html";
   });
 
-  // 今の装備のところ
+
+  /* =============================
+     装備プルダウン取得
+  ============================== */
+
+  const weaponSelect = document.getElementById("weaponpuru");
+  const armorSelect  = document.getElementById("armorpuru");
+
   const weaponImg = document.getElementById("weaponimg");
-  const weaponMenu = document.getElementById("weaponpuru");
+  const armorImg  = document.getElementById("armorimg");
 
-  const armorImg = document.getElementById("armorimg");
-  const armorMenu = document.getElementById("armorpuru");
+  const avatarWeapon = document.getElementById("avatarWeapon");
+  const avatarArmor  = document.getElementById("avatarArmor");
 
-  weaponImg.addEventListener("click", (e) => {
-    e.stopPropagation();
-    weaponMenu.classList.toggle("active");
-    armorMenu.classList.remove("active");
-  });
 
-  armorImg.addEventListener("click", (e) => {
-    e.stopPropagation();
-    armorMenu.classList.toggle("active");
-    weaponMenu.classList.remove("active");
-  });
+  /* =============================
+     所持装備のみ表示
+  ============================== */
 
-  // 外をクリックしたら閉じる
-  document.addEventListener("click", () => {
-    weaponMenu.classList.remove("active");
-    armorMenu.classList.remove("active");
-  });
+  // Array.from(weaponSelect.options).forEach(option => {
+  //   if (!owned.some(o => o.id == option.value)) {
+  //     option.remove();
+  //   }
+  // });
 
-});
+  // Array.from(armorSelect.options).forEach(option => {
+  //   if (!owned.some(o => o.id == option.value)) {
+  //     option.remove();
+  //   }
+  // });
 
-// optionにある武器、防具とownedにある武器、防具と一致したら表示させる
 
-document.addEventListener("DOMContentLoaded", () => {
-  const owned = JSON.parse(localStorage.getItem("owned")) || [];
+  /* =============================
+     保存済み装備復元
+  ============================== */
 
-  const weaponSelect = document.getElementById("weaponpuru");
-  const armorSelect = document.getElementById("armorpuru");
-
-  // 武器のoption整理
-  Array.from(weaponSelect.options).forEach((option) => {
-    const hasItem = owned.some((o) => o.id == option.value);
-
-    if (!hasItem) {
-      option.remove();
-    }
-  });
-
-  // ownedにない武器、防具はselectから消す
-  Array.from(armorSelect.options).forEach((option) => {
-    const hasItem = owned.some((o) => o.id == option.value);
-
-    if (!hasItem) {
-      option.remove();
-    }
-  });
-});
-
-//プルダウンで設定した武器、防具をステータスに反映
-document.addEventListener("DOMContentLoaded", async () => {
-
-  const HP_BASE = 100;
-  const ATK_BASE = 0;
-
-  const weaponSelect = document.getElementById("weaponpuru");
-  const armorSelect = document.getElementById("armorpuru");
-
-  const owned = JSON.parse(localStorage.getItem("owned")) || [];
-
-  // 所持していないoptionを削除
-  Array.from(weaponSelect.options).forEach(option => {
-      if (!owned.some(o => o.id == option.value)) {
-          option.remove();
-      }
-  });
-
-  Array.from(armorSelect.options).forEach(option => {
-      if (!owned.some(o => o.id == option.value)) {
-          option.remove();
-      }
-  });
-
-  // 保存済み装備を復元
   const savedEquip = JSON.parse(localStorage.getItem("equipped"));
   if (savedEquip) {
-      weaponSelect.value = savedEquip.weapon;
-      armorSelect.value = savedEquip.armor;
+    weaponSelect.value = savedEquip.weapon;
+    armorSelect.value  = savedEquip.armor;
   }
 
-  // eq.json取得
-  const response = await fetch("./eq.json");
+
+  /* =============================
+     eq.json読み込み
+  ============================== */
+
+  const response = await fetch(Jsonfile);
   const data = await response.json();
 
+
+  /* =============================
+     ステータス更新処理
+  ============================== */
+
+  const HP_BASE  = 100;
+  const ATK_BASE = 0;
+
   function updateStatus() {
-    //プルダウンの選択をステータスに反映
-      const weaponId = Number(weaponSelect.value);
-      const armorId = Number(armorSelect.value);
 
-      const weapon = data.weapon.find(w => w.id === weaponId);
-      const armor = data.armor.find(a => a.id === armorId);
+    const weaponId = Number(weaponSelect.value);
+    const armorId  = Number(armorSelect.value);
 
-      const totalATK = ATK_BASE + (weapon ? weapon.atk : 0);
-      const totalHP = HP_BASE + (armor ? armor.hp : 0);
+    const weapon = data.weapon.find(w => w.id === weaponId);
+    const armor  = data.armor.find(a => a.id === armorId);
 
-      document.getElementById("hp").textContent = totalHP;
-      document.getElementById("kougeki").textContent = totalATK;
+    const totalATK = ATK_BASE + (weapon ? weapon.atk : 0);
+    const totalHP  = HP_BASE  + (armor  ? armor.hp  : 0);
 
-      // 武器防具変更の写真変更
-      weaponImg.src = `./images/equipments_img/e${weaponId}.JPG`;
-      armorImg.src  = `./images/equipments_img/e${armorId}.JPG`;
+    document.getElementById("hp").textContent = totalHP;
+    document.getElementById("kougeki").textContent = totalATK;
 
-      localStorage.setItem("avatarHP", totalHP);
-      localStorage.setItem("avatarATK", totalATK);
+    // 横の装備画像変更
+    weaponImg.src = `./images/equipments_img/e${weaponId}.JPG`;
+    armorImg.src  = `./images/equipments_img/e${armorId}.JPG`;
 
-      localStorage.setItem("equipped", JSON.stringify({
-          weapon: weaponId,
-          armor: armorId
-      }));
+    // アバター重ね画像変更
+    // 画像変更
+avatarWeapon.src = `./images/wear_img/e${weaponId}.png`;
+avatarArmor.src  = `./images/wear_img/e${armorId}.png`;
+
+// 武器位置適用
+if (weaponPosition[weaponId]) {
+  avatarWeapon.style.top = weaponPosition[weaponId].top;
+  avatarWeapon.style.left = weaponPosition[weaponId].left;
+  avatarWeapon.style.width = weaponPosition[weaponId].width;
+}
+
+// 防具位置適用
+if (armorPosition[armorId]) {
+  avatarArmor.style.top = armorPosition[armorId].top;
+  avatarArmor.style.left = armorPosition[armorId].left;
+  avatarArmor.style.width = armorPosition[armorId].width;
+}
+
+    localStorage.setItem("avatarHP", totalHP);
+    localStorage.setItem("avatarATK", totalATK);
+
+    localStorage.setItem("equipped", JSON.stringify({
+      weapon: weaponId,
+      armor: armorId
+    }));
   }
 
   updateStatus();
@@ -163,9 +158,65 @@ document.addEventListener("DOMContentLoaded", async () => {
   weaponSelect.addEventListener("change", updateStatus);
   armorSelect.addEventListener("change", updateStatus);
 
+
+  /* =============================
+     プルダウン開閉処理
+  ============================== */
+
+  weaponImg.addEventListener("click", (e) => {
+    e.stopPropagation();
+    weaponSelect.classList.toggle("active");
+    armorSelect.classList.remove("active");
+  });
+
+  armorImg.addEventListener("click", (e) => {
+    e.stopPropagation();
+    armorSelect.classList.toggle("active");
+    weaponSelect.classList.remove("active");
+  });
+
+  document.addEventListener("click", () => {
+    weaponSelect.classList.remove("active");
+    armorSelect.classList.remove("active");
+  });
+
 });
 
-// imageを取得
+// 武器防具微調整
+const weaponPosition = {
+  0: { top: "50%", left: "39%", width: "8%" },
+  1: { top: "50%", left: "42%", width: "5%" },
+  2: { top: "50%", left: "42%", width: "5%" },
+  3: { top: "50%", left: "42%", width: "5%" },
+  4: { top: "50%", left: "42%", width: "5%" },
+  5: { top: "50%", left: "37%", width: "10%" },
+  6: { top: "50%", left: "40%", width: "7%" },
+  7: { top: "47%", left: "40%", width: "7%" },
+  8: { top: "50%", left: "42%", width: "5%" },
+  9: { top: "50%", left: "42%", width: "5%" },
+ 10: { top: "50%", left: "42%", width: "5%" },
+ 11: { top: "50%", left: "42%", width: "5%" },
+ 12: { top: "50%", left: "42%", width: "5%" },
+ 13: { top: "50%", left: "42%", width: "5%" },
+ 14: { top: "50%", left: "42%", width: "5%" },
+ 15: { top: "50%", left: "42%", width: "5%" },
+ 16: { top: "50%", left: "42%", width: "5%" },
+ 17: { top: "50%", left: "42%", width: "5%" },
+ 18: { top: "50%", left: "42%", width: "5%" },
+ 19: { top: "50%", left: "42%", width: "5%" },
+ 20: { top: "50%", left: "42%", width: "5%" },
+ 21: { top: "50%", left: "42%", width: "5%" },
+ 22: { top: "50%", left: "42%", width: "5%" },
+ 23: { top: "50%", left: "42%", width: "5%" },
+ 24: { top: "50%", left: "42%", width: "5%" },
+ 25: { top: "50%", left: "42%", width: "5%" },
+ 26: { top: "50%", left: "42%", width: "5%" },
+ 27: { top: "50%", left: "42%", width: "5%" },
+};
 
-const weaponImg = document.getElementById("weaponimg");
-const armorImg  = document.getElementById("armorimg");
+const armorPosition = {
+  28: { top: "25%", left: "20%", width: "60%" },
+  29: { top: "24%", left: "18%", width: "65%" }
+};
+
+
