@@ -39,9 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.location.href = "battle.html";
   });
   document.getElementById("soubi").addEventListener("click", function (e) {
-    e.preventDefault();
-    localStorage.setItem("RivalType", 1);
-    window.location.href = "battle.html";
+    window.location.href = "equipment.html";
   });
 
   // 今の装備のところ

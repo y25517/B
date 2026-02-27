@@ -110,6 +110,7 @@ StartBtn.addEventListener("click", async function(){
             RivalAtk = data.Boss[rank].atk;   //敵の攻撃力
             RivalHP = data.Boss[rank].HP;     //敵のHP
             RivalName = data.Boss[rank].name;
+            RivalImg.src = data.Boss[rank].image;
             console.log("ボスカウント：" + rank);
             console.log("ボスの攻撃力:"+RivalAtk);
             console.log("ボスのHP:"+RivalHP);
@@ -187,9 +188,9 @@ StartBtn.addEventListener("click", async function(){
                 if(type === "0") //モブ
                 {
                     let Coin = Number(localStorage.getItem("Coin"));
-                    Coin = Coin + Number(data.Rival[MobuRondom].coin);
+                    Coin = Coin + Number(Mobu.coin);
                     localStorage.setItem("Coin", Coin); 
-                    showResult("Coin" + Number(data.Rival[MobuRondom].coin) + "枚獲得！");
+                    showResult("Coin" + Number(Mobu.coin) + "枚獲得！");
                     const CoinImg = document.querySelector("#coinimg");
                     CoinImg.src = "./images/resultmoney.png";
                 }   
@@ -199,24 +200,28 @@ StartBtn.addEventListener("click", async function(){
                     Coin = Coin + Number(data.Boss[rank].coin);
                     localStorage.setItem("Coin", Coin);
 
+                    let message = "";
+
                     switch(rank){
                         case 0:
-                            showResult("「ボスを撃破した！」<br>しかし、この地を支配する者はまだ他にもいる……。。<br> Coin" + data.Boss[rank].coin+ "枚獲得！")
+                            message = "「ボスを撃破した！」<br>しかし、この地を支配する者はまだ他にもいる……。。<br>";
                             break;
                         case 1:
-                            showResult("「強敵を打ち倒した！」<br>だがさらに危険な存在が、<br>この先に待ち受けているようだ... 。<br> Coin" + data.Boss[rank].coin+ "枚獲得！");
+                            message = "「強敵を打ち倒した！」<br>だがさらに危険な存在が、<br>この先に待ち受けているようだ... 。<br>";
                             break;
                         case 2:
-                            showResult("「激戦の末、勝利をつかんだ！」<br>残るボスは、あと一体――。。<br> Coin" + data.Boss[rank].coin+ "枚獲得！");
+                            message = "「激戦の末、勝利をつかんだ！」<br>残るボスは、あと一体――。。<br>";
                             break;
                         case 3:
-                            showResult("「最後のボスを撃破！」<br>すべての脅威は消え去った。<br>世界に、静かな光が戻る。<br> Coin" + data.Boss[rank].coin+ "枚獲得！");
+                            message = "「最後のボスを撃破！」<br>すべての脅威は消え去った。<br>世界に、静かな光が戻る。<br>";
                             break;
                     }
+
+                    showResult(message + "Coin " + data.Boss[rank].coin + "枚獲得！");
                     document.querySelector("#coinimg").style.opacity = '0';
                     rank++;
                     if(rank > data.Boss.length - 1) //ランクを3で固定にする
-                        rank = 3;
+                        rank = data.Boss.length - 1;
                     localStorage.setItem("rank", rank);
                 }
             }
