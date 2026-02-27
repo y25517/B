@@ -238,6 +238,7 @@ StartBtn.addEventListener("click", async function(){
             }
             // リザルトのボタンを押されたら遷移する
             document.querySelector("#resultbtn").addEventListener("click", function(){
+                localStorage.setItem("isFought", "true");   // 変更by伊藤　戦闘終了を検知します
                 window.location.href = "index.html";
                 document.getElementById("resultModal").style.display = "none";
             })
