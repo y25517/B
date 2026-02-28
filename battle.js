@@ -202,23 +202,23 @@ StartBtn.addEventListener("click", async function(){
 
                     let message = "";
 
-                    // 変更by伊藤　メッセージを変更しています（現段階では一部）
+                    // 変更by伊藤　メッセージを変更しています
                     switch(rank){
                         case 0:
-                            message = "\"<ruby>This is the Generation of that great Leviathan, or rather (to speake more <br>reverently) of that Mortall God, to which wee owe under the Immortall God, <br>our peace and defence. <rp>(</rp><rt>これこそが、かの偉大なりしレヴィアタンの――より畏敬の念を込めて語るならば――、可死の神の誕生である。我らが平和と防衛を、不死の神に次いで依存するところのものである。</rt><rp>)</rp></ruby>\" <br>Thomas Hobbes, LEVIATHAN, OR The Matter, Forme, & Power OF A COMMON-WEALTH ECCLESIASTICALL AND CIVILL. Chap. 17, Page. 87<br>";
+                            message = "<ruby>\"This is the Generation of that great Leviathan, or rather (to speake more reverently) <rp>(</rp><rt>これこそが、かの偉大なりしレヴィアタンの――より畏敬の念を込めて語るならば――、</rt><rp>)</rp></ruby><br><ruby>of that Mortall God, to which wee owe under the Immortall God, our peace and defence. \"<rp>(</rp><rt>可死の神の誕生である。我らが平和と防衛を、不死の神に次いで依存するところのものである。</rt><rp>)</rp></ruby> <br>Thomas Hobbes, LEVIATHAN, OR The Matter, Forme, & Power OF A COMMON-WEALTH ECCLESIASTICALL AND CIVILL. Chap. 17, Page. 87<br>死すべき神という「恐怖」は死んだ。暴力のコモディティ化が再び始まる。<br>";
                             break;
                         case 1:
-                            message = "\"<ruby>तस्स सोकपरेतस्स वीणा कच्छा अभस्सथ, ततो सो दुम्मनो यक्खो तत्थेव अन्तरधायथा ति।<rp>(</rp><rt>悲しみに打ちひしがれた彼の脇から、琵琶が落ちた。その意気消沈した夜叉は、その場から姿を消した。</rt><rp>)</rp></ruby>\" <br>Sutta Nipāta, 449";
+                            message = "<ruby>\"तस्स सोकपरेतस्स वीणा कच्छा अभस्सथ, ततो सो दुम्मनो यक्खो तत्थेव अन्तरधायथा ति।\"<rp>(</rp><rt>悲しみに打ちひしがれた彼の脇から、琵琶が落ちた。その意気消沈した夜叉は、その場から姿を消した。</rt><rp>)</rp></ruby> <br>Sutta Nipāta, 449<br>変化と停滞の「恐怖」は六道の何処かに転生したようだ。悟りを拒む衆生は、いずれまた別の姿で現れることだろう。<br>";
                             break;
                         case 2:
-                            message = "\"<ruby>Tod! Sterben … Einz'ge Gnade! Die schreckliche Wunde, das Gift, ersterbe, das es zernagt, erstarre das Herz! <rp>(</rp><rt>死よ!死の眠りこそ唯一の救い!この身を穢し蝕む毒よ、我が心の臓の鼓動と共に、永久に凍てつき靜まるが良い!</rt><rp>)</rp></ruby>\" <br>Richard Wagner, Parsifal Act 3, Scene 2<br>";
+                            message = "<ruby>\"Tod! Sterben … Einz'ge Gnade! <rp>(</rp><rt>死よ!死の眠りこそ唯一の救い!</rt><rp>)</rp></ruby><br><ruby>Die schreckliche Wunde, das Gift, ersterbe, <rp>(</rp><rt>この身を穢し蝕む毒よ、</rt><rp>)</rp></ruby><br><ruby>das es zernagt, erstarre das Herz!\" <rp>(</rp><rt>我が心の臓の鼓動と共に、永久に凍てつき靜まるが良い!</rt><rp>)</rp></ruby> <br>Richard Wagner, Parsifal Act 3, Scene 2<br>死への「恐怖」は沈黙した。遍く生命は刹那ではなく、悠久を生きていくこととなる。<br>";
                             break;
                         case 3:
-                            message = "「最後のボスを撃破！」<br>すべての脅威は消え去った。<br>世界に、静かな光が戻る。<br>";
+                            message = "<ruby>\"Putatis quia pacem veni dare in terram ? non, dico vobis, sed separationem : <rp>(</rp><rt>汝ら、我が地に平和を齎さんとして来たと思うか? 我、汝らに告ぐ、然らず、寧ろ爭いなり。</rt><rp>)</rp></ruby><br><ruby>erunt enim ex hoc quinque in domo una divisi, tres in duos, et duo in tres <rp>(</rp><rt>今より後一家に五人あらば、三人は二人、二人は三人に分かれて爭わん。</rt><rp>)</rp></ruby><br><ruby>dividentur : pater in filium, et filius in patrem suum, mater in filiam, et filia in matrem... \"<rp>(</rp><rt>父は子に、子は父に、母は娘に、娘は母に。</rt><rp>)</rp></ruby> <br>Lucas 12, 51-53<br>恐怖への「恐怖」は霧散した。されど、未だ嵐は荒野に吹き荒れる。<br>";
                             break;
                     }
 
-                    showResult(message + "Coin " + data.Boss[rank].coin + "枚獲得！");
+                    showResult(message + "<br>Coin " + data.Boss[rank].coin + "枚獲得！");
                     document.querySelector("#coinimg").style.opacity = '0';
                     rank++;
                     if(rank > data.Boss.length - 1) //ランクを3で固定にする
