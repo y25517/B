@@ -208,10 +208,10 @@ StartBtn.addEventListener("click", async function(){
                             message = "\"<ruby>This is the Generation of that great Leviathan, or rather (to speake more <br>reverently) of that Mortall God, to which wee owe under the Immortall God, <br>our peace and defence. <rp>(</rp><rt>これこそが、かの偉大なりしレヴィアタンの――より畏敬の念を込めて語るならば――、可死の神の誕生である。我らが平和と防衛を、不死の神に次いで依存するところのものである。</rt><rp>)</rp></ruby>\" <br>Thomas Hobbes, LEVIATHAN, OR The Matter, Forme, & Power OF A COMMON-WEALTH ECCLESIASTICALL AND CIVILL. Chap. 17, Page. 87<br>";
                             break;
                         case 1:
-                            message = "\"<ruby>तस्स सोकपरेतस्स वीणा कच्छा अभस्सथ, ततो सो दुम्मनो यक्खो तत्थेव अन्तरधायथा ति।<rp>(</rp><rt>悲しみに打ちひしがれた彼の脇から、琵琶が落ちた。その意気消沈した夜叉は、その場から姿を消した。</rt><rp>)</rp></ruby>\"<br>Sutta Nipāta 449";
+                            message = "\"<ruby>तस्स सोकपरेतस्स वीणा कच्छा अभस्सथ, ततो सो दुम्मनो यक्खो तत्थेव अन्तरधायथा ति।<rp>(</rp><rt>悲しみに打ちひしがれた彼の脇から、琵琶が落ちた。その意気消沈した夜叉は、その場から姿を消した。</rt><rp>)</rp></ruby>\" <br>Sutta Nipāta, 449";
                             break;
                         case 2:
-                            message = "「激戦の末、勝利をつかんだ！」<br>残るボスは、あと一体――。。<br>";
+                            message = "\"<ruby>Tod! Sterben … Einz'ge Gnade! Die schreckliche Wunde, das Gift, ersterbe, das es zernagt, erstarre das Herz! <rp>(</rp><rt>死よ!死の眠りこそ唯一の救い!この身を穢し蝕む毒よ、我が心の臓の鼓動と共に、永久に凍てつき靜まるが良い!</rt><rp>)</rp></ruby>\" <br>Richard Wagner, Parsifal Act 3, Scene 2<br>";
                             break;
                         case 3:
                             message = "「最後のボスを撃破！」<br>すべての脅威は消え去った。<br>世界に、静かな光が戻る。<br>";
