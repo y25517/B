@@ -117,6 +117,7 @@ let sounds = {
     }
 }
 let currentIndex = 0;
+soundEffect("exit");
 let bgm = new Audio(sounds.me);
 bgm.volume = 0.5;
 bgm.loop=true;
@@ -199,14 +200,14 @@ function showDetails(itemId) {
             <h3>${selectedItem.name}</h3>
             <p>${selectedItem.desc}</p>
             <p>攻撃力: ${selectedItem.atk}</p>
-            <button type="button" onClick="buyItem()">購入する</button>
+            <button type="button" class="buy_button" onClick="buyItem()">購入する</button>
         `;
     } else {
         itemDetailsArea.innerHTML=`
             <h3>${selectedItem.name}</h3>
             <p>${selectedItem.desc}</p>
             <p>HP: ${selectedItem.hp}</p>
-            <button type="button" onClick="buyItem()">購入する</button>
+            <button type="button" class="buy_button" onClick="buyItem()">購入する</button>
         `;
     }
     compareEquipment();
@@ -255,9 +256,13 @@ function compareEquipment() {
 
 // 購入時の挙動
 function buyItem() {
-    // すでに所持しているものを購入しようとすると、売り切れ用のメッセージを表示して戻る
+    let buyBtn = document.querySelector(".buy_button");
+    // すでに所持しているものを購入しようとすると、売り切れ用のメッセージを表示して戻る あとボタンも震える
     for (let i = 0; i < owned.length; i++) {
         if (owned[i].id == selectedItem.id) {
+            buyBtn.classList.remove("isShaking");
+            void buyBtn.offsetWidth;
+            buyBtn.classList.add("isShaking");
             soundEffect("deny");
             messageTxt = randomPick(message.sold_out, 1);
             updateMessage(messageTxt[0]);
@@ -265,8 +270,11 @@ function buyItem() {
         }
     }
 
-    // コインが足らなかったら専用のメッセージを表示して戻る
+    // コインが足らなかったら専用のメッセージを表示して戻る　あとボタンも震える
     if (coins<selectedItem.price) {
+        buyBtn.classList.remove("isShaking");
+        void buyBtn.offsetWidth;
+        buyBtn.classList.add("isShaking");
         soundEffect("deny");
         messageTxt = randomPick(message.no_money, 1);
         updateMessage(messageTxt[0]);

@@ -605,6 +605,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     padding: 0;
+    cursor: pointer;
 }
 
 .center {
@@ -707,7 +708,7 @@ body{
 }
 
 /* 購入ボタン */
-.itemDetailsArea button {
+.buy_button {
   margin-top: 20px;
   padding: 15px;
   font-size: 20px;
@@ -718,6 +719,21 @@ body{
   cursor: pointer;
   transition: 0.3s;
 }
+
+/* 震える動きの定義 */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+/* このクラスがついている間だけ震える */
+.isShaking {
+  animation: shake 0.1s;
+}
+
 
 /* コイン、ランク */
 #coin {
