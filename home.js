@@ -16,11 +16,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!localStorage.getItem("isFought")) {
     localStorage.setItem("isFought", "true");  // 変更by伊藤　戦闘終了検知のキーがセットされてなかった場合の初期設定(true)
   }
-  const RankCnt = document.querySelector("#rank-count");
-  RankCnt.textContent = localStorage.getItem("rank");
+  const rankSelect = document.getElementById("rank-select");
 
-  document.querySelector("#rank-count").textContent =
-    localStorage.getItem("rank");
+// 保存されているランクを反映
+rankSelect.value = localStorage.getItem("rank");
+
+// 変更されたら保存
+rankSelect.addEventListener("change", () => {
+  localStorage.setItem("rank", rankSelect.value);
+});
 
   const owned = JSON.parse(localStorage.getItem("owned")) || [];
   console.log("owned:", owned);
@@ -133,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const avatar = document.getElementById("avatarComplete");
 
-avatar.src = `./images/wear_img/a${armorId}_w${weaponId}.png`;
+avatar.src = `./images/wear_img/a${armorId}_w${weaponId}.png`;  //ここでアバターの画像を装備に合わせて変更してます。wear_imgに画像が全部あります。ぉーかるストレージにはまだ入れてないです。
 
     // アバター重ね画像変更
     // 画像変更
@@ -220,3 +224,9 @@ kichikuBtn.addEventListener("click", function(){
 });
 
 
+const resetBtn = document.getElementById("risetto");
+
+resetBtn.addEventListener("click", () => {
+  localStorage.clear();
+  location.reload();
+});
