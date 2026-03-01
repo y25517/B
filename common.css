@@ -626,7 +626,7 @@ body{
 /* メッセージ */
 #messageArea {
     position: absolute;
-    top: 250px;
+    top: 160px;
     left: 125vh;
     max-width: 500px;
     padding: 30px;
@@ -643,7 +643,7 @@ body{
 /* 店主タイトル */
 .shopTitle {
   position: fixed;
-  top: 200px;   /* messageAreaより少し上 */
+  top: 125px;   /* messageAreaより少し上 */
   right: 25%;
   transform: translateX(-50%);
   font-size: 32px;
