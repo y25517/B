@@ -773,8 +773,13 @@ body{
 
 /* 商品棚  */
 .itemsArea {
+    position: fixed;
+    bottom: 10%;
+    left: 0%;
+    right: 0%;
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 30vh;
     box-shadow: 0 0 20px #d10a0a;
     color: white;
