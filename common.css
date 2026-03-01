@@ -1,5 +1,5 @@
 body{
-  height: 100vh;
+  min-height: 100vh;
 }
 /* 戦闘画面
 ---------------------------------------------------- */
@@ -575,6 +575,7 @@ body{
   background-size: cover;
   opacity: 0.5;
   z-index: -1;
+  overflow-x: hidden;
 }
 
 /* 戻るボタン */
@@ -582,8 +583,8 @@ body{
   position: fixed;
   top: 30px;
   left: 30px;
-  font-size: 40px;
-  padding: 40px 70px;
+  font-size: 32px;
+  padding: 20px 40px;
   background: rgba(160, 227, 15, 0.402);
   color: #000;
   font-weight: 600;
@@ -599,23 +600,35 @@ body{
 
 /* 店員 */
 .shopkeeper {
-    width: 50vh;
+    width: 350px;
     display: block;
     margin-left: auto;
     margin-right: auto;
-    padding: 5rem;
+    padding: 0;
 }
 
 .center {
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.shopkeepersArea {
+  display: flex;
+  flex-direction: column;
 }
 
 /* メッセージ */
 #messageArea {
-    position: fixed;
-    top: 300px;
-    left: 60%;
-    width: 700px;
+    position: absolute;
+    top: 250px;
+    left: 125vh;
+    max-width: 500px;
     padding: 30px;
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
@@ -630,8 +643,8 @@ body{
 /* 店主タイトル */
 .shopTitle {
   position: fixed;
-  top: 250px;   /* messageAreaより少し上 */
-  left: 63%;
+  top: 200px;   /* messageAreaより少し上 */
+  right: 25%;
   transform: translateX(-50%);
   font-size: 32px;
   font-weight: bold;
@@ -641,10 +654,10 @@ body{
 /* 装備詳細 */
 .itemDetailsArea {
     position: fixed;
-    top: 40%;
-    right: 12%;
-    width: 25%;
-    padding: 40px;
+    top: 30%;
+    left: 12%;
+    max-width: 25%;
+    padding: 20px;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(12px);
     border-radius: 20px;
@@ -652,18 +665,45 @@ body{
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    overflow: auto;
+    box-sizing: border-box;
 }
+
+.itemDetailsArea h3 {
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: break-word; 
+  word-break: break-all;
+}
+
+.itemDetailsArea h3 ruby {
+    /* ルビが長い場合、親文字の方を中央寄せや分散にする */
+    ruby-align: center; 
+    ruby-align: space-around;
+}
+
+.itemDetailsArea h3 rt {
+    /* ルビ内での改行を許可 */
+    overflow-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+    display: ruby-text; 
+    text-align: left;
+}
+
+
 
 /* 商品棚  */
 .itemsArea {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 30vh;
     box-shadow: 0 0 20px #d10a0a;
     color: white;
     background-color: #8139239b;
     padding-top: 50px;
     padding-bottom: 50px;
+    margin-top: 10px;
 }
 
 /* 購入ボタン */
@@ -705,10 +745,10 @@ body{
 /* ステータス比較 */
 .statusDifferenceArea {
     position: fixed;
-    top: 20%;
+    top: 1%;
     left: 12%;
-    width: 20%;
-    padding: 200px;
+    min-width: 25%;
+    padding: 20px;
     background: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-size: 20px;
