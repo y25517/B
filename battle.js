@@ -70,7 +70,7 @@ StartBtn.addEventListener("click", async function(){
     let RivalHP;
     let RivalName; 
     let animationId;
-    let speed = 1; // 基本のスピード
+    let speed = 2; // 基本のスピード
 
     /* 鬼畜モードか通常モードかの判定
     --------------------------------------------------------*/
@@ -89,25 +89,23 @@ StartBtn.addEventListener("click", async function(){
             // 鬼畜モード
             if (StopBar.classList.contains('is-kichiku')) 
             {
-                // 0.5%の確率でスピード変更
-                if (Math.random() < 0.005) 
+                // 1%の確率でスピード変更
+                if (Math.random() < 0.01) 
                 { 
                     let r = Math.random();
                     
-                    if (r < 0.2) {
-                        speed = 0; // 20%の確率で停止
-                    } else if (r < 0.4) {
-                        // 20%の確率で逆走（-1.0 〜 -2.0 のスピード）
-                        speed = -(1 + Math.random());
-                    } else {
-                        // 残り60%は正方向への加速（1.0 〜 2.0 のスピード）
-                        speed = 1 + Math.random(); 
+                    if (r < 0.3) {  //停止
+                        speed = 0;
+                    } else if (r < 0.5) {   //逆走
+                        speed = -(3 + Math.random());
+                    } else {    //正走
+                        speed = 3 + Math.random(); 
                     }
                 }
                 i += speed;
             } 
             else
-                i += 1;
+                i += 3;
 
             // ループ処理（右端に行ったら左から出す）
             if (i >= 396)
