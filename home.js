@@ -24,6 +24,7 @@ rankSelect.value = localStorage.getItem("rank");
 // 変更されたら保存
 rankSelect.addEventListener("change", () => {
   localStorage.setItem("rank", rankSelect.value);
+  updateStatus();   // ← 追加
 });
 
   const owned = JSON.parse(localStorage.getItem("owned")) || [];
