@@ -15,5 +15,8 @@
 - `mobuBGM3.m4a` : **RRR_loop.m4a** / ユーフルカ (https://youfulca.com/2022/08/13/stage_return-to-the-royal-road/) 
 
 ## Sound Effects (フォルダ名: SE)
+- `choice.mp3` : **確認2.mp3** / Springin' Sound Stock (https://www.springin.org/sound-stock/category/system/page/2/)
 - `deal.mp3` : **財布ひっくりかえす.mp3** / Springin' Sound Stock (https://www.springin.org/sound-stock/subcategory/money/)
+- `deny.mp3` : **キャンセル.mp3** / Springin' Sound Stock (https://www.springin.org/sound-stock/category/system/page/2/)
+- `exit.mp3` : **ドアチャイム1.mp3** / Springin' Sound Stock (https://www.springin.org/sound-stock/category/life/)
 - `text.mp3` : **選択6.mp3** / Springin' Sound Stock (https://www.springin.org/sound-stock/category/system)
