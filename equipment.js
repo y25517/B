@@ -64,7 +64,9 @@ let message =
         "次に来る時まで、店があればいいがな。"
     ],
 
+    // 店主クリック時
     "chats": {
+        // ランク0
         0: [
             "……サメク。あれは60を意味する。所謂ゲマトリア、というやつだな。全部集めて足せば、何かわかるかもしれないな。",
             "アヴァターラってのは昔の噂話だ。だが今は違う。人が忘れ、覚え続けた恐れが、肉を得ただけさ。",
@@ -72,6 +74,8 @@ let message =
             "世界が壊れてから、国境は意味を失った。恐怖も同じだ。",
             "まだ世界は浅い。恐怖は形を試している段階だ。……お前さんも、俺も、まだ試されている。"
         ],
+
+        // ランク1
         1: [
             "ヴァーヴ。これは6だ。ひょっとしたら、AEMAETHの謎が解けるかもな。",
             "人祖の元嫁、その夜の子らが地を歩く時代か……アレに仕組まれているとて、とんだ女に引っかかったものだな。",
@@ -79,6 +83,8 @@ let message =
             "アシャに背き、ドゥルジに随う不義者ドルグワント。それに対抗するのが義者アシャワン。だがアヴァターラの出現は、アシャ――宇宙秩序の意思そのものだ。それを考えれば、お前さんは果たしてアシャワンに相応しいと言えるのかな? ",
             "この辺りからだ。武器がただの鉄ではなくなる。お前さんの意志が、質量に干渉する。"
         ],
+
+        // ランク2
         2: [
             "レーシュ。意味は200。言ってなかったが、ゴーレムってのは本来は人祖と同じく土塊だ。字義通りに捉えるなら、「未完成の無形」。額に刻まれた真理と死によって、主人の命令の通り動く。原罪の穢れなきアーダーム・ハ=リショーンを人工的に再現しようとするラビの傲慢、その極みだよ。",
             "古代の国家においては、過去の栄光に化石みたいなイデオロギー――そういう干からびた死装束を必死に噛み締めていた。同時に、自分の国家を豊かにするために、自国の若人を食らっていた。墓の中で自分の手足を貪るナハツェーラーとは、とかくそういうものだ。",
@@ -86,6 +92,8 @@ let message =
             "実に滑稽だろう。同じ色と形をした獣は、かたや誇りと崇められ、かたや邪悪と蔑まれる。人は赤い竜という記号の持つ一側面をそれぞれで見ているんだ。……これって、アヴァターラの縮図だとは思わないか? ",
             "ここから先は、ただの怪物じゃない。概念そのものと戦うことになる。覚悟はあるか？"
         ],
+
+        // ランク3
         3: [
             "タヴ……その意味は400、だな。これでカバリストごっこも終いだ。意味ありげに見えて、その実、待っていたのは凡庸で大したことのない真実――AEMAETHだ。往々にしてMAETHは、これに与えられることはないだろうよ。",
             "七つの印は、劇的な崩壊によって解かれるんじゃない。利便性、効率、そして自己の正当化を、生きていく中で累積していくその中で、人と共に四騎士は来るんだよ。",
@@ -101,8 +109,11 @@ let message =
 let sounds = {
     me: "./ME/equipment.m4a",
     se:{
-        texts: Array.from({length:5}, () => new Audio("./SE/text.mp3")),
-        deal: Array.from({length:5}, () => new Audio("./SE/deal.mp3"))
+        choice: {audio: Array.from({length:5}, () => new Audio("./SE/choice.mp3")), volume: 0.3},
+        deal: {audio: Array.from({length:5}, () => new Audio("./SE/deal.mp3")), volume: 0.4},
+        exit: {audio: Array.from({length:5}, () => new Audio("./SE/exit.mp3")), volume: 0.5},
+        deny: {audio: Array.from({length:5}, () => new Audio("./SE/deny.mp3")), volume: 0.15},
+        texts: {audio: Array.from({length:5}, () => new Audio("./SE/text.mp3")), volume: 0.1}
     }
 }
 let currentIndex = 0;
@@ -122,8 +133,8 @@ let button = document.querySelector(".button-style");
 button.addEventListener("click", async () => {
     messageTxt = randomPick(message.leave, 1);
     updateMessage(messageTxt[0]);
-    await sleep(1000);
-    await sleep(500);
+    soundEffect("exit");
+    await sleep(2000);
     window.location.href = "index.html";
 })
 
@@ -174,9 +185,10 @@ function renderItems(e) {
     });
 }
 
-// 詳細を見るボタンを押すと、装備の詳細情報を出す
+// 装備をクリックすると、装備の詳細情報を出す
 let selectedItem = null;
 function showDetails(itemId) {
+    soundEffect("choice");
     let allEqs = eqs.weapon.concat(eqs.armor);
     
     selectedItem = allEqs.find(i=>i.id==itemId);
@@ -246,6 +258,7 @@ function buyItem() {
     // すでに所持しているものを購入しようとすると、売り切れ用のメッセージを表示して戻る
     for (let i = 0; i < owned.length; i++) {
         if (owned[i].id == selectedItem.id) {
+            soundEffect("deny");
             messageTxt = randomPick(message.sold_out, 1);
             updateMessage(messageTxt[0]);
             return;
@@ -254,6 +267,7 @@ function buyItem() {
 
     // コインが足らなかったら専用のメッセージを表示して戻る
     if (coins<selectedItem.price) {
+        soundEffect("deny");
         messageTxt = randomPick(message.no_money, 1);
         updateMessage(messageTxt[0]);
         return;
@@ -285,7 +299,7 @@ async function updateMessage(mes) {
     if (isProcessing) {
         return;
     }
-    let speed = 15;
+    let speed = 16;
     
     messageArea.textContent = "";
     isProcessing = true;
@@ -314,14 +328,14 @@ function randomPick(array, n) {
 // 効果音を鳴らす
 function soundEffect(key) {
     // 指定されたキーの効果音を取得
-    let pool = sounds.se[key];
-
+    let pool = sounds.se[key].audio;
+    let volume = sounds.se[key].volume;
     // currentindexに対応するAudioオブジェクトを取得
     let se = pool[currentIndex];
     if (se) {
         // 再生位置を0.0秒にする
         se.currentTime = 0.0;
-        se.volume = 0.1;
+        se.volume = volume;
         se.play().catch(e => console.log(e));
     } else {
         console.log("見つかりませんでした");
