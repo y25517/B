@@ -61,12 +61,12 @@ body{
 }
 .myimg,
 .rivalimg{
-  width: auto;
-  max-width: 25vw;
+  width: 25vw;
   height: 40vh;
   min-height: 500px;
   position: absolute;
-  top: 130px;
+  top: 80px;
+  object-fit: contain;
 }
 .vs_text {
   font-size: 70px;
@@ -86,12 +86,13 @@ body{
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.6);
   justify-content: center;
   align-items: center;
+  transition: opacity 1s ease;
 }
 .modal-content {
-  background: rgb(252, 241, 213);
+  background: rgb(224, 214, 189);
   padding: 70px;
   border-radius: 15px;
   text-align: center;
@@ -99,7 +100,7 @@ body{
   position: relative;
 }
 .resulttext{
-  color: #000000;
+  color: #3a3939;
   font-size: 33px;
   text-align: center;
 }
@@ -119,7 +120,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 80.5px);
 }
 
 .startbtn {
@@ -161,6 +162,16 @@ body{
     left: 380px;
     filter: saturate(500%);
 }
+.atack_clitical{
+  display: block;
+  width: 4px;
+  height: 100%;
+  background: green;
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .stop_bar{
     width:4px;
     height: 100%;
@@ -169,6 +180,24 @@ body{
     position: absolute;
     left: 1px;
     filter: saturate(500%);
+}
+/* kichiku */
+.stop_bar.is-kichiku{
+  background: yellow;
+}
+.atack_bar:has(.stop_bar.is-kichiku){
+    animation: anime-bg 2s forwards infinite;
+}
+@keyframes anime-bg {
+  0% { 
+    background: #ababab;
+  }
+  50% {
+    background: blue;
+  }
+  100% {
+    background: #ababab;
+  }
 }
 
 .btn-3d-shadow {
@@ -493,8 +522,9 @@ body{
   /* ボタンの並び替え */
 .buttons{
     display: block;
-    bottom: 50px;
-    left: 80px;
+    position: relative;   /* ボタンが押せなかったので変えました（笹森）
+    /* bottom: 50px;
+    left: 80px; */
 }
 
   .battle-buttons{
