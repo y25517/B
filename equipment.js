@@ -21,6 +21,7 @@ let coins = parseInt(localStorage.getItem("Coin")) || 0;
 // 指定した時間待機する（メッセージ更新用の補助）
 let sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
 let messageTxt = "";
+let isProcessing = false;
 
 // 店主のメッセージ一覧
 let message = 
@@ -61,17 +62,54 @@ let message =
         "じゃあな。また顔を見せに来いよ。",
         "外は物騒だ。背中には気をつけな。",
         "次に来る時まで、店があればいいがな。"
-    ]
+    ],
+
+    "chats": {
+        0: [
+            "……サメク。あれは60を意味する。所謂ゲマトリア、というやつだな。全部集めて足せば、何かわかるかもしれないな。",
+            "アヴァターラってのは昔の噂話だ。だが今は違う。人が忘れ、覚え続けた恐れが、肉を得ただけさ。",
+            "死の舞踏――絵画の比喩に過ぎなかったんだが。まさか本当に人骨が狂喜乱舞して練り歩くとはな。",
+            "世界が壊れてから、国境は意味を失った。恐怖も同じだ。",
+            "まだ世界は浅い。恐怖は形を試している段階だ。……お前さんも、俺も、まだ試されている。"
+        ],
+        1: [
+            "ヴァーヴ。これは6だ。ひょっとしたら、AEMAETHの謎が解けるかもな。",
+            "人祖の元嫁、その夜の子らが地を歩く時代か……アレに仕組まれているとて、とんだ女に引っかかったものだな。",
+            "シー、ってのは妖精のことだ。ケット・シー、クー・シー、バーヴァン・シー、バン・シー……様々な美麗なるシーがいるわけだが、これらは皆没落した神々の成れの果てさ。",
+            "アシャに背き、ドゥルジに随う不義者ドルグワント。それに対抗するのが義者アシャワン。だがアヴァターラの出現は、アシャ――宇宙秩序の意思そのものだ。それを考えれば、お前さんは果たしてアシャワンに相応しいと言えるのかな? ",
+            "この辺りからだ。武器がただの鉄ではなくなる。お前さんの意志が、質量に干渉する。"
+        ],
+        2: [
+            "レーシュ。意味は200。言ってなかったが、ゴーレムってのは本来は人祖と同じく土塊だ。字義通りに捉えるなら、「未完成の無形」。額に刻まれた真理と死によって、主人の命令の通り動く。原罪の穢れなきアーダーム・ハ=リショーンを人工的に再現しようとするラビの傲慢、その極みだよ。",
+            "古代の国家においては、過去の栄光に化石みたいなイデオロギー――そういう干からびた死装束を必死に噛み締めていた。同時に、自分の国家を豊かにするために、自国の若人を食らっていた。墓の中で自分の手足を貪るナハツェーラーとは、とかくそういうものだ。",
+            "暴君というのは、二つのケースがある。一つは、本気で自分のことを疑わない元首による圧政というケース。もう一つは、後の民意がそいつを暴君にしたというケースだ。……絶対に間違わない独裁政権がないように、歴史もまた、虚偽と欺瞞のインクで編纂されているのさ。",
+            "実に滑稽だろう。同じ色と形をした獣は、かたや誇りと崇められ、かたや邪悪と蔑まれる。人は赤い竜という記号の持つ一側面をそれぞれで見ているんだ。……これって、アヴァターラの縮図だとは思わないか? ",
+            "ここから先は、ただの怪物じゃない。概念そのものと戦うことになる。覚悟はあるか？"
+        ],
+        3: [
+            "タヴ……その意味は400、だな。これでカバリストごっこも終いだ。意味ありげに見えて、その実、待っていたのは凡庸で大したことのない真実――AEMAETHだ。往々にしてMAETHは、これに与えられることはないだろうよ。",
+            "七つの印は、劇的な崩壊によって解かれるんじゃない。利便性、効率、そして自己の正当化を、生きていく中で累積していくその中で、人と共に四騎士は来るんだよ。",
+            "アエーシュマに関しては、語ることも少ない。あれは怒りそのものだ。世界大戦が七度もあれば、至極当然だな。",
+            "アリフ・ラーム・ミーム……その意味は、もはや誰にも分からない。どれほど初志が高邁なものであろうと、長すぎる歳月の堆積はそこに歪みを齎す。アブラハムの教えを正確に継ぐ者がどこにも存在しないのと同じように。自然に、或いは恣意的に、複合的な要素が複雑に絡み合い、遍く事象は不可逆的な変質を起こしていくものさ。",
+            "リヴァイアサンも、マハーマーラも、冥王も没した。最後に事象地平戦線に立つのは、一体誰になるんだろうな? ",
+            "お前さんが勝てば、恐怖は一瞬だけ沈黙する。だが消えはしない、人がいる限り決して嵐が止むことはないんだよ。……それでも行くか、サバイバー。"
+        ]
+    }
 }
 
 // SEとME一覧
 let sounds = {
-    me:{},
+    me: "./ME/equipment.m4a",
     se:{
-        texts: Array.from({length:5}, () => new Audio("./SE/text.mp3"))
+        texts: Array.from({length:5}, () => new Audio("./SE/text.mp3")),
+        deal: Array.from({length:5}, () => new Audio("./SE/deal.mp3"))
     }
 }
 let currentIndex = 0;
+let bgm = new Audio(sounds.me);
+bgm.volume = 0.5;
+bgm.loop=true;
+bgm.play().catch(e => console.log(e));
 
 // 入店時のメッセージ表示、コイン表示
 let messageArea = document.querySelector("#messageArea");
@@ -79,12 +117,21 @@ messageTxt = randomPick(message.welcome, 1);
 updateMessage(messageTxt[0]);
 updateCoins();
 
+// 戻るボタン
 let button = document.querySelector(".button-style");
 button.addEventListener("click", async () => {
     messageTxt = randomPick(message.leave, 1);
     updateMessage(messageTxt[0]);
     await sleep(1000);
+    await sleep(500);
     window.location.href = "index.html";
+})
+
+// 店主をクリックすると会話可能
+let shopkeeper = document.querySelector("#shopkeeper");
+shopkeeper.addEventListener("click", () => {
+    messageTxt = randomPick(message.chats[rank],1);
+    updateMessage(messageTxt[0]);
 })
 
 let itemDetailsArea = document.querySelector("#itemDetailsArea");
@@ -219,6 +266,7 @@ function buyItem() {
     owned.push(selectedItem);
     localStorage.setItem("owned", JSON.stringify(owned));
     
+    soundEffect("deal");
     messageTxt = randomPick(message.purchase, 1);
     updateMessage(messageTxt[0]);
     updateCoins();
@@ -234,14 +282,21 @@ function updateCoins() {
 
 // 店主のメッセージ更新
 async function updateMessage(mes) {
+    if (isProcessing) {
+        return;
+    }
     let speed = 15;
     
     messageArea.textContent = "";
-
-    for (let char of mes) {
-        messageArea.textContent += char;
-        soundEffect("texts");
-        await sleep(speed);
+    isProcessing = true;
+    try {
+        for (let char of mes) {
+            messageArea.textContent += char;
+            soundEffect("texts");
+            await sleep(speed);
+        }
+    } finally {
+        isProcessing = false;
     }
 }
 
