@@ -471,6 +471,53 @@ body{
     font-weight: bolder;
     /* リセットボタン */
   }
+  /* =========================
+   ランクセレクト装飾
+   ========================= */
+
+.rankmenu {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  margin-left: 10px;
+  padding: 8px 35px 8px 14px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00c3ff;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  /* カスタム矢印 */
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23ffffff' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+/* もわっと光る */
+.rankmenu:hover {
+  border-color: #ffff1c;
+  box-shadow: 0 0 15px #00c3ff;
+}
+
+/* フォーカス時 */
+.rankmenu:focus {
+  outline: none;
+  box-shadow: 0 0 20px #ffff1c;
+}
+
+/* option */
+.rankmenu option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
   .reset {
   display: inline-block;
   width: 250px;
