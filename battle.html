@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css"/>
     <link rel="stylesheet" href="common.css">
 </head>
-<body class="battle_body">
+<body class="battle_body" id="battlebody">
     <div class="hp_bar">
         <div class="my_frame">
             <p>HP:</p>
@@ -45,7 +45,9 @@
     <!-- アタックボタン -->
     <div class="atack_pos">
         <div class="atack_bar" id="atcbar">
-            <div class="atack_mark" id="atcmark"></div>
+            <div class="atack_mark" id="atcmark">
+                <span class="atack_clitical" id="atcclitical"></span>
+            </div>
             <div class="stop_bar" id="stopbar"></div>
         
         </div>

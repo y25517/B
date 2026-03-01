@@ -197,4 +197,26 @@ avatar.src = `./images/wear_img/a${armorId}_w${weaponId}.png`;
 
 // avatar.src = `./images/wear_img/a${armorId}_w${weaponId}.png`;
 
+// 勝手に鬼畜ボタンを追加しました（笹森）
+/* 鬼畜ボタンを押したら
+--------------------------------------------------------*/
+
+const kichikuBtn = document.querySelector("#kichikubtn");
+if(!localStorage.getItem("kichikuon"))
+{
+  localStorage.setItem("kichikuon", "off");
+}
+kichikuBtn.addEventListener("click", function(){
+    if(localStorage.getItem("kichikuon") === "on")
+    {
+      localStorage.setItem("kichikuon", "off");
+      kichikuBtn.textContent = "通常モード";
+    }
+    else
+    {
+      localStorage.setItem("kichikuon","on");
+      kichikuBtn.textContent = "鬼畜モード";
+    }  
+});
+
 
