@@ -39,6 +39,7 @@ let welcomeMsg, purchaseMsg, soldOutMsg, noMoneyMsg, leaveMsg, chatsMsg;
 let selectedItem = null;
 // メッセージ表示、装備詳細表示、ステータス比較表示、商品表示、戻るボタン、店主のDOM取得用の変数を用意しておく
 let messageArea, itemDetailsArea, statusDifferenceArea, itemsArea, button, shopkeeper;
+
 window.addEventListener("load", async () => {
     try {
         

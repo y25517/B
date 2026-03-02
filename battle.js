@@ -197,7 +197,7 @@ StartBtn.addEventListener("click", async function(){
             }
             if(isColliding(StopBar, AtcClitical)) {
                 console.log("clitical!!!!!!!!!");
-                ATKTimes = 2.0;
+                ATKTimes = 1.75;
                 isCrit = true;
             }
             StopBtn.style.display = "none";
