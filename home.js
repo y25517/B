@@ -172,8 +172,8 @@ rankSelect.addEventListener("change", () => {
 
     const avatar = document.getElementById("avatarComplete");
 
-avatar.src = `./images/wear_img/a${armorId}_w${weaponId}-removebg-preview.png`;  //ここでアバターの画像を装備に合わせて変更してます。wear_imgに画像が全部あります。ぉーかるストレージにはまだ入れてないです。
-
+avatar.src = `./images/wear_img/a${armorId}_w${weaponId}.png`;  //ここでアバターの画像を装備に合わせて変更してます。wear_imgに画像が全部あります。ぉーかるストレージにはまだ入れてないです。
+localStorage.setItem("avatarimg", avatar.src);  //笹森加えたとこ
     // アバター重ね画像変更
     // 画像変更
 // avatarWeapon.src = `./images/wear_img/e${weaponId}.png`;

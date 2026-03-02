@@ -26,15 +26,15 @@
     ],
     
     "Boss": [
-        {"id":0, "name":"「大海を結ぶ者、嫉妬の蛇、地上の神」リヴヤタン",
+        {"id":0, "name":"「大覚を殺す者、魔羅波旬、第六天魔王」マーラ・パーピーヤス",
         "atk":18, "HP":400, "coin":150,
-        "txt":"\"Non est super terram potestas quae comparetur ei, qui factus est ut nullum timeret. Omne sublime videt: ipse est rex super universos filios superbiae.\"\n Iob 41, 24-25",
-        "image": "images/Rival_img/ri_b.png"},
-
-        {"id":1, "name":"「大覚を殺す者、魔羅波旬、第六天魔王」マーラ・パーピーヤス",
-        "atk":150, "HP":4000, "coin":1500,
         "txt":"三障四魔、如是波俾掾発退轉心……",
         "image": "images/Rival_img/ma_b.png"},
+
+        {"id":1, "name":"「大海を結ぶ者、嫉妬の蛇、地上の神」リヴヤタン",
+        "atk":150, "HP":4000, "coin":1500,
+        "txt":"\"Non est super terram potestas quae comparetur ei, qui factus est ut nullum timeret. Omne sublime videt: ipse est rex super universos filios superbiae.\"\n Iob 41, 24-25",
+        "image": "images/Rival_img/ri_b.png"},
 
         {"id":2, "name":"「万象を殱くす者、エスカトス・ロゴス、冥王」タルタロス・クトニオス",
         "atk":300, "HP":8000, "coin":4000,

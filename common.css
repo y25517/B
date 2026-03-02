@@ -181,6 +181,33 @@ body{
     left: 1px;
     filter: saturate(500%);
 }
+/* 通常のダメージ（左右に小さく） */
+.shake {
+    animation: shake-animation 0.3s ease-in-out;
+}
+
+/* クリティカル（大きく激しく、少し画面が光る） */
+.critical-shake {
+    animation: critical-shake-animation 0.5s ease-in-out;
+    filter: brightness(2); /* 一瞬白く光らせる */
+}
+
+@keyframes shake-animation {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes critical-shake-animation {
+    0% { transform: translate(0, 0) scale(1.1); }
+    10% { transform: translate(-20px, -10px); }
+    30% { transform: translate(20px, 15px); }
+    50% { transform: translate(-25px, -5px); }
+    70% { transform: translate(20px, 10px); }
+    90% { transform: translate(-10px, 0); }
+    100% { transform: translate(0, 0) scale(1); }
+}
 /* kichiku */
 .stop_bar.is-kichiku{
   background: yellow;
@@ -721,8 +748,8 @@ body{
 /* 店主タイトル */
 .shopTitle {
   position: fixed;
-  top: 125px;   /* messageAreaより少し上 */
-  right: 25%;
+  top: 10%;   /* messageAreaより少し上 */
+  right: 30%;
   transform: translateX(-50%);
   font-size: 32px;
   font-weight: bold;
@@ -816,24 +843,6 @@ body{
   animation: shake 0.1s;
 }
 
-
-/* コイン、ランク */
-#coin {
-  position: absolute;
-  top: 120px;
-  right: 570px;
-  font-size: 30px;
-  font-weight: bolder;
-}
-
-#rank {
-  position: absolute;
-  top: 120px;
-  right: 300px;
-  font-size: 30px;
-  font-weight: bolder;
-}
-
 /* 装備セレクト */
 .equip-box {
   display: flex;
@@ -865,7 +874,7 @@ body{
 /* コイン */
 .coinArea {
   position: fixed;
-  top: 5%;
+  top: 1%;
   right: 15%;
   padding: 15px 30px;
   font-size: 30px;

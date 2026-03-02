@@ -72,6 +72,41 @@ StartBtn.addEventListener("click", async function () {
   let speed = 2; // 基本のスピード
 
   /* 鬼畜モードか通常モードかの判定
+const BattleBody = document.querySelector("#battlebody");
+if(type === "0")
+{
+    BattleBody.style.backgroundImage =
+  `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+   url('images/sentouhaikei/mobuhaikei_${rank}.png')`;
+}
+if(type === "1")
+{
+    BattleBody.style.backgroundImage =
+  `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+   url('images/sentouhaikei/bosshaikei_${rank}.png')`;
+}
+
+/*戦闘開始
+--------------------------------------------------------*/
+StartBtn.addEventListener("click", async function(){
+    StartBtn.style.display = "none";
+    const AtcMark = document.querySelector("#atcmark");
+    const AtcClitical = document.querySelector("#atcclitical");
+    const StopBar = document.querySelector("#stopbar");
+    let i = 0;
+    let timer;
+    let RivalAtk;
+    let RivalHP;
+    let RivalName; 
+    let animationId;
+    let speed = 2; // 基本のスピード
+
+    if (!localStorage.getItem("hasPlayedBattle")) {
+        alert("　　　【チュートリアル】\nSpaceキーを押してもストップできます！");
+        localStorage.setItem("hasPlayedBattle", "true");
+    }
+
+    /* 鬼畜モードか通常モードかの判定
     --------------------------------------------------------*/
   if (localStorage.getItem("kichikuon") === "on")
     StopBar.classList.add("is-kichiku");
@@ -204,6 +239,92 @@ StartBtn.addEventListener("click", async function () {
           RivalLifeMark.style.backgroundColor = "limegreen";
         else if (RivalRate > 20) RivalLifeMark.style.backgroundColor = "yellow";
         else RivalLifeMark.style.backgroundColor = "red";
+        let RivalHP_now = RivalHP;  //現在の敵のHp
+        
+        //ストップボタンを押されたら
+        function Stop(){
+            if(StopBtn.style.display === "none") return;
+            cancelAnimationFrame(animationId);
+            const RivalLifeMark = document.querySelector("#rival_lifemark"); //ボスの体力状態
+            const MyLifeMark = document.querySelector("#my_lifemark");       //自分の体力
+            let ATKTimes = Math.round((1 + Math.random() * 0.4) * 10) / 10;     //攻撃上乗せをどのくらい倍にするか
+
+            StopBar.classList.add('is-stop');
+            
+            let isCrit = false;
+            //　ストップした位置がどこかで判定を変える
+            if(isColliding(StopBar, AtcMark)) {
+                ATKTimes = 1.5   
+            }
+            if(isColliding(StopBar, AtcClitical)) {
+                console.log("clitical!!!!!!!!!");
+                ATKTimes = 2.0;
+                isCrit = true;
+            }
+            StopBtn.style.display = "none";
+
+            // 敵の体力状態変化
+            RivalHP_now = RivalHP_now - MyATK * ATKTimes;
+            shakeElement(RivalImg, isCrit);
+            let RivalRate= Math.round(RivalHP_now / RivalHP * 100);
+            console.log("敵のHP状態:"+ RivalRate);
+            RivalLifeMark.style.width = RivalRate + "%";
+
+            if(RivalRate >= 70) // 体力状態の色の変化
+                RivalLifeMark.style.backgroundColor = "limegreen";
+            else if(RivalRate > 20)
+                RivalLifeMark.style.backgroundColor = "yellow";    
+            else
+                RivalLifeMark.style.backgroundColor = "red";
+
+            /*勝ち判定
+            ---------------------------------------------*/
+            if(RivalHP_now < 1)   //勝ち
+            {
+                RivalLifeMark.style.opacity = "0";
+                clearTimeout(timer);
+                AtcBar.style.display = "none";
+                StopBtn.style.display = "none";
+                if(type === "0") //モブ
+                {
+                    let Coin = Number(localStorage.getItem("Coin"));
+                    Coin = Coin + Number(Mobu.coin);
+                    localStorage.setItem("Coin", Coin); 
+                    showResult("Coin" + Number(Mobu.coin) + "枚獲得！");
+                    const CoinImg = document.querySelector("#coinimg");
+                    CoinImg.src = "./images/resultmoney.png";
+                }   
+                else if(type === "1") //ボス
+                {
+                    let Coin = Number(localStorage.getItem("Coin"));
+                    Coin = Coin + Number(data.Boss[rank].coin);
+                    localStorage.setItem("Coin", Coin);
+
+                    let message = "";
+
+                    switch(rank){
+                        case 0:
+                            message = "<ruby>\"तस्स सोकपरेतस्स वीणा कच्छा अभस्सथ, ततो सो दुम्मनो यक्खो तत्थेव अन्तरधायथा ति।\"<rp>(</rp><rt>悲しみに打ちひしがれた彼の脇から、琵琶が落ちた。その意気消沈した夜叉は、その場から姿を消した。</rt><rp>)</rp></ruby> <br>Sutta Nipāta, 449<br>変化と停滞の「恐怖」は六道の何処かに転生したようだ。悟りを拒む衆生は、いずれまた別の姿で現れることだろう。<br>";
+                            break;
+                        case 1:
+                            message = "<ruby>\"This is the Generation of that great Leviathan, or rather (to speake more reverently) <rp>(</rp><rt>これこそが、かの偉大なりしレヴィアタンの――より畏敬の念を込めて語るならば――、</rt><rp>)</rp></ruby><br><ruby>of that Mortall God, to which wee owe under the Immortall God, our peace and defence. \"<rp>(</rp><rt>可死の神の誕生である。我らが平和と防衛を、不死の神に次いで依存するところのものである。</rt><rp>)</rp></ruby> <br>Thomas Hobbes, LEVIATHAN, OR The Matter, Forme, & Power OF A COMMON-WEALTH ECCLESIASTICALL AND CIVILL. Chap. 17, Page. 87<br>死すべき神という「恐怖」は死んだ。暴力のコモディティ化が再び始まる。<br>";
+                            break;
+                        case 2:
+                            message = "<ruby>\"Tod! Sterben … Einz'ge Gnade! <rp>(</rp><rt>死よ!死の眠りこそ唯一の救い!</rt><rp>)</rp></ruby><br><ruby>Die schreckliche Wunde, das Gift, ersterbe, <rp>(</rp><rt>この身を穢し蝕む毒よ、</rt><rp>)</rp></ruby><br><ruby>das es zernagt, erstarre das Herz!\" <rp>(</rp><rt>我が心の臓の鼓動と共に、永久に凍てつき靜まるが良い!</rt><rp>)</rp></ruby> <br>Richard Wagner, Parsifal Act 3, Scene 2<br>死への「恐怖」は沈黙した。遍く生命は刹那ではなく、悠久を生きていくこととなる。<br>";
+                            break;
+                        case 3:
+                            message = "<ruby>\"Putatis quia pacem veni dare in terram ? non, dico vobis, sed separationem : <rp>(</rp><rt>汝ら、我が地に平和を齎さんとして来たと思うか? 我、汝らに告ぐ、然らず、寧ろ爭いなり。</rt><rp>)</rp></ruby><br><ruby>erunt enim ex hoc quinque in domo una divisi, tres in duos, et duo in tres <rp>(</rp><rt>今より後一家に五人あらば、三人は二人、二人は三人に分かれて爭わん。</rt><rp>)</rp></ruby><br><ruby>dividentur : pater in filium, et filius in patrem suum, mater in filiam, et filia in matrem... \"<rp>(</rp><rt>父は子に、子は父に、母は娘に、娘は母に。</rt><rp>)</rp></ruby> <br>Lucas 12, 51-53<br>恐怖への「恐怖」は霧散した。されど、未だ嵐は荒野に吹き荒れる。<br>";
+                            break;
+                    }
+                    showResult(message + "<br>Coin " + data.Boss[rank].coin + "枚獲得！");
+                    document.querySelector("#coinimg").style.opacity = '0';
+                    rank++;
+                    if(rank > data.Boss.length - 1) //ランクを3で固定にする
+                        rank = data.Boss.length - 1;
+                    localStorage.setItem("rank", rank);
+                }
+                 return;
+            }
 
         /*勝ち判定
             ---------------------------------------------*/
@@ -283,6 +404,20 @@ StartBtn.addEventListener("click", async function () {
             MyLifeMark.style.backgroundColor = "limegreen";
           else if (MyRate > 20) MyLifeMark.style.backgroundColor = "yellow";
           else MyLifeMark.style.backgroundColor = "red";
+            //　敵からの反撃（少し時間がたってから自分の体力が減る）
+            timer = setTimeout(() => {
+                shakeElement(document.querySelector("#myimg"), false);
+                if(MyRate >= 70) // 体力状態の色の変化
+                    MyLifeMark.style.backgroundColor = "limegreen";
+                else if(MyRate > 20)
+                    MyLifeMark.style.backgroundColor = "yellow";    
+                else
+                    MyLifeMark.style.backgroundColor = "red";
+
+                MyLifeMark.style.width = MyRate + "%";
+                StopBtn.style.display = "block";
+                StopBar_move();
+            }, 1100);
 
           MyLifeMark.style.width = MyRate + "%";
           StopBtn.style.display = "block";
@@ -365,6 +500,18 @@ async function updateMessage(messageText) {
   }
 }
 
+// 揺らす関数（引数でクリティカルかどうかを受け取る）
+function shakeElement(element, isCritical = false) {
+    const className = isCritical ? "critical-shake" : "shake";
+    
+    element.classList.remove("shake", "critical-shake"); // 両方消しておく
+    void element.offsetWidth; // リセット用
+    element.classList.add(className);
+    setTimeout(() => {
+        element.classList.remove(className);
+    }, 1000);
+}
+
 // リザルトのボタンを押されたら遷移する
 document.querySelector("#resultbtn").addEventListener("click", function () {
   localStorage.setItem("isFought", "true");
@@ -376,6 +523,16 @@ function main() {
   RivalImg.style.opacity = "0";
   AtcBar.style.display = "none";
   StopBtn.style.display = "none";
+function main()
+{
+    RivalImg.style.opacity = "0";
+    AtcBar.style.display = "none";
+    StopBtn.style.display = "none";
+    // 自分の画像
+    const MyImg = document.querySelector("#myimg");
+    const AvatarImg = localStorage.getItem("avatarimg");
+    console.log(AvatarImg);
+    MyImg.src = AvatarImg;
 }
 
 main();
