@@ -64,10 +64,9 @@ StartBtn.addEventListener("click", async function(){
     let animationId;
     let speed = 2; // 基本のスピード
 
-    if (!localStorage.getItem("hasPlayedBattle")) 
-    {
-      showTutorial();
-      localStorage.setItem("hasPlayedBattle", "true");
+    if (!localStorage.getItem("hasPlayedBattle")) {
+        alert("　　　　[チュートリアル]Spaceキーを押してもストップできます！");
+        localStorage.setItem("hasPlayedBattle", "true");
     }
 
     /* 鬼畜モードか通常モードかの判定
