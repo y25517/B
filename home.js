@@ -4,6 +4,21 @@ const Jsonfile = "./eq.json";
 
 document.addEventListener("DOMContentLoaded", async () => {
 
+  
+
+  if (!localStorage.getItem("maxRank")) {
+    localStorage.setItem("maxRank", localStorage.getItem("rank") || 0);
+  }
+
+//初期装備
+  if (!localStorage.getItem("owned")) {
+    const starterItems = [
+      { id: 0 },     // 檜の棒
+      { id: 28 }    // 布の服
+    ];
+    localStorage.setItem("owned", JSON.stringify(starterItems));
+  }
+
   /* =============================
      初期設定（ランク・コイン）
   ============================== */
@@ -18,7 +33,26 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   const rankSelect = document.getElementById("rank-select");
 
-// 保存されているランクを反映
+  
+
+// // 保存されているランクを反映
+// const currentRank = Number(localStorage.getItem("rank"));
+// const maxRank = Number(localStorage.getItem("maxRank"));
+
+// // いったん中身を空にする
+// rankSelect.innerHTML = "";
+
+// // 0〜maxRankまで追加
+// for (let i = 0; i <= maxRank; i++) {
+//   const option = document.createElement("option");
+//   option.value = i;
+//   option.textContent = i;
+//   rankSelect.appendChild(option);
+// }
+
+// // 現在選択中のランクを反映
+// rankSelect.value = currentRank;
+
 rankSelect.value = localStorage.getItem("rank");
 
 // 変更されたら保存
@@ -79,17 +113,17 @@ rankSelect.addEventListener("change", () => {
      所持装備のみ表示　　一時的にここコメントアウトしてます　用が終わったら直します　廣田
   ============================== */
 
-  // Array.from(weaponSelect.options).forEach(option => {
-  //   if (!owned.some(o => o.id == option.value)) {
-  //     option.remove();
-  //   }
-  // });
+  Array.from(weaponSelect.options).forEach(option => {
+    if (!owned.some(o => o.id == option.value)) {
+      option.remove();
+    }
+  });
 
-  // Array.from(armorSelect.options).forEach(option => {
-  //   if (!owned.some(o => o.id == option.value)) {
-  //     option.remove();
-  //   }
-  // });
+  Array.from(armorSelect.options).forEach(option => {
+    if (!owned.some(o => o.id == option.value)) {
+      option.remove();
+    }
+  });
 
 
   /* =============================
@@ -233,6 +267,13 @@ kichikuBtn.addEventListener("click", function(){
 const resetBtn = document.getElementById("risetto");
 
 resetBtn.addEventListener("click", () => {
+  let msg = "本当にリセットしますか？";
+let res = confirm(msg);
+if (res) {
+  localStorage.clear();
+  alert("リセットしました");
+  location.reload();
+}
   localStorage.clear();
   location.reload();
 });
