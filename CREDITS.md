@@ -1,9 +1,9 @@
 # Credits
 この製作で使用している音響素材のクレジット一覧です。ゲームをプレイする際は、以下のダウンロードリンクから音声ファイルをダウンロード、ファイルの形式変更を行い、指定したフォルダの中に入れてください。
-- `ファイル名` : **ダウンロード時の元のファイル名** / 作者名(敬称略) (ダウンロードサイトへのリンク)
+- `配置する際のファイル名` : **ダウンロード時の元のファイル名** / 作者名 (ダウンロードサイトへのリンク)
 の順番で記述してあります。
 
-## Music (フォルダ名: ME)
+## BGM (フォルダ名: ME)
 - `bossBGM0.m4a` : **massive_damage.mp3** / KK (https://dova-s.jp/bgm/download1439.html)
 - `bossBGM1.m4a` : **The-Last-Judgement_loop.m4a** / ユーフルカ (https://youfulca.com/2022/08/13/boss_the-last-judgement/) 
 - `bossBGM2.m4a` : **Thunder_of_God.mp3** / スエノブ (https://dova-s.jp/bgm/download1346.html) 
@@ -15,7 +15,7 @@
 - `mobuBGM2.m4a` : **Baattle-Legendary_loop.m4a** / ユーフルカ (https://youfulca.com/2022/08/14/boss_legendary-opus/) 
 - `mobuBGM3.m4a` : **RRR_loop.m4a** / ユーフルカ (https://youfulca.com/2022/08/13/stage_return-to-the-royal-road/) 
 
-## Sound Effects (フォルダ名: SE)
+## 効果音 (フォルダ名: SE)
 - `choice.mp3` : **確認2.mp3** / Springin' Sound Stock (https://www.springin.org/sound-stock/category/system/page/2/)
 - `deal.mp3` : **財布ひっくりかえす.mp3** / Springin' Sound Stock (https://www.springin.org/sound-stock/subcategory/money/)
 - `deny.mp3` : **キャンセル.mp3** / Springin' Sound Stock (https://www.springin.org/sound-stock/category/system/page/2/)
