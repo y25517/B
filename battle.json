@@ -6,23 +6,23 @@
         {"id":0, "name":"ドラウグ", "atk":12, "HP":130, "coin":4, "image": "images/Rival_img/dora_0.png"},
         {"id":0, "name":"トーテンタンツァー", "atk":14, "HP":150, "coin":5, "image": "images/Rival_img/to-te_0.png"},
 
-        {"id":1, "name":"ゴーレム・ヴァーヴ", "atk":38, "HP":650, "coin":90, "image": "images/Rival_img/goremuva_1.png"},
-        {"id":1, "name":"リリン", "atk":36, "HP":600, "coin":80, "image": "images/Rival_img/ririn_1.png"},
-        {"id":1, "name":"ドルグワント", "atk":42, "HP":700, "coin":110, "image": "images/Rival_img/doru_1.png"},
-        {"id":1, "name":"ツェンタウァ", "atk":45, "HP":750, "coin":130, "image": "images/Rival_img/tuwen_1.png"},
-        {"id":1, "name":"スルーア・シー", "atk":48, "HP":800, "coin":150, "image": "images/Rival_img/surua_1.png"},
+        {"id":1, "name":"ゴーレム・ヴァーヴ", "atk":38, "HP":1000, "coin":90, "image": "images/Rival_img/goremuva_1.png"},
+        {"id":1, "name":"リリン", "atk":36, "HP":1300, "coin":80, "image": "images/Rival_img/ririn_1.png"},
+        {"id":1, "name":"ドルグワント", "atk":42, "HP":1500, "coin":110, "image": "images/Rival_img/doru_1.png"},
+        {"id":1, "name":"ツェンタウァ", "atk":45, "HP":1800, "coin":130, "image": "images/Rival_img/tuwen_1.png"},
+        {"id":1, "name":"スルーア・シー", "atk":48, "HP":2000, "coin":150, "image": "images/Rival_img/surua_1.png"},
         
-        {"id":2, "name":"ゴーレム・レーシュ", "atk":65, "HP":1100, "coin":250, "image": "images/Rival_img/goremure_2.png"},
-        {"id":2, "name":"バルトアンデルス", "atk":72, "HP":1200, "coin":300, "image": "images/Rival_img/baruto_2.png"},
-        {"id":2, "name":"ア・ズライグ・ゴーッホ", "atk":78, "HP":1300, "coin":350, "image": "images/Rival_img/azu_2.png"},
-        {"id":2, "name":"ナハツェーラー", "atk":85, "HP":1400, "coin":400, "image": "images/Rival_img/naha_2.png"},
-        {"id":2, "name":"ネロン・カイサル", "atk":92, "HP":1500, "coin":450, "image": "images/Rival_img/neron_2.png"},
+        {"id":2, "name":"ゴーレム・レーシュ", "atk":83, "HP":3000, "coin":200, "image": "images/Rival_img/goremure_2.png"},
+        {"id":2, "name":"バルトアンデルス", "atk":90, "HP":3500, "coin":250, "image": "images/Rival_img/baruto_2.png"},
+        {"id":2, "name":"ア・ズライグ・ゴーッホ", "atk":100, "HP":4000, "coin":300, "image": "images/Rival_img/azu_2.png"},
+        {"id":2, "name":"ナハツェーラー", "atk":130, "HP":4500, "coin":350, "image": "images/Rival_img/naha_2.png"},
+        {"id":2, "name":"ネロン・カイサル", "atk":150, "HP":5000, "coin":400, "image": "images/Rival_img/neron_2.png"},
 
-        {"id":3, "name":"ゴーレム・タヴ", "atk":110, "HP":2000, "coin":600, "image": "images/Rival_img/goremuta_3.png"},
-        {"id":3, "name":"「支配」「戦争」「飢餓」「万死」", "atk":125, "HP":2300, "coin":750, "image": "images/Rival_img/sihai_3.png"},
-        {"id":3, "name":"アエーシュマ", "atk":140, "HP":2600, "coin":900, "image": "images/Rival_img/ae_3.png"},
-        {"id":3, "name":"阿良波々岐荒御魂", "atk":160, "HP":3000, "coin":1100, "image": "images/Rival_img/ara_3.png"},
-        {"id":3, "name":"ムカッタアート=イコシエンネアグラマトン", "atk":200, "HP":3800, "coin":1500, "image": "images/Rival_img/muka_3.png"}
+        {"id":3, "name":"ゴーレム・タヴ", "atk":550, "HP":10000, "coin":5500, "image": "images/Rival_img/goremuta_3.png"},
+        {"id":3, "name":"「支配」「戦争」「飢餓」「万死」", "atk":650, "HP":13000, "coin":6500, "image": "images/Rival_img/sihai_3.png"},
+        {"id":3, "name":"アエーシュマ", "atk":750, "HP":15000, "coin":7500, "image": "images/Rival_img/ae_3.png"},
+        {"id":3, "name":"阿良波々岐荒御魂", "atk":850, "HP":18000, "coin":8500, "image": "images/Rival_img/ara_3.png"},
+        {"id":3, "name":"ムカッタアート=イコシエンネアグラマトン", "atk":1000, "HP":20000, "coin":10000, "image": "images/Rival_img/muka_3.png"}
     ],
     
     "Boss": [
@@ -42,7 +42,7 @@
         "image": "images/Rival_img/taru_b.png"},
 
         {"id":3, "name":"「黄衣を纏う者、叛逆の使徒、ケリヨトのイェフーダー」ジューダス・クライスト",
-        "atk":1400, "HP":35000, "coin":10000,
+        "atk":1400, "HP":35000, "coin":30,
         "txt":"\"Surgite, eamus : ecce appropinquavit qui me tradet.\"\n Matthæus 26, 46",
         "image": "images/Rival_img/ju_b.png"}
     ]
