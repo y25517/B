@@ -24,7 +24,7 @@ rankSelect.value = localStorage.getItem("rank");
 // 変更されたら保存
 rankSelect.addEventListener("change", () => {
   localStorage.setItem("rank", rankSelect.value);
-  updateStatus();   // ← 追加
+  updateStatus();
 });
 
   const owned = JSON.parse(localStorage.getItem("owned")) || [];
@@ -138,7 +138,7 @@ rankSelect.addEventListener("change", () => {
 
     const avatar = document.getElementById("avatarComplete");
 
-avatar.src = `./images/wear_img/a${armorId}_w${weaponId}.png`;  //ここでアバターの画像を装備に合わせて変更してます。wear_imgに画像が全部あります。ぉーかるストレージにはまだ入れてないです。
+avatar.src = `./images/wear_img/a${armorId}_w${weaponId}-removebg-preview.png`;  //ここでアバターの画像を装備に合わせて変更してます。wear_imgに画像が全部あります。ぉーかるストレージにはまだ入れてないです。
 
     // アバター重ね画像変更
     // 画像変更

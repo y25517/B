@@ -308,7 +308,7 @@ body{
 /* アバター */
 .home_avatar {
     position: fixed;
-    top: 20%;
+    top: 10%;
     right: 35%;
     width: 30%;
 }
