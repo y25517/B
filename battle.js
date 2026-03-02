@@ -64,6 +64,11 @@ StartBtn.addEventListener("click", async function(){
     let animationId;
     let speed = 2; // 基本のスピード
 
+    if (!localStorage.getItem("hasPlayedBattle")) {
+        alert("　　　【チュートリアル】\nSpaceキーを押してもストップできます！");
+        localStorage.setItem("hasPlayedBattle", "true");
+    }
+
     /* 鬼畜モードか通常モードかの判定
     --------------------------------------------------------*/
     if(localStorage.getItem("kichikuon") === "on")
@@ -404,7 +409,6 @@ function main()
     const AvatarImg = localStorage.getItem("avatarimg");
     console.log(AvatarImg);
     MyImg.src = AvatarImg;
-
 }
 
 main();
