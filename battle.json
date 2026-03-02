@@ -1,10 +1,10 @@
 {
     "Rival": [
-        {"id":0, "name":"ゴーレム・サメク", "atk":9, "HP":100, "coin":10, "image": "images/Rival_img/goremusa_0.png"},
-        {"id":0, "name":"射干", "atk":10, "HP":110, "coin":15, "image": "images/Rival_img/sha_0.png"},
-        {"id":0, "name":"ジェヴォーダンの獣", "atk":11, "HP":120, "coin":20, "image": "images/Rival_img/jevo_0.png"},
-        {"id":0, "name":"ドラウグ", "atk":12, "HP":130, "coin":25, "image": "images/Rival_img/dora_0.png"},
-        {"id":0, "name":"トーテンタンツァー", "atk":14, "HP":150, "coin":35, "image": "images/Rival_img/to-te_0.png"},
+        {"id":0, "name":"ゴーレム・サメク", "atk":9, "HP":100, "coin":1, "image": "images/Rival_img/goremusa_0.png"},
+        {"id":0, "name":"射干", "atk":10, "HP":110, "coin":2, "image": "images/Rival_img/sha_0.png"},
+        {"id":0, "name":"ジェヴォーダンの獣", "atk":11, "HP":120, "coin":3, "image": "images/Rival_img/jevo_0.png"},
+        {"id":0, "name":"ドラウグ", "atk":12, "HP":130, "coin":4, "image": "images/Rival_img/dora_0.png"},
+        {"id":0, "name":"トーテンタンツァー", "atk":14, "HP":150, "coin":5, "image": "images/Rival_img/to-te_0.png"},
 
         {"id":1, "name":"ゴーレム・ヴァーヴ", "atk":38, "HP":650, "coin":90, "image": "images/Rival_img/goremuva_1.png"},
         {"id":1, "name":"リリン", "atk":36, "HP":600, "coin":80, "image": "images/Rival_img/ririn_1.png"},
@@ -27,22 +27,22 @@
     
     "Boss": [
         {"id":0, "name":"「大覚を殺す者、魔羅波旬、第六天魔王」マーラ・パーピーヤス",
-        "atk":18, "HP":400, "coin":150,
+        "atk":20, "HP":400, "coin":10,
         "txt":"三障四魔、如是波俾掾発退轉心……",
         "image": "images/Rival_img/ma_b.png"},
 
         {"id":1, "name":"「大海を結ぶ者、嫉妬の蛇、地上の神」リヴヤタン",
-        "atk":150, "HP":4000, "coin":1500,
+        "atk":50, "HP":3000, "coin":1500,
         "txt":"\"Non est super terram potestas quae comparetur ei, qui factus est ut nullum timeret. Omne sublime videt: ipse est rex super universos filios superbiae.\"\n Iob 41, 24-25",
         "image": "images/Rival_img/ri_b.png"},
 
         {"id":2, "name":"「万象を殱くす者、エスカトス・ロゴス、冥王」タルタロス・クトニオス",
-        "atk":300, "HP":8000, "coin":4000,
+        "atk":250, "HP":6500, "coin":4000,
         "txt":"ネクロマンティオンのデストルドーが形而下に顕れていく……",
         "image": "images/Rival_img/taru_b.png"},
 
         {"id":3, "name":"「黄衣を纏う者、叛逆の使徒、ケリヨトのイェフーダー」ジューダス・クライスト",
-        "atk":500, "HP":15000, "coin":10000,
+        "atk":1400, "HP":35000, "coin":10000,
         "txt":"\"Surgite, eamus : ecce appropinquavit qui me tradet.\"\n Matthæus 26, 46",
         "image": "images/Rival_img/ju_b.png"}
     ]
