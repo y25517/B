@@ -193,7 +193,7 @@ StartBtn.addEventListener("click", async function(){
             let isCrit = false;
             //　ストップした位置がどこかで判定を変える
             if(isColliding(StopBar, AtcMark)) {
-                ATKTimes = 1.5   
+                ATKTimes = 1.5;   
             }
             if(isColliding(StopBar, AtcClitical)) {
                 console.log("clitical!!!!!!!!!");
@@ -277,10 +277,18 @@ StartBtn.addEventListener("click", async function(){
                 document.querySelector("#coinimg").style.opacity = '0';
                 AtcBar.style.display = "none";
                 StopBtn.style.display = "none";
+
                 if(type === "0")
-                    showResult("あなたは力尽きた…");
-                else if(type === "1")
-                    showResult("深淵があなたを呑み込む。")
+                    {
+                        showResult();
+                        let Coin = parseInt(Number(localStorage.getItem("Coin")));
+                        Coin = Coin + parseInt(( Number(Mobu.coin) / 2 ));
+                        localStorage.setItem("Coin", Coin);
+                        showResult("あなたは力尽きた…<br>" + parseInt(Mobu.coin /2 )+ " 枚獲得！");
+                        document.querySelector("#coinimg").style.opacity = '0';
+                    }
+                    else if(type === "1")
+                        showResult("深淵があなたを呑み込む。")
                 return;
             }
 
