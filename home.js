@@ -32,7 +32,7 @@ rankSelect.addEventListener("change", () => {
 
   let CoinNow = Number(localStorage.getItem("Coin"));
   if (isNaN(CoinNow) || CoinNow <= 0) {
-    CoinNow = 100;
+    CoinNow = 0;
     localStorage.setItem("Coin", CoinNow);
   }
 
