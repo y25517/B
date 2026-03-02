@@ -721,8 +721,8 @@ body{
 /* 店主タイトル */
 .shopTitle {
   position: fixed;
-  top: 125px;   /* messageAreaより少し上 */
-  right: 25%;
+  top: 10%;   /* messageAreaより少し上 */
+  right: 30%;
   transform: translateX(-50%);
   font-size: 32px;
   font-weight: bold;
@@ -816,24 +816,6 @@ body{
   animation: shake 0.1s;
 }
 
-
-/* コイン、ランク */
-#coin {
-  position: absolute;
-  top: 120px;
-  right: 570px;
-  font-size: 30px;
-  font-weight: bolder;
-}
-
-#rank {
-  position: absolute;
-  top: 120px;
-  right: 300px;
-  font-size: 30px;
-  font-weight: bolder;
-}
-
 /* 装備セレクト */
 .equip-box {
   display: flex;
@@ -865,7 +847,7 @@ body{
 /* コイン */
 .coinArea {
   position: fixed;
-  top: 5%;
+  top: 1%;
   right: 15%;
   padding: 15px 30px;
   font-size: 30px;
