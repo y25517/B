@@ -35,31 +35,23 @@ console.log("自分のATK:"+MyATK);
 
 /*戦闘背景
 --------------------------------------------------------*/
-let BattleBody = document.querySelector("#battlebody");
-if(type === 0)
+const BattleBody = document.querySelector("#battlebody");
+if(type === "0")
 {
-    switch(rank){
-        case 1:
-            BattleBody.style.url = "";
-            break;
-    }
+    BattleBody.style.backgroundImage =
+  `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+   url('images/sentouhaikei/mobuhaikei_${rank}.png')`;
 }
-if(type === 1)
+if(type === "1")
 {
-    switch(rank){
-        case 1:
-            BattleBody.style.url = "";
-            break;
-    }
+    BattleBody.style.backgroundImage =
+  `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+   url('images/sentouhaikei/bosshaikei_${rank}.png')`;
 }
 
 /*戦闘開始
 --------------------------------------------------------*/
 StartBtn.addEventListener("click", async function(){
-    if (!localStorage.getItem("SpaceAlert")) {
-        alert("　　　【チュートリアル】\nSpaceキーでもストップできます！");
-        localStorage.setItem("SpaceAlert", "true"); // 見たという目印を保存
-    }
     StartBtn.style.display = "none";
     const AtcMark = document.querySelector("#atcmark");
     const AtcClitical = document.querySelector("#atcclitical");
@@ -193,6 +185,7 @@ StartBtn.addEventListener("click", async function(){
 
             StopBar.classList.add('is-stop');
             
+            let isCrit = false;
             //　ストップした位置がどこかで判定を変える
             if(isColliding(StopBar, AtcMark)) {
                 ATKTimes = 1.5   
@@ -200,11 +193,13 @@ StartBtn.addEventListener("click", async function(){
             if(isColliding(StopBar, AtcClitical)) {
                 console.log("clitical!!!!!!!!!");
                 ATKTimes = 2.0;
+                isCrit = true;
             }
             StopBtn.style.display = "none";
 
             // 敵の体力状態変化
             RivalHP_now = RivalHP_now - MyATK * ATKTimes;
+            shakeElement(RivalImg, isCrit);
             let RivalRate= Math.round(RivalHP_now / RivalHP * 100);
             console.log("敵のHP状態:"+ RivalRate);
             RivalLifeMark.style.width = RivalRate + "%";
@@ -243,10 +238,10 @@ StartBtn.addEventListener("click", async function(){
 
                     switch(rank){
                         case 0:
-                            message = "<ruby>\"This is the Generation of that great Leviathan, or rather (to speake more reverently) <rp>(</rp><rt>これこそが、かの偉大なりしレヴィアタンの――より畏敬の念を込めて語るならば――、</rt><rp>)</rp></ruby><br><ruby>of that Mortall God, to which wee owe under the Immortall God, our peace and defence. \"<rp>(</rp><rt>可死の神の誕生である。我らが平和と防衛を、不死の神に次いで依存するところのものである。</rt><rp>)</rp></ruby> <br>Thomas Hobbes, LEVIATHAN, OR The Matter, Forme, & Power OF A COMMON-WEALTH ECCLESIASTICALL AND CIVILL. Chap. 17, Page. 87<br>死すべき神という「恐怖」は死んだ。暴力のコモディティ化が再び始まる。<br>";
+                            message = "<ruby>\"तस्स सोकपरेतस्स वीणा कच्छा अभस्सथ, ततो सो दुम्मनो यक्खो तत्थेव अन्तरधायथा ति।\"<rp>(</rp><rt>悲しみに打ちひしがれた彼の脇から、琵琶が落ちた。その意気消沈した夜叉は、その場から姿を消した。</rt><rp>)</rp></ruby> <br>Sutta Nipāta, 449<br>変化と停滞の「恐怖」は六道の何処かに転生したようだ。悟りを拒む衆生は、いずれまた別の姿で現れることだろう。<br>";
                             break;
                         case 1:
-                            message = "<ruby>\"तस्स सोकपरेतस्स वीणा कच्छा अभस्सथ, ततो सो दुम्मनो यक्खो तत्थेव अन्तरधायथा ति।\"<rp>(</rp><rt>悲しみに打ちひしがれた彼の脇から、琵琶が落ちた。その意気消沈した夜叉は、その場から姿を消した。</rt><rp>)</rp></ruby> <br>Sutta Nipāta, 449<br>変化と停滞の「恐怖」は六道の何処かに転生したようだ。悟りを拒む衆生は、いずれまた別の姿で現れることだろう。<br>";
+                            message = "<ruby>\"This is the Generation of that great Leviathan, or rather (to speake more reverently) <rp>(</rp><rt>これこそが、かの偉大なりしレヴィアタンの――より畏敬の念を込めて語るならば――、</rt><rp>)</rp></ruby><br><ruby>of that Mortall God, to which wee owe under the Immortall God, our peace and defence. \"<rp>(</rp><rt>可死の神の誕生である。我らが平和と防衛を、不死の神に次いで依存するところのものである。</rt><rp>)</rp></ruby> <br>Thomas Hobbes, LEVIATHAN, OR The Matter, Forme, & Power OF A COMMON-WEALTH ECCLESIASTICALL AND CIVILL. Chap. 17, Page. 87<br>死すべき神という「恐怖」は死んだ。暴力のコモディティ化が再び始まる。<br>";
                             break;
                         case 2:
                             message = "<ruby>\"Tod! Sterben … Einz'ge Gnade! <rp>(</rp><rt>死よ!死の眠りこそ唯一の救い!</rt><rp>)</rp></ruby><br><ruby>Die schreckliche Wunde, das Gift, ersterbe, <rp>(</rp><rt>この身を穢し蝕む毒よ、</rt><rp>)</rp></ruby><br><ruby>das es zernagt, erstarre das Herz!\" <rp>(</rp><rt>我が心の臓の鼓動と共に、永久に凍てつき靜まるが良い!</rt><rp>)</rp></ruby> <br>Richard Wagner, Parsifal Act 3, Scene 2<br>死への「恐怖」は沈黙した。遍く生命は刹那ではなく、悠久を生きていくこととなる。<br>";
@@ -286,6 +281,7 @@ StartBtn.addEventListener("click", async function(){
 
             //　敵からの反撃（少し時間がたってから自分の体力が減る）
             timer = setTimeout(() => {
+                shakeElement(document.querySelector("#myimg"), false);
                 if(MyRate >= 70) // 体力状態の色の変化
                     MyLifeMark.style.backgroundColor = "limegreen";
                 else if(MyRate > 20)
@@ -296,7 +292,7 @@ StartBtn.addEventListener("click", async function(){
                 MyLifeMark.style.width = MyRate + "%";
                 StopBtn.style.display = "block";
                 StopBar_move();
-            }, 1000);
+            }, 1100);
 
 
             /*リザルト表示
@@ -379,6 +375,18 @@ async function updateMessage(messageText) {
     }
 }
 
+// 揺らす関数（引数でクリティカルかどうかを受け取る）
+function shakeElement(element, isCritical = false) {
+    const className = isCritical ? "critical-shake" : "shake";
+    
+    element.classList.remove("shake", "critical-shake"); // 両方消しておく
+    void element.offsetWidth; // リセット用
+    element.classList.add(className);
+    setTimeout(() => {
+        element.classList.remove(className);
+    }, 1000);
+}
+
 // リザルトのボタンを押されたら遷移する
 document.querySelector("#resultbtn").addEventListener("click", function(){
     localStorage.setItem("isFought", "true");
@@ -391,6 +399,12 @@ function main()
     RivalImg.style.opacity = "0";
     AtcBar.style.display = "none";
     StopBtn.style.display = "none";
+    // 自分の画像
+    const MyImg = document.querySelector("#myimg");
+    const AvatarImg = localStorage.getItem("avatarimg");
+    console.log(AvatarImg);
+    MyImg.src = AvatarImg;
+
 }
 
 main();
