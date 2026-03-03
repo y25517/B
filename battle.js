@@ -65,7 +65,7 @@ StartBtn.addEventListener("click", async function(){
     let speed = 2; // 基本のスピード
 
     if (!localStorage.getItem("hasPlayedBattle")) {
-        alert("　　　　[チュートリアル]Spaceキーを押してもストップできます！");
+        alert("　　　【チュートリアル】\nSpaceキーを押してもストップできます！");
         localStorage.setItem("hasPlayedBattle", "true");
     }
 
