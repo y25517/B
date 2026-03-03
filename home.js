@@ -270,10 +270,18 @@ resetBtn.addEventListener("click", () => {
   let msg = "本当にリセットしますか？";
 let res = confirm(msg);
 if (res) {
-  localStorage.clear();
+  localStorage.removeItem("Coin");
+  localStorage.removeItem("avatarATK");
+  localStorage.removeItem("avatarHP");
+  localStorage.removeItem("avatarimg");
+  localStorage.removeItem("equipped");
+  localStorage.removeItem("isDone");
+  localStorage.removeItem("isFought");
+  localStorage.removeItem("kichikuon");
+  localStorage.removeItem("maxRank");
+  localStorage.removeItem("owned");
+  localStorage.removeItem("rank");
   alert("リセットしました");
   location.reload();
 }
-  localStorage.clear();
-  location.reload();
 });
