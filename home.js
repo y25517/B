@@ -3,9 +3,7 @@
 const Jsonfile = "./eq.json";
 
 document.addEventListener("DOMContentLoaded", async () => {
-
   
-
   if (!localStorage.getItem("maxRank")) {
     localStorage.setItem("maxRank", localStorage.getItem("rank") || 0);
   }

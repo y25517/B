@@ -67,10 +67,27 @@ window.addEventListener("load", async () => {
 
         // 入店時のメッセージ表示、コイン表示
         messageTxt = randomPick(welcomeMsg, 1);
-        updateMessage(messageTxt[0]);
-        updateCoins();
+        if (owned.length == 44) {
+            localStorage.setItem("truth", 666);
+            messageArea.textContent = "お前さんには、真実の一端を知る権利がある。";
+            button.classList.add("hidden");
+            shopkeeper.classList.add("hidden");
+            statusDifferenceArea.classList.add("hidden");
+            itemDetailsArea.classList.add("hidden");
+            document.querySelector(".coinArea").classList.add("hidden");
+            document.querySelector(".shopTitle").textContent = "メモ"
+            let finalKey = document.createElement("a");
+            finalKey.textContent = "奥の部屋へ";
+            finalKey.href = "./secret.html";
+            finalKey.classList.add("finalKey");
+            document.querySelector(".shopkeepersArea").appendChild(finalKey);
 
-        renderItems(eqs);
+        } else {
+            localStorage.removeItem("truth");
+            updateMessage(messageTxt[0]);
+            updateCoins();
+            renderItems(eqs);
+        }
 
         // 戻るボタンの挙動
         button.addEventListener("click", async () => {
@@ -86,11 +103,13 @@ window.addEventListener("load", async () => {
             messageTxt = randomPick(chatsMsg[rank], 1);
             updateMessage(messageTxt[0]);
         });
-
+        
+        
     } catch (error) {
         console.log("読み込みエラー");
     }
 });
+
 
 // 販売する装備を並べる
 function renderItems(e) {

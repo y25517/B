@@ -884,3 +884,12 @@ body{
   border: 2px solid #ffd700;
 
 }
+
+.hidden {
+  display: none;
+}
+
+.finalKey {
+ background: #970e0e;
+  color: black; 
+}
