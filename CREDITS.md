@@ -14,6 +14,7 @@
 - `mobuBGM1.m4a` : **Di-Va-Boss_loop.m4a** / ユーフルカ (https://youfulca.com/2022/08/13/boss_face-the-fear/)
 - `mobuBGM2.m4a` : **Baattle-Legendary_loop.m4a** / ユーフルカ (https://youfulca.com/2022/08/14/boss_legendary-opus/) 
 - `mobuBGM3.m4a` : **RRR_loop.m4a** / ユーフルカ (https://youfulca.com/2022/08/13/stage_return-to-the-royal-road/) 
+- `secret.m4a` : **reminiscence_loop.ogg** / ユーフルカ (https://youfulca.com/2022/08/12/evemt_reminiscence/)
 
 ## 効果音 (フォルダ名: SE)
 - `choice.mp3` : **確認2.mp3** / Springin' Sound Stock (https://www.springin.org/sound-stock/category/system/page/2/)

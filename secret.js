@@ -51,6 +51,10 @@ function typeBootLog() {
         setTimeout(typeBootLog, 120 + Math.random()*120);
     } else {
         setTimeout(endBoot, 1200);
+        let bgm = new Audio("./ME/secret.m4a");
+        bgm.volume = 0.3;
+        bgm.loop = true;
+        bgm.play().catch(e => console.log(e));
     }
 }
 
