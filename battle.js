@@ -65,7 +65,7 @@ StartBtn.addEventListener("click", async function(){
     let speed = 2; // 基本のスピード
 
     if (!localStorage.getItem("hasPlayedBattle")) {
-        alert("　　　　[チュートリアル]Spaceキーを押してもストップできます！");
+        alert("　　　【チュートリアル】\nSpaceキーを押してもストップできます！");
         localStorage.setItem("hasPlayedBattle", "true");
     }
 
@@ -282,9 +282,9 @@ StartBtn.addEventListener("click", async function(){
                     {
                         showResult();
                         let Coin = parseInt(Number(localStorage.getItem("Coin")));
-                        Coin = Coin + parseInt(( Number(Mobu.coin) / 2 ));
+                        Coin = Coin + parseInt(( Number(Mobu.coin) / 4 ));
                         localStorage.setItem("Coin", Coin);
-                        showResult("あなたは力尽きた…<br>" + parseInt(Mobu.coin /2 )+ " 枚獲得！");
+                        showResult("あなたは力尽きた…<br>" + parseInt(Mobu.coin / 4 )+ " 枚獲得！");
                         document.querySelector("#coinimg").style.opacity = '0';
                     }
                     else if(type === "1")
@@ -328,11 +328,17 @@ StartBtn.addEventListener("click", async function(){
         StopBtn.addEventListener("mousedown", function(){
             Stop();
         });
+        let isCooldown = false;
         // 押されたキーが「Space（スペースキー）」だったら
         document.addEventListener("keydown", function(e){
             if (e.code === "Space") {
                 e.preventDefault();
-                Stop();
+                if (e.repeat || isCooldown) return;
+                    Stop();
+                isCooldown = true; 
+                setTimeout(() => {
+                    isCooldown = false;
+                }, 1500);
             }
         });
     });
@@ -397,7 +403,7 @@ function shakeElement(element, isCritical = false) {
     element.classList.add(className);
     setTimeout(() => {
         element.classList.remove(className);
-    }, 1000);
+    }, 1600);
 }
 
 // リザルトのボタンを押されたら遷移する
