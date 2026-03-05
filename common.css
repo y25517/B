@@ -893,3 +893,9 @@ body{
  background: #970e0e;
   color: black; 
 }
+
+.new-tegomin-regular {
+  font-family: "New Tegomin", serif;
+  font-weight: 400;
+  font-style: normal;
+}
