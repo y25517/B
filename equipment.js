@@ -7,7 +7,7 @@ let coins = parseInt(localStorage.getItem("Coin")) || 0;
 let sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
 // メッセージリセット
 let messageTxt = "";
-
+rank=1
 // メッセージ更新用の関数が実行中かを検知する
 let isProcessing = false;
 
@@ -65,6 +65,11 @@ window.addEventListener("load", async () => {
         statusDifferenceArea = document.querySelector("#statusDifferenceArea");
         shopkeeper = document.querySelector("#shopkeeper");
 
+        //店主の衣替え
+        
+        shopkeeper.src = `/images/shopkeeper_img/shopkeeper${rank}.png` ;
+        console.log(shopkeeper);
+        
         // 入店時のメッセージ表示、コイン表示
         messageTxt = randomPick(welcomeMsg, 1);
         if (owned.length == 44) {
