@@ -21,33 +21,37 @@ let bootLines = [
 "[ 0.650 ] Collateral gematrian estimate: 131.8B fatalities.",
 "[ 0.666 ] Cause: uncontrolled collective override.",
 "",
-"",
 "[ 1.102 ] Salvageable fragments detected.",
 "[ 1.145 ] Archive ready.",
-"",
-"",
-"",
 "",
 "System ready.",
 "Awaiting operator input."
 ];
 
+let sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
 let logIndex = 0;
-
-function typeBootLog() {
+let bootLog = document.querySelector("#boot-log");
+async function typeBootLog() {
     if (logIndex < bootLines.length) {
-        document.getElementById("boot-log").innerHTML += bootLines[logIndex] + "\n";
-        logIndex++;
-        if (logIndex == 27 && !localStorage.getItem("truth")) {
+        if (bootLines[logIndex] == "") {
+            await sleep(1000)
+            if (logIndex >= 18) {
+                await sleep(250);
+            }
+            logIndex++;
+        }
+        if (logIndex == (bootLines.length - 2) && !localStorage.getItem("truth")) {
             console.log(bootLines.length);
-            document.getElementById("boot-log").innerHTML += "Fatal: Permission denied.\nWarning: You need to collect all remnants to open.";
+            bootLog.innerHTML += "Fatal: Permission denied.\nWarning: You need to collect all remnants to open.";
             document.body.style.color = "#FFB347";
             document.querySelector("h1").style.color = "#FFD08E"
             document.querySelector("h1").style.borderLeftColor = "#FF0013"
-            
+            commandRead();
             return;
         }
         
+        bootLog.innerHTML += bootLines[logIndex] + "\n";
+        logIndex++;
         setTimeout(typeBootLog, 120 + Math.random()*120);
     } else {
         setTimeout(endBoot, 1200);
@@ -57,7 +61,6 @@ function typeBootLog() {
         bgm.play().catch(e => console.log(e));
     }
 }
-
 function endBoot() {
     let overlay = document.getElementById("boot-overlay");
     overlay.style.transition = "opacity 1.2s ease";
@@ -111,7 +114,7 @@ function unlock() {
             return;
         }
 
-        triggerSuccess(text, C);
+        triggerSuccess(text);
 
     } catch (e) {
         triggerFail();
@@ -131,18 +134,7 @@ function triggerFail() {
     }, 2000)
 }
 
-let sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
-async function triggerSuccess(text, code) {
-    let output = document.getElementById("output");
-    let speed = 16;
-    output.textContent = "";
-    
-    output.appendChild(document.createElement("p"));
-    let p = document.querySelector("p");
-    for (let char of code) {
-        p.innerHTML += marked.parse(char);
-        await sleep(speed);
-    }
+async function triggerSuccess(text) {
     document.body.classList.add("flash-success");
 
     output.innerHTML = marked.parse(text);
@@ -159,6 +151,54 @@ async function triggerSuccess(text, code) {
     }, 800);
 }
 
+function commandRead() {
+    let ans = "2a16b51a4d5062868748b4ffe58e25f67d4dac0fd85a42021793791306fa9cca";
+    let inputLog = [];
+    let ansLength = 37;
+    window.addEventListener('keydown', async(e) => {
+    if (e.key.length === 1) {
+        inputLog.push(e.key);
+        inputLog = inputLog.slice(-ansLength);
+
+        if (inputLog.length === ansLength) {
+            let currentInput = inputLog.join('');
+            
+            let currentHash = CryptoJS.SHA256(currentInput).toString();
+
+            if (currentHash === ans) {
+                let remove = ",";
+                bootLog.innerHTML+="\n";
+                for(let i=0; i<inputLog.length; i++) {
+                    if (inputLog[i] == remove) {
+                        inputLog.splice(i, 1);
+                    }
+                    console.log(inputLog);
+                }
+                for (let char of inputLog) {
+                    bootLog.textContent+=char;
+                    await sleep(100);
+                }
+                document.body.style.setProperty("--start-color", "#FFB347");
+                document.body.style.setProperty("--end-color", "#7CFF9E");
+                document.querySelector("h1").style.setProperty("--start-color", "#FFD08E");
+                document.querySelector("h1").style.setProperty("--end-color", "#B4FFCA");
+                document.querySelector("h1").style.setProperty("--start-b", "#FF0013");
+                document.querySelector("h1").style.setProperty("--end-b", "#00FF66");
+                document.body.style.setProperty("animation", "multiColorChange 2s ease-in-out forwards");
+                document.querySelector("h1").style.setProperty("animation", "multiColorChange 2s ease-in-out forwards");
+                await sleep(1500);
+                bootLog.innerHTML += "\nSystem ready.\nAwaiting operator input.";
+                inputLog = [];
+                setTimeout(endBoot, 2500);
+                let bgm = new Audio("./ME/secret.m4a");
+                bgm.volume = 0.3;
+                bgm.loop = true;
+                bgm.play().catch(e => console.log(e));
+            }
+        }
+    }
+});
+}
 
 // 降らせたい文章のリスト
 let texts = [
