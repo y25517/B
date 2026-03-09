@@ -2,8 +2,6 @@
 
 const Jsonfile = "./eq.json";
 
-document.addEventListener("DOMContentLoaded", async () => {
-  
   if (!localStorage.getItem("maxRank")) {
     localStorage.setItem("maxRank", localStorage.getItem("rank") || 0);
   }
@@ -70,6 +68,17 @@ rankSelect.addEventListener("change", () => {
 
   document.querySelector("#coin-count").textContent =
     localStorage.getItem("Coin");
+
+/*ホーム画面の背景
+--------------------------------------------------------*/
+const homeBody = document.querySelector("#home_body");
+
+const newImageUrl = `url('images/home_background/home${rankSelect.value}.jpg')`;
+console.log("読み込む画像のパス:", newImageUrl);
+homeBody.style.setProperty('--bg-image', newImageUrl);
+
+document.addEventListener("DOMContentLoaded", async () => {
+  
 
 
   /* =============================
