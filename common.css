@@ -280,8 +280,7 @@ body{
 
   /* ホーム画面
   --------------------------------------------------------------------------- */
-  
-  body {
+body {
   height: 100vh;
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -294,6 +293,7 @@ body{
   color: white;
   position: relative;
   overflow: hidden;
+  overflow-x: hidden; 
 }
 
 .home_body::before {
@@ -301,8 +301,11 @@ body{
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: url('images/home_back.jpg') no-repeat center center;
+  background-image: var(--bg-image, url('images/home_back.jpg'));
   background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  
   opacity: 0.2;
   z-index: 0;
 }
@@ -338,53 +341,57 @@ body{
   100% { text-shadow: 2px 2px 2px #fff, 4px 4px 4px rgba(255,255,255,0.4), 6px 6px 6px rgba(255,255,255,0.2); }
 }
 
-  /* アバター */
-  .avatar {
-    position: absolute;  
-    top: 50%;
-    right: 45%;
-    transform: translateY(-50%);
-    display: flex;
-    gap: 20px;
-  }
+/* アバター */
+.avatar {
+  position: absolute;  
+  top: 50%;
+  right: 45%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 20px;
+}
 
-  .avatar img {
+.avatar img {
   width: 250px;
   animation: float 3s ease-in-out infinite;
-  .index p {
-    margin: 0;
-    font-weight: bold;
-    letter-spacing: 5px;
-    color: rgba(138, 25, 25, 0.788);
-    text-shadow: 
-      3px 3px 0 #000,
-      6px 6px 10px rgba(0, 0, 0, 0.6);
-      }
-    }
-/* アバター */
+}
+
+.avatar .index p {
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: rgba(138, 25, 25, 0.788);
+  text-shadow: 
+    3px 3px 0 #000,
+    6px 6px 10px rgba(0, 0, 0, 0.6);
+}
+
 .home_avatar {
     position: fixed;
-    top: 10%;
     right: 35%;
-    width: 30%;
+    width: 470px;
+    height: auto;
+    bottom: 5vh;
 }
+
 .avatar_armor,
 .avatar_weapon {
   position: absolute;
 }
+
 .avatar_armor {
-  z-index: 1; /* 防具は武器の下 */
-  left: 965px;
-  top: 340px;
-  width: 8%;
-}
-.avatar_weapon {
-  z-index: 2; /* 武器は防具の上 */
-  left: 800px;
-  top: 600px;
+  z-index: 1;
+  left: 55vw; 
+  top: 35vh;
   width: 8%;
 }
 
+.avatar_weapon {
+  z-index: 2;
+  left: 45vw;
+  top: 60vh;
+  width: 8%;
+}
 
 /* ステータス */
 .sute-tasu {
@@ -401,11 +408,12 @@ body{
     position: fixed;
     top: 30%;
     left: 80px; 
-    width: 420px;
+    width: 380px;
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(10px);
     border-radius: 15px;
     padding: 40px;
+    box-sizing: border-box; 
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
@@ -431,15 +439,15 @@ body{
 /* 装備ボックス */
 .now-equipment {
   position: absolute;
-  background-color: #75757515;
+  background-color: rgba(117, 117, 117, 0.08);
   top: 45%;
-  right: 8%;
+  right: 100px;
   transform: translateY(-50%);
   display: flex;
   gap: 50px;
-  width: 500px;
-  left: 1420px;
+  width: 25vw;
   padding: 40px;
+  box-sizing: border-box; 
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
   border-radius: 20px;
@@ -448,7 +456,7 @@ body{
 }
 
 .now-equipment img {
-  width: 120px;
+  width: 7vw;
   height: auto;
 }
 
@@ -456,43 +464,40 @@ body{
 .btn_battle,
 .btn_shop,
 .btn_battle_boss {
-  /* position: fixed; */
   bottom: 50px;
-  font-size: 70px;
   border-radius: 20px;
   text-decoration: none;
   font-weight: bold;
   transition: 0.3s;
+  text-align: center;
+  box-sizing: border-box;
 }
 
 .btn_battle {
   background: #98930a;
   color: black;
-  /* left: 100px; */
-  padding: 30px 75px;
+  padding: 30px 30px;
+  font-size: 30px;
 }
 
 .btn_battle_boss {
-  background: #d10a0a;
+  background: #970e0e; 
   color: black;
-  padding: 30px 75px;
-    /* left: 550px; */
+  padding: 60px 65px;
+  font-size: 50px;
 }
+
 .btn_shop {
   background: #1488a5;
   color: black;
-  right: 150px;
-  padding: 80px 150px;
+  padding: 35px 70px;
   position: fixed;
   bottom: 50px;
-  right: 120px;
-}
-
-.btn_battle_boss {
-  background: #970e0e;
-  color: black;
-  left: 500px;
-  padding: 80px 70px;
+  right: 100px;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
 }
 
 .btn_battle:hover {
@@ -511,70 +516,61 @@ body{
 }
 
 /* coin */
-  #coin {
-    position: absolute;
-    top: 120px;
-    right: 570px;
-    font-size: 30px;
-    font-weight: bolder;
-  }
-  /* ランク */
-  #rank{
-    position: absolute;
-    top: 120px;
-    right: 250px;
-    font-size: 30px;
-    font-weight: bolder;
-    /* リセットボタン */
-  }
-  /* =========================
-   ランクセレクト装飾
-   ========================= */
+#coin {
+  position: absolute;
+  top: 120px;
+  right: 400px;
+  font-size: 30px;
+  font-weight: bolder;
+}
 
+/* ランク */
+#rank {
+  position: absolute;
+  top: 120px;
+  right: 100px;
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+/* ランクセレクト装飾 */
 .rankmenu {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-
   margin-left: 10px;
   padding: 8px 35px 8px 14px;
   font-size: 18px;
   font-weight: bold;
   color: #ffffff;
-
   background: rgba(0, 0, 0, 0.6);
   border: 2px solid #00c3ff;
   border-radius: 12px;
   backdrop-filter: blur(8px);
-
   cursor: pointer;
   transition: 0.3s ease;
-
-  /* カスタム矢印 */
   background-image: url("data:image/svg+xml,%3Csvg fill='%23ffffff' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7l5 6 5-6z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 16px;
 }
 
-/* もわっと光る */
 .rankmenu:hover {
   border-color: #ffff1c;
   box-shadow: 0 0 15px #00c3ff;
 }
 
-/* フォーカス時 */
 .rankmenu:focus {
   outline: none;
   box-shadow: 0 0 20px #ffff1c;
 }
 
-/* option */
 .rankmenu option {
   background: #1a1a1a;
   color: #ffffff;
 }
-  .reset {
+
+.reset {
   display: inline-block;
   width: 250px;
   text-align: center;
@@ -586,34 +582,28 @@ body{
   -webkit-transition: all .3s;
   transition: all .3s;
 }
+
 .reset:hover {
   color: #FFFFFF;
   background-color: #1B85FB;
   opacity: 0.7;
 }
 
-
-  /* ボタンの並び替え */
-.buttons{
-    display: block;
-    position: relative;   /* ボタンが押せなかったので変えました（笹森）
-    /* bottom: 50px;
-    left: 80px; */
+.buttons {
+  display: block;
+  position: relative; 
 }
 
-  .battle-buttons{
-    position: fixed;
+.battle-buttons {
+  position: fixed;
   bottom: 50px;
   left: 80px;
   display: flex;
   flex-direction: column;
   gap: 30px;
-  }
+}
 
-  /* =========================
-   武器・防具セレクト装飾
-   ========================= */
-
+/* 武器・防具セレクト装飾 */
 .weaponmenu,
 .armormenu {
   appearance: none;
@@ -630,33 +620,112 @@ body{
   backdrop-filter: blur(8px);
   cursor: pointer;
   transition: 0.3s ease;
-
-  /* カスタム矢印 */
   background-image: url("data:image/svg+xml,%3Csvg fill='%23ffffff' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7l5 6 5-6z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 18px;
 }
 
-/* もわーんってやつ */
 .weaponmenu:hover,
 .armormenu:hover {
   border-color: #ffff1c;
   box-shadow: 0 0 15px #00c3ff;
 }
 
-/* 伸びたとき */
 .weaponmenu:focus,
 .armormenu:focus {
   outline: none;
   box-shadow: 0 0 20px #ffff1c;
 }
 
-/* option */
 .weaponmenu option,
 .armormenu option {
   background: #1a1a1a;
   color: #ffffff;
+}
+
+/* 中型ノートPC向け (1280px以下) */
+@media screen and (max-width: 1280px) {
+  .home_header { font-size: 40px; height: 110px; }
+  .home_header p { font-size: 54px; }
+
+  #coin { right: 35vw; }
+  #rank { right: 10vw; }
+  .status-box { 
+    width: 300px; 
+    left: 40px; 
+    padding: 30px; 
+  }
+  .status .row { font-size: 24px; }
+
+  .now-equipment {
+    width: 30vw;
+    right: 40px;
+    gap: 20px;
+    padding: 30px;
+  }
+  
+  .battle-buttons { left: 40px; }
+  .btn_battle{
+    padding: 30px 25px;
+    font-size: 25px;
+  }
+   .btn_battle_boss { 
+    padding: 50px 50px;
+    font-size: 30px;
+   }
+  .btn_shop {
+    padding: 30px 50px;
+    font-size: 36px;
+    right: 40px;
+  }
+
+  .home_avatar {width: 400px;}
+  .avatar_armor { left: 52vw; top: 36vh; width: 9%; }
+  .avatar_weapon { left: 42vw; top: 58vh; width: 9%; }
+}
+
+
+/* 小型ノートPC向け (1024px以下) */
+@media screen and (max-width: 1024px) {
+  .home_header { font-size: 32px; height: 100px; }
+  .home_header p { font-size: 48px; }
+
+  #coin { right: 25vw; top: 110px; font-size: 24px; }
+  #rank { right: 5vw; top: 110px; font-size: 24px; }
+
+  .status-box { 
+    width: 250px;  
+    left: 40px; 
+    padding: 20px; 
+  }
+  .status .row { font-size: 20px; }
+
+  .now-equipment {
+    width: 34vw;
+    min-width: 260px;
+    gap: 15px;
+    padding: 20px;
+    right: 2vw;
+  }
+  .now-equipment img { width: 5vw; }
+  
+  .weaponmenu,
+  .armormenu {
+    padding: 6px 15px 6px 10px;
+    font-size: 14px;
+    width: 100%; 
+    box-sizing: border-box;
+  }
+
+  .avatar_armor { left: 52vw; top: 38vh; width: 10%; }
+  .avatar_weapon { left: 42vw; top: 58vh; width: 10%; }
+
+  .battle-buttons { 
+    left: 2vw; 
+    gap: 15px; 
+    bottom: 20px; 
+  }
 }
  
 /* 装備屋画面

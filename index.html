@@ -17,7 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
   </head>
 
-  <body class="home_body">
+  <body class="home_body" id="home_body">
     <header class="home_header">
         <p>アバサバイバー</p>
     </header>
@@ -101,12 +101,14 @@
       </div>
     <div class="buttons">
       <div class="battle-buttons">
-        <!--  クラスの名前が変わっていたため変えてます　（笹森） -->
-          <!-- 大幅変更に加え、わかりやすい説明ありがとう御座います　（廣田） -->
-            <!-- ここで会話する必要がないのでこの注釈消してくだせえ（笹森） -->
-        <button id="rival" class="btn_battle"> 
-          ⚔戦闘⚔
-        </button>
+        <div class="batlle-button-flex">
+          <button id="rival" class="btn_battle"> 
+            ⚔戦闘⚔
+          </button>
+          <button id="rash" class="btn_battle"> 
+            ラッシュ
+          </button>
+        </div>
         <button id="boss" class="btn_battle_boss">
          ☠ボス☠
         </button>
