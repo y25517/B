@@ -369,9 +369,9 @@ body {
 .home_avatar {
     position: fixed;
     right: 35%;
-    width: 470px;
+    width: 550px;
     height: auto;
-    bottom: 5vh;
+    bottom: 4vh;
 }
 
 .avatar_armor,
@@ -649,8 +649,11 @@ body {
   .home_header { font-size: 40px; height: 110px; }
   .home_header p { font-size: 54px; }
 
-  #coin { right: 35vw; }
-  #rank { right: 10vw; }
+  .reset {
+    width: 200px;
+  }
+  #coin { right: 25vw;  font-size: 24px;}
+  #rank { right: 5vw;  font-size: 24px;}
   .status-box { 
     width: 300px; 
     left: 40px; 
@@ -680,7 +683,7 @@ body {
     right: 40px;
   }
 
-  .home_avatar {width: 400px;}
+  .home_avatar {width: 450px;}
   .avatar_armor { left: 52vw; top: 36vh; width: 9%; }
   .avatar_weapon { left: 42vw; top: 58vh; width: 9%; }
 }
@@ -691,9 +694,6 @@ body {
   .home_header { font-size: 32px; height: 100px; }
   .home_header p { font-size: 48px; }
 
-  #coin { right: 25vw; top: 110px; font-size: 24px; }
-  #rank { right: 5vw; top: 110px; font-size: 24px; }
-
   .status-box { 
     width: 250px;  
     left: 40px; 
@@ -701,31 +701,12 @@ body {
   }
   .status .row { font-size: 20px; }
 
-  .now-equipment {
-    width: 34vw;
-    min-width: 260px;
-    gap: 15px;
-    padding: 20px;
-    right: 2vw;
-  }
-  .now-equipment img { width: 5vw; }
-  
-  .weaponmenu,
-  .armormenu {
-    padding: 6px 15px 6px 10px;
-    font-size: 14px;
-    width: 100%; 
-    box-sizing: border-box;
-  }
-
-  .avatar_armor { left: 52vw; top: 38vh; width: 10%; }
-  .avatar_weapon { left: 42vw; top: 58vh; width: 10%; }
-
   .battle-buttons { 
     left: 2vw; 
     gap: 15px; 
     bottom: 20px; 
   }
+  .home_avatar {width: 400px;}
 }
  
 /* 装備屋画面
