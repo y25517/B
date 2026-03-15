@@ -69,9 +69,32 @@ rankSelect.addEventListener("change", () => {
   document.querySelector("#coin-count").textContent =
     localStorage.getItem("Coin");
 
+/*タイトル画面
+--------------------------------------------------------*/
+const titleScreen = document.querySelector("#title_screen");
+const homeBody = document.querySelector("#home_body");
+const hajimeBtn = document.querySelector("#hajimebtn");
+const tudukiBtn = document.querySelector("#tudukibtn");
+const ha_dokoaBtn = document.querySelector("#ha-dokoabtn");
+
+function start(){
+  titleScreen.style.display = "none";
+  homeBody.style.display = "block";
+}
+
+hajimeBtn.addEventListener("click", () => {
+  const isReset = reset();
+  if(isReset){
+    console.log("リセット");
+    start();
+  }
+});
+tudukiBtn.addEventListener("click", start);
+
+
 /*ホーム画面の背景
 --------------------------------------------------------*/
-const homeBody = document.querySelector("#home_body");
+
 
 const newImageUrl = `url('images/home_background/home${rankSelect.value}.jpg')`;
 console.log("読み込む画像のパス:", newImageUrl);
@@ -225,7 +248,6 @@ localStorage.setItem("avatarimg", avatar.src);  //笹森加えたとこ
 
 // avatar.src = `./images/wear_img/a${armorId}_w${weaponId}.png`;
 
-// 勝手に鬼畜ボタンを追加しました（笹森）
 /* 鬼畜ボタンを押したら
 --------------------------------------------------------*/
 const kichikuBtn = document.querySelector("#kichikubtn");
@@ -252,25 +274,27 @@ kichikuBtn.addEventListener("click", function(){
     }  
 });
 
-
-const resetBtn = document.getElementById("risetto");
-
-resetBtn.addEventListener("click", () => {
+// リセット
+function reset(){
   let msg = "本当にリセットしますか？";
-let res = confirm(msg);
-if (res) {
-  localStorage.removeItem("Coin");
-  localStorage.removeItem("avatarATK");
-  localStorage.removeItem("avatarHP");
-  localStorage.removeItem("avatarimg");
-  localStorage.removeItem("equipped");
-  localStorage.removeItem("isDone");
-  localStorage.removeItem("isFought");
-  localStorage.removeItem("kichikuon");
-  localStorage.removeItem("maxRank");
-  localStorage.removeItem("owned");
-  localStorage.removeItem("rank");
-  alert("リセットしました");
-  location.reload();
+  let res = confirm(msg);
+  if (res) {
+    localStorage.removeItem("Coin");
+    localStorage.removeItem("avatarATK");
+    localStorage.removeItem("avatarHP");
+    localStorage.removeItem("avatarimg");
+    localStorage.removeItem("equipped");
+    localStorage.removeItem("isDone");
+    localStorage.removeItem("isFought");
+    localStorage.removeItem("kichikuon");
+    localStorage.removeItem("maxRank");
+    localStorage.removeItem("owned");
+    localStorage.removeItem("rank");
+    alert("リセットしました");
+    return true;
+  }
+  else{
+    alert("リセットしませんでした。")
+    return false;
+  }
 }
-});
