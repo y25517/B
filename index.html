@@ -16,29 +16,31 @@
 </head>
 
 <body>
-  <section class="title_screen">
+  <section class="title_screen" id="title_screen">
     <header class="home_header">
       <p>アバサバイバー</p>
       <div class="button_group">
-        <button class="titlebtn">はじめから</button>
-        <button class="titlebtn">つづきから</button>
-        <button class="titlebtn">ハードコア</button>
+        <button class="titlebtn" id="hajimebtn">はじめから</button>
+        <button class="titlebtn" id="tudukibtn">つづきから</button>
+        <button class="titlebtn" id="ha-dokoabtn">ハードコア</button>
       </div>
     </header>
   </section>
 
   <section  class="home_body" id="home_body">
     <div class="sonota">
-      <h1 id="coin">COIN : <span id="coin-count"></span></h1>
-      <h1 id="rank">
-        RANK :
+      <div id="rank">
+        RANK<br>
         <select class="rankmenu" id="rank-select">
           <option value="0">0</option>
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
         </select>
-      </h1>
+      </div>
+      <p>名前</p>
+      <input type="text">
+      <div id="coin">COIN : <span id="coin-count"></span></div>
     </div>
 
     <div class="avatar_area">
@@ -120,9 +122,6 @@
       </div>
       <button class="btn_shop" id="soubi">
         装備屋
-      </button>
-      <button class="reset" id="risetto">
-        リセット
       </button>
       <button class="reset" id="kichikubtn">
         通常モード
