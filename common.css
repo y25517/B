@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-/* 戦闘画面
----------------------------------------------------- */
-
-.HP_bar{
-    display: flex;
-}
-.My_frame{
-    display: flex;
-    display: block;
-    margin: auto;
-}
-.My_frame p{
-    font-size: 20px;
-}
-.My_HPbar,
-.Rival_HPbar{
-    width: 40vw;
-=======
 body{
   min-height: 100vh;
 }
@@ -57,25 +38,10 @@ body{
 .my_hpbar,
 .rival_hpbar{
     width: 100%;
->>>>>>> main
     height: 25px;
     background-color: #4b4b4b;
     border-radius:10px;
 }
-<<<<<<< HEAD
-.life_mark
-{
-    width: 90%;
-    height: 100%;
-    background-color: #8df369;
-    border-radius:10px;
-    filter: saturate(500%);
-}
-img{
-    width: 30px;
-}
-
-=======
 .mylife_mark{
     width: 100%;
     height: 100%;
@@ -985,4 +951,3 @@ body {
   font-weight: 400;
   font-style: normal;
 }
->>>>>>> main
