@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/destyle.css@1.0.15/destyle.css"/>
     <link rel="stylesheet" href="common.css">
 </head>
+<<<<<<< HEAD
 <body>
     <header>
         <div class="HP_bar">
@@ -33,3 +34,56 @@
 </body>
 </html>
 
+=======
+<body class="battle_body" id="battlebody">
+    <div class="hp_bar">
+        <div class="my_frame">
+            <p>HP:</p>
+            <div class="my_hpbar" id="mybar">
+            <div class="mylife_mark" id="my_lifemark"></div>
+            </div>
+            <img src="" alt="自分" class="myimg" id="myimg">
+        </div>
+        <div class="vs_text">VS</div>
+        <div class="rival_frame">
+            <p>HP:</p>
+            <div class="rival_hpbar" id="rivalbar">
+                <div class="rivallife_mark" id="rival_lifemark"></div>
+                <p id="rival_name"></p>
+            </div>
+            <img src="" alt="敵"class="rivalimg" id="rival_img">
+        </div>
+    </div>
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+          <p id="resultText" class="resulttext"></p>
+          <img src="" alt="コインの写真"id="coinimg">
+          <button class="resultbutton" id="resultbtn">ホームへ戻る</button>
+        </div>
+    </div>
+    <div id="overlay">
+        <div class="ta"> 
+            <div id="text"></div> 
+        </div>
+    </div>
+    <!-- スタートボタン -->
+    <div class="startbtn_pos">
+        <button class="startbtn" id="strbtn">戦闘を開始</button>
+    </div>
+    <!-- アタックボタン -->
+    <div class="atack_pos">
+        <div class="atack_bar" id="atcbar">
+            <div class="atack_mark" id="atcmark">
+                <span class="atack_clitical" id="atcclitical"></span>
+            </div>
+            <div class="stop_bar" id="stopbar"></div>
+        
+        </div>
+        <button class="btn-3d-shadow" id="stopbtn">攻撃</button>      
+    </div>
+
+    <script type="module" src="battle.js"></script>
+   
+</body>
+</html>
+>>>>>>> main
