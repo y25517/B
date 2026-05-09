@@ -78,8 +78,15 @@ const tudukiBtn = document.querySelector("#tudukibtn");
 const ha_dokoaBtn = document.querySelector("#ha-dokoabtn");
 
 function start(){
+
   titleScreen.style.display = "none";
   homeBody.style.display = "block";
+
+  sessionStorage.setItem("started", "true");
+}
+
+if(sessionStorage.getItem("started") === "true"){
+  start();
 }
 
 hajimeBtn.addEventListener("click", () => {
