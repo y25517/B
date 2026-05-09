@@ -7,7 +7,7 @@ let coins = parseInt(localStorage.getItem("Coin")) || 0;
 let sleep = (ms) => new Promise(resolve => setTimeout(resolve,ms));
 // メッセージリセット
 let messageTxt = "";
-rank=1
+// rank=1
 // メッセージ更新用の関数が実行中かを検知する
 let isProcessing = false;
 
@@ -291,12 +291,23 @@ async function updateMessage(mes) {
 
 // 配列からのランダム取得用の関数(配列と取り出したい要素の数を引数に)
 function randomPick(array, n) {
+
+    if (!array || array.length === 0) {
+        return [];
+    }
+
     let result = [];
     let copy = [...array];
+
+    n = Math.min(n, copy.length);
+
     for (let i = 0; i < n; i++) {
+
         let index = Math.floor(Math.random() * copy.length);
-        result.push(copy.splice(index,1)[0]);
+
+        result.push(copy.splice(index, 1)[0]);
     }
+
     return result;
 }
 
