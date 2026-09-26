@@ -369,6 +369,116 @@ body {
   100% { text-shadow: 2px 2px 2px #fff, 4px 4px 4px rgba(255,255,255,0.4), 6px 6px 6px rgba(255,255,255,0.2); }
 }
 
+/* ランク */
+#rank {
+  font-size: 15px;
+  font-weight: bolder;
+  text-align: center;
+  width: 70px;
+  height: auto;
+  border: solid 2px;
+  border-radius: 100px;
+}
+/* name */
+.yu-zaname{
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 5px 10px;
+  outline: none;
+  width: 180px;
+  font-family: inherit;
+  transition: 0.3s;
+  position: relative;
+  z-index: 10;
+}
+.yu-zaname:focus {
+  border-bottom-color: #0084ff;
+  box-shadow: 0 5px 10px -5px #0084ff;
+}
+/* coin */
+#coin {
+  font-size: 20px;
+  font-weight: bolder;
+}
+.rankposition{
+  display: flex;
+  width: 260px;
+  height: 70px;
+  border: solid 2px;
+  border-radius: 100px 30px 0 100px;
+  position: absolute;
+  top: 30px;
+  left: 20px;
+}
+
+/* ランクセレクト装飾 */
+.rankmenu {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin-left: 10px;
+  padding: 8px 35px 8px 14px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg fill='%23ffffff' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.rankmenu:hover {
+  border-color: #ffff1c;
+  box-shadow: 0 0 15px #00c3ff;
+}
+
+.rankmenu:focus {
+  outline: none;
+  box-shadow: 0 0 20px #ffff1c;
+}
+
+.rankmenu option {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+/* サブボタン */
+.subbtn_pos {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.subbtn_home,
+.subbtn {
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.subbtn:hover,
+.subbtn_home:hover {
+  opacity: 0.7;
+}
+.subbtn img {
+  width: 65px;
+  height: auto;
+  display: block;
+}
+.subbtn_home img {
+  width: 55px;
+  height: auto;
+  display: block;
+}
+
 /* アバター */
 .avatar {
   position: absolute;  
@@ -428,25 +538,25 @@ body {
 }
 
 .st1 {
-  font-size: 32px;
+  font-size: 29px;
   margin-bottom: 20px;
 }
 
 .status-box {
-    position: fixed;
-    top: 30%;
-    left: 80px; 
-    width: 380px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 40px;
-    box-sizing: border-box; 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 20%;
+  left: 200px; 
+  width: 300px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 40px;
+  box-sizing: border-box; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .status .row {
-  font-size: 30px;
+  font-size: 25px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 15px;
@@ -468,8 +578,8 @@ body {
 .now-equipment {
   position: absolute;
   background-color: rgba(117, 117, 117, 0.08);
-  top: 45%;
-  right: 100px;
+  top: 35%;
+  right: 200px;
   transform: translateY(-50%);
   display: flex;
   gap: 50px;
@@ -499,28 +609,29 @@ body {
   transition: 0.3s;
   text-align: center;
   box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .btn_battle {
-  background: #98930a;
+  background: #8d880c;
   color: black;
   padding: 30px 30px;
   font-size: 30px;
 }
 
 .btn_battle_boss {
-  background: #970e0e; 
+  background: #9a1313; 
   color: black;
   padding: 60px 65px;
   font-size: 50px;
 }
 
 .btn_shop {
-  background: #1488a5;
+  background: #4a8fb7;
   color: black;
   padding: 35px 70px;
   position: fixed;
-  bottom: 50px;
+  bottom: 60px;
   right: 100px;
   display: flex; 
   justify-content: center;
@@ -541,56 +652,6 @@ body {
 .btn_shop:hover {
   box-shadow: 0 0 20px #6bb3c5;
   color: white;
-}
-
-/* coin */
-#coin {
-  font-size: 30px;
-  font-weight: bolder;
-}
-
-/* ランク */
-#rank {
-  font-size: 15px;
-  font-weight: bolder;
-  text-align: center;
-  width: 70px;
-  height: auto;
-  border: solid 2px;
-  border-radius: 100%;
-}
-
-/* ランクセレクト装飾 */
-.rankmenu {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  margin-left: 10px;
-  padding: 8px 35px 8px 14px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #ffffff;
-  cursor: pointer;
-  transition: 0.3s ease;
-  background-image: url("data:image/svg+xml,%3Csvg fill='%23ffffff' height='20' viewBox='0 0 20 20' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 7l5 6 5-6z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px;
-}
-
-.rankmenu:hover {
-  border-color: #ffff1c;
-  box-shadow: 0 0 15px #00c3ff;
-}
-
-.rankmenu:focus {
-  outline: none;
-  box-shadow: 0 0 20px #ffff1c;
-}
-
-.rankmenu option {
-  background: #1a1a1a;
-  color: #ffffff;
 }
 
 .buttons {
@@ -661,7 +722,7 @@ body {
     left: 40px; 
     padding: 30px; 
   }
-  .status .row { font-size: 24px; }
+  .status .row { font-size: 20px; }
 
   .now-equipment {
     width: 30vw;

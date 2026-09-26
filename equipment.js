@@ -100,7 +100,7 @@ window.addEventListener("load", async () => {
             updateMessage(messageTxt[0]);
             soundEffect("exit");
             await sleep(2000);
-            window.location.href = "index.html";
+            window.location.href = "index.html?skipTitle=true";
         })
 
         // 店主をクリックすると会話可能
