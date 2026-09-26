@@ -28,7 +28,7 @@
   </section>
 
   <section  class="home_body" id="home_body">
-    <div class="sonota">
+    <div class="rankposition">
       <div id="rank">
         RANK<br>
         <select class="rankmenu" id="rank-select">
@@ -38,10 +38,26 @@
           <option value="3">3</option>
         </select>
       </div>
-      <p>名前</p>
-      <input type="text">
-      <div id="coin">COIN : <span id="coin-count"></span></div>
+      <div class="yu-za">
+        <input type="text" class="yu-zaname"placeholder="ユーザーネーム"> 
+        <div id="coin">COIN : <span id="coin-count"></span></div>
+      </div>
     </div>
+    <div class="subbtn_pos">
+      <button class="kichikubtn subbtn" id="kichikubtn">
+        <img src="images/homebtn_img/tuujoumodebtn.png" alt="通常モード">
+      </button>
+      <button class="subbtn" id="pattibtn">
+        <img src="images/homebtn_img/pattibtn.png" alt="パッチノート">
+      </button>
+      <button class="subbtn" id="jissekibtn">
+        <img src="images/homebtn_img/jissekibtn.png" alt="実績">
+      </button>
+      <button class="subbtn_home" id="homebtn">
+        <img src="images/homebtn_img/homebtn.png" alt="ホームへ">
+      </button>
+    </div>
+    
 
     <div class="avatar_area">
       <img id="avatarComplete" class="home_avatar">
@@ -122,9 +138,6 @@
       </div>
       <button class="btn_shop" id="soubi">
         装備屋
-      </button>
-      <button class="reset" id="kichikubtn">
-        通常モード
       </button>
     </div>
 
