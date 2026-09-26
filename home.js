@@ -76,6 +76,13 @@ const homeBody = document.querySelector("#home_body");
 const hajimeBtn = document.querySelector("#hajimebtn");
 const tudukiBtn = document.querySelector("#tudukibtn");
 const ha_dokoaBtn = document.querySelector("#ha-dokoabtn");
+const urlParams = new URLSearchParams(window.location.search);
+
+// もし URL に skipTitle=true が含まれていたらタイトルをスキップ
+if (urlParams.get('skipTitle') === 'true') {
+  titleScreen.style.display = "none";
+  homeBody.style.display = "block";
+}
 
 function start(){
 
@@ -101,14 +108,22 @@ tudukiBtn.addEventListener("click", start);
 
 /*ホーム画面の背景
 --------------------------------------------------------*/
-
-
 const newImageUrl = `url('images/home_background/home${rankSelect.value}.jpg')`;
 console.log("読み込む画像のパス:", newImageUrl);
 homeBody.style.setProperty('--bg-image', newImageUrl);
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+/*サブボタン
+-----------------------------------------------------------*/
+const pattiBtn = document.querySelector("#pattibtn");
+const jissekiBtn = document.querySelector("#jissekibtn");
+const homeBtn = document.querySelector("#homebtn");
   
+homeBtn.addEventListener("click", () => {
+  titleScreen.style.display = "block";
+  homeBody.style.display = "none";
+});
 
 
   /* =============================
